@@ -1,0 +1,14 @@
+{
+  "name": "Baby Food Plan",
+  "short_name": "Food Plan",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff8ec",
+  "theme_color": "#2f8f6f",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icons/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

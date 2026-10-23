@@ -1,0 +1,3 @@
+pdfplumber==0.11.5
+# cryptography>=46 has no prebuilt wheel for Intel macOS / Python 3.9 (needs a Rust toolchain)
+cryptography<46

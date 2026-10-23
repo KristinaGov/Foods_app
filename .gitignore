@@ -1,0 +1,13 @@
+# Solid Starts source material is copyrighted: never commit the PDF or its full-text dump
+materials/Solid-Starts-First-100-Days-1.pdf
+materials/Solid-Starts-First-100-Days-1.txt
+materials/*.pdf
+materials/*.txt
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
