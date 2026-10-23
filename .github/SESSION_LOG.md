@@ -207,8 +207,13 @@ Python, not the project `.venv`.
   smoke test.
 
 **Open questions / next steps:**
-- User to complete GitHub device login; then create the **private** repo and
-  push.
+- ~~User to complete GitHub device login; then create the private repo and
+  push.~~ Done later the same day: private repo
+  https://github.com/KristinaGov/Foods_app created with `gh`, `main` pushed.
+  `gh` itself is not installed system-wide (Homebrew no longer supports this
+  Intel Mac); the standalone binary lives only in a temp folder, so future
+  sessions need to re-download it from https://github.com/cli/cli/releases
+  or use plain `git push` (credentials are stored for https).
 - Hosting decision: GitHub Pages on a private repo needs GitHub Pro;
   alternatives are serving from the Mac over Wi-Fi or a private host
   (e.g. Cloudflare Pages with access control).
