@@ -77,6 +77,19 @@ later reversed, add a new bullet noting the change and why.
   The Solid Starts PDF and its `.txt` dump are copyrighted and are
   git-ignored — they must never be committed. Hosting choice still open:
   GitHub Pages for a private repo requires GitHub Pro (see 2026-10-23 entry).
+- **Repo made PUBLIC + GitHub Pages (user decision 2026-10-23, reverses
+  the "private" bullet above):** Pages on a private repo needs GitHub Pro,
+  so the user chose a public repo. App URL:
+  https://kristinagov.github.io/Foods_app/ — deployed from `app/` only by
+  `.github/workflows/pages.yml` on every push to `main` (`materials/` is not
+  served). Discoverability is minimised where GitHub allows: repo has no
+  description/topics/README, and `app/index.html` carries
+  `<meta name="robots" content="noindex, nofollow, noarchive">`. A
+  `robots.txt` would NOT help (project sites can't set one at the domain
+  root). The repo page itself on github.com can still be indexed — the only
+  further mitigation would be an unrelated repo name. Caveat the user
+  accepted: `plan.json`/`recipes_raw.json` with the full recipe text are
+  now public even though the PDF/.txt are not.
 
 ---
 
@@ -214,9 +227,13 @@ Python, not the project `.venv`.
   Intel Mac); the standalone binary lives only in a temp folder, so future
   sessions need to re-download it from https://github.com/cli/cli/releases
   or use plain `git push` (credentials are stored for https).
-- Hosting decision: GitHub Pages on a private repo needs GitHub Pro;
-  alternatives are serving from the Mac over Wi-Fi or a private host
-  (e.g. Cloudflare Pages with access control).
+- ~~Hosting decision~~ Settled later the same day: repo switched to public,
+  Pages enabled (workflow build type), first deploy verified — all app
+  assets return 200 at https://kristinagov.github.io/Foods_app/ and
+  `materials/` returns 404. See Key Design Decisions.
+- To install on the iPhone: open the URL above in Safari → Share → "Add to
+  Home Screen". Each push to `main` redeploys automatically; the service
+  worker cache name must still be bumped for data/JS changes.
 - Smoke-test the app (Today date, Grocery list without staples, recipe
   cards) in Safari and reinstall on the iPhone to pick up cache v3.
 - Optional: replace the hand-maintained `CATEGORY` map in `categories.js`
