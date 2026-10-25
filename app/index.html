@@ -33,12 +33,34 @@
     <label for="start-date-input">Baby's Day 1 date</label>
     <input type="date" id="start-date-input">
     <p class="hint">Day 1 = the first day of solid food introduction. Everything else is calculated from this date.</p>
+
+    <h3>Your data</h3>
+    <p class="hint">Tried foods, reactions and notes are stored on this phone only, in the app's own storage. App updates never touch them, but they are gone if you delete the app icon, clear Safari's website data, or switch phones. Keep a backup in one of the two ways below.</p>
+
+    <h3>1 · Backup file</h3>
+    <p class="hint">Export writes everything to a small JSON file you keep somewhere safe (Files, iCloud, email to yourself). Import loads such a file back and replaces what is on this phone. <span id="last-export"></span></p>
     <div class="settings-actions">
       <button id="export-btn" class="btn">Export data (JSON)</button>
       <label class="btn" for="import-file">Import data (JSON)</label>
       <input type="file" id="import-file" accept="application/json" class="hidden-input">
     </div>
-    <p class="hint">Export downloads a JSON file you can commit to your GitHub repo to back up or sync your tracked data across devices.</p>
+
+    <h3>2 · Automatic backup to GitHub</h3>
+    <div id="github-disconnected">
+      <p class="hint">Every change is copied within seconds to a secret Gist in your GitHub account, and a new phone (or this one after a reinstall) gets everything back as soon as you connect it. The Gist is unlisted and not searchable, but anyone who has its link could read it.</p>
+      <p class="hint">To connect: on github.com open Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token, tick only the <b>gist</b> scope, copy the token and paste it here. It stays on this phone and is not included in export files.</p>
+      <input type="password" id="github-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn btn-primary" id="github-connect">Connect</button>
+    </div>
+    <div id="github-connected" class="hidden">
+      <p class="hint" id="github-status"></p>
+      <div class="settings-actions">
+        <button class="btn" id="github-push">Back up now</button>
+        <button class="btn" id="github-pull">Restore from GitHub</button>
+      </div>
+      <button class="btn btn-link" id="github-disconnect">Disconnect (keeps data on this phone)</button>
+    </div>
+
     <button id="close-settings" class="btn btn-primary">Done</button>
   </div>
 </div>

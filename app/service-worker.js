@@ -1,4 +1,4 @@
-const CACHE_NAME = "baby-food-plan-v3";
+const CACHE_NAME = "baby-food-plan-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const ASSETS = [
   "./js/store.js",
   "./js/categories.js",
   "./js/views.js",
+  "./js/sync.js",
   "./data/plan.json",
   "./manifest.webmanifest",
   "./icons/icon-180.png",
@@ -28,6 +29,9 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  // Only the app's own files are cached. Cross-origin requests (the GitHub
+  // API used for backups) always go straight to the network.
+  if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;

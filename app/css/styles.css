@@ -207,7 +207,7 @@ main#view {
   border-color: var(--green-dark);
 }
 
-textarea, input[type="text"], input[type="date"], input[type="search"] {
+textarea, input[type="text"], input[type="date"], input[type="search"], input[type="password"] {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -253,6 +253,8 @@ textarea { min-height: 70px; resize: vertical; }
 .modal-card {
   background: white;
   width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
   border-radius: 18px 18px 0 0;
   padding: 20px 18px calc(env(safe-area-inset-bottom) + 20px);
   display: flex;
@@ -261,6 +263,29 @@ textarea { min-height: 70px; resize: vertical; }
 }
 
 .modal-card h2 { margin: 0 0 4px; }
+
+.modal-card h3 {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.status-ok { color: var(--green-dark); }
+.status-err { color: var(--danger); }
+
+.btn-link {
+  background: none;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 6px;
+}
+
+.card.notice {
+  background: #fff3d6;
+  border-color: var(--warn);
+}
 
 .hint {
   font-size: 0.78rem;

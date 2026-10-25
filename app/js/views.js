@@ -1,5 +1,28 @@
 import { store } from "./store.js";
 import { CATEGORY_ORDER, categoryFor, isPantryStaple } from "./categories.js";
+import { sync } from "./sync.js";
+
+const BACKUP_REMINDER_DAYS = 14;
+
+// Shown on Today when data exists on this phone only and no export was made
+// recently. Disappears once GitHub backup is connected or a file is exported.
+function backupNoticeHTML() {
+  if (sync.isConnected() || !store.hasUserData()) return "";
+  const last = sync.getConfig().lastExportAt;
+  const ageDays = last ? (Date.now() - new Date(last).getTime()) / 86400000 : Infinity;
+  if (ageDays < BACKUP_REMINDER_DAYS) return "";
+  return `
+    <div class="card notice">
+      <strong>Your data lives only on this phone.</strong>
+      <p class="hint" style="margin-top:4px;">${last ? `Last backup file was exported ${Math.floor(ageDays)} days ago.` : "No backup yet."} Export a backup file or connect GitHub in Settings so a reinstall or a new phone doesn't lose your tracker and notes.</p>
+      <button class="btn" id="notice-open-settings" style="margin-top:8px;">Open Settings</button>
+    </div>`;
+}
+
+function attachBackupNotice() {
+  const btn = document.getElementById("notice-open-settings");
+  if (btn) btn.addEventListener("click", () => document.getElementById("settings-btn").click());
+}
 
 let PLAN = [];
 let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "" };
@@ -114,6 +137,7 @@ export function renderToday() {
   const recipesHTML = (data.recipes || []).map(recipeCardHTML).join("");
 
   view.innerHTML = `
+    ${backupNoticeHTML()}
     <div class="day-nav">
       <button id="prev-day">‹</button>
       <span class="current-date">${fmtDate(iso)}</span>
@@ -150,6 +174,7 @@ export function renderToday() {
   `;
 
   attachDayNav();
+  attachBackupNotice();
 
   view.querySelectorAll(".new-food-pill").forEach((btn) => {
     btn.addEventListener("click", () => {

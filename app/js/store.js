@@ -3,6 +3,7 @@
 const STORAGE_KEY = "babyFoodPlan.v1";
 
 const DEFAULT_STATE = {
+  updatedAt: null, // ISO timestamp of the last change; used to pick the newest copy when syncing
   startDate: null, // ISO date string "YYYY-MM-DD", set on first launch
   // foodName -> { status: "tried", firstDate, reaction, notes, timesServed }
   foodTracker: {},
@@ -25,14 +26,27 @@ function load() {
 }
 
 let state = load();
+const listeners = [];
 
-function save() {
+// touch=false keeps the existing updatedAt (used when restoring a backup so
+// the restored copy is not mistaken for a newer edit).
+function save(touch = true) {
+  if (touch) state.updatedAt = new Date().toISOString();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  listeners.forEach((fn) => { try { fn(state); } catch (e) { console.error(e); } });
 }
 
 export const store = {
   getState() {
     return state;
+  },
+
+  onChange(fn) {
+    listeners.push(fn);
+  },
+
+  hasUserData() {
+    return Object.keys(state.foodTracker).length > 0 || Object.keys(state.dailyLogs).length > 0 || Boolean(state.startDate);
   },
 
   setStartDate(isoDate) {
@@ -107,8 +121,11 @@ export const store = {
 
   importJSON(json) {
     const parsed = JSON.parse(json);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed) || !("foodTracker" in parsed)) {
+      throw new Error("this is not a Baby Food Plan backup");
+    }
     state = { ...structuredClone(DEFAULT_STATE), ...parsed };
-    save();
+    save(!parsed.updatedAt);
   }
 };
 

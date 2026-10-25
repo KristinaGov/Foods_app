@@ -90,6 +90,18 @@ later reversed, add a new bullet noting the change and why.
   further mitigation would be an unrelated repo name. Caveat the user
   accepted: `plan.json`/`recipes_raw.json` with the full recipe text are
   now public even though the PDF/.txt are not.
+- **User data persistence (user decision 2026-10-25):** tracked data stays
+  in localStorage on the phone (survives app updates; lost on icon
+  deletion / Safari data clear / new phone). Two backup paths, both
+  explained in Settings: (1) manual Export/Import JSON file, with a
+  reminder card on Today after 14 days without a backup; (2) optional
+  automatic backup to a **secret Gist** in the user's GitHub account
+  (`app/js/sync.js`), using a classic personal access token with only the
+  `gist` scope, pasted once in Settings and stored in its own localStorage
+  key (never in export files). Every change is uploaded after a 2.5 s
+  debounce; on launch/foreground the newest copy (by `updatedAt`) wins, so
+  two devices can share one backup. The data is NOT stored in the public
+  app repo.
 
 ---
 
@@ -238,3 +250,34 @@ Python, not the project `.venv`.
   cards) in Safari and reinstall on the iPhone to pick up cache v3.
 - Optional: replace the hand-maintained `CATEGORY` map in `categories.js`
   with something generated, so new foods can't silently fall into "Other".
+
+---
+
+## 2026-10-25 — data backup & sync
+**Done:**
+- `app/js/sync.js` (new): GitHub secret-Gist backup — connect (validate
+  token, find gist by file name `baby-food-plan.json` or create it), push
+  (PATCH), pull, disconnect, debounced auto-push, newest-wins reconcile on
+  start/foreground.
+- `app/js/store.js`: `updatedAt` on every save, `onChange()` listeners,
+  `hasUserData()`, stricter `importJSON()` validation that keeps the
+  backup's own `updatedAt`.
+- `app/index.html` + `app/js/app.js`: Settings rewritten with a "Your data"
+  explanation and two sections (backup file / GitHub), connect/back up
+  now/restore/disconnect flows, conflict prompt when both phone and GitHub
+  hold data, `navigator.storage.persist()` request at launch.
+- `app/js/views.js`: amber reminder card on Today when data exists but no
+  export in 14 days and GitHub is not connected.
+- `app/service-worker.js`: cache v4, `sync.js` precached, cross-origin
+  requests (GitHub API) are never cached.
+- Verified: all JS passes a JavaScriptCore syntax check; the exact Gist API
+  sequence (list → create secret → PATCH → GET → DELETE) was exercised with
+  the user's gist-scoped token via `gh api` and a temporary gist (deleted).
+  Not verified: the UI itself in a browser (no browser in the agent
+  session).
+
+**Open questions / next steps:**
+- User to create a classic token with only `gist` scope and connect it in
+  Settings on the phone; confirm the reminder card and restore flow look
+  right.
+- Possible follow-up: show a small sync indicator outside Settings.
