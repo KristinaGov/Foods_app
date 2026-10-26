@@ -205,9 +205,73 @@ async function init() {
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") reconcile(); });
   window.addEventListener("online", () => { if (sync.getConfig().lastError) sync.push().catch(() => {}); });
 
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./service-worker.js").catch((e) => console.error("SW registration failed", e));
+  setupUpdates();
+}
+
+// --- App updates -----------------------------------------------------------
+// The service worker serves cached files, so a new deploy only shows up once
+// the new worker has installed and taken control. updateViaCache: "none"
+// makes the browser re-fetch service-worker.js on every check instead of
+// trusting GitHub Pages' 10-minute HTTP cache; the controllerchange reload
+// then switches to the new files without a second manual launch.
+async function swVersion() {
+  const sw = navigator.serviceWorker && navigator.serviceWorker.controller;
+  if (!sw) return "not cached yet";
+  return new Promise((resolve) => {
+    const ch = new MessageChannel();
+    const t = setTimeout(() => resolve("unknown"), 1500);
+    ch.port1.onmessage = (e) => { clearTimeout(t); resolve(String(e.data)); };
+    sw.postMessage({ type: "version" }, [ch.port2]);
+  });
+}
+
+async function showVersion() {
+  const el = document.getElementById("app-version");
+  if (el) el.textContent = await swVersion();
+}
+
+function setupUpdates() {
+  const btn = document.getElementById("check-update");
+  if (!("serviceWorker" in navigator)) {
+    if (btn) btn.disabled = true;
+    showVersion();
+    return;
   }
+
+  let reloading = false;
+  const hadController = Boolean(navigator.serviceWorker.controller);
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    // A new worker took over (an update was installed). Reload once so the
+    // page runs the new files. Skipped on the very first install, when there
+    // was no previous controller.
+    if (reloading || !hadController) return;
+    reloading = true;
+    window.location.reload();
+  });
+
+  navigator.serviceWorker.register("./service-worker.js", { updateViaCache: "none" })
+    .then((reg) => {
+      document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") reg.update().catch(() => {}); });
+      if (btn) {
+        btn.addEventListener("click", async () => {
+          btn.disabled = true;
+          btn.textContent = "Checking…";
+          try {
+            await reg.update();
+            // If a new worker is installing, controllerchange will reload the page.
+            await new Promise((r) => setTimeout(r, 2500));
+            btn.textContent = reg.installing || reg.waiting ? "Updating…" : "Up to date ✓";
+          } catch (e) {
+            btn.textContent = "Could not check (offline?)";
+          }
+          setTimeout(() => { btn.textContent = "Check for updates"; btn.disabled = false; }, 2000);
+        });
+      }
+    })
+    .catch((e) => console.error("SW registration failed", e));
+
+  document.getElementById("settings-btn").addEventListener("click", showVersion);
+  showVersion();
 }
 
 init();

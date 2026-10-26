@@ -408,3 +408,31 @@ and it had no quantities or substitutes.
   SE 0.26 (20 × 12px), 15 Pro Max 0.29 (16 × 19px), landscape 0.27
   (60 × 11px).
 - Service worker cache v9.
+
+---
+
+## 2026-10-26 (night) — app updates not reaching the phone
+**Problem:** after pushing v9 the phone kept showing the old version even
+after two launches. GitHub Pages serves every file, including
+`service-worker.js`, with `cache-control: max-age=600`, and the browser's
+service-worker update check honours that HTTP cache for up to 24 h unless
+told otherwise. So a check within ~10 minutes of a deploy sees the old
+worker and nothing changes. The deploy itself was fine (live site served
+v9 and rendered the grid in a fresh browser).
+
+**Done:**
+- `app.js`: register with `{ updateViaCache: "none" }` (always re-fetch
+  the worker script); `reg.update()` whenever the app returns to the
+  foreground; on `controllerchange` reload the page once so the new files
+  run on the first launch instead of the second (skipped on first-ever
+  install). Settings gains an "App version" line (asks the controlling
+  worker for its cache name over a MessageChannel) and a "Check for
+  updates" button.
+- `service-worker.js`: cache v10, `message` handler answering `version`.
+- Verified against the local server with a real service worker: v10 shown;
+  bumping the cache name on disk and tapping Check for updates installed
+  the new worker, auto-reloaded, showed v11, old cache deleted.
+
+**Note for the phone:** the currently installed old worker lacks all of
+this, so one more manual cycle is needed: wait >10 min after the deploy,
+force-quit and reopen the app twice. From v10 on, updates self-apply.

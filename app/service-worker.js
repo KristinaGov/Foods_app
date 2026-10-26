@@ -1,4 +1,4 @@
-const CACHE_NAME = "baby-food-plan-v9";
+const CACHE_NAME = "baby-food-plan-v10";
 const ASSETS = [
   "./",
   "./index.html",
@@ -47,4 +47,11 @@ self.addEventListener("fetch", (event) => {
       }).catch(() => cached);
     })
   );
+});
+
+// Lets the page ask which version is running (shown in Settings).
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "version" && event.ports[0]) {
+    event.ports[0].postMessage(CACHE_NAME.replace("baby-food-plan-", ""));
+  }
 });
