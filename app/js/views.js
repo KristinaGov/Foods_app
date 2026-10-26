@@ -27,8 +27,9 @@ function attachBackupNotice() {
 let PLAN = [];
 let WEEKS = [];
 // editingNotesFor: ISO date whose notes textarea is open (null = none).
+// editingFoodNote: food name whose Tracker note textarea is open.
 // overviewWeek: week number shown on the Weeks tab (null = the current week).
-let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, overviewWeek: null };
+let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, editingFoodNote: null, overviewWeek: null };
 
 export function setPlan(plan) {
   PLAN = plan;
@@ -127,7 +128,7 @@ export function renderToday() {
     view.innerHTML = `
       <div class="day-nav">
         <button id="prev-day">‹</button>
-        <span class="current-date">${fmtDate(iso)}</span>
+        <span class="current-date">${fmtDate(iso)}${viewState.todayDayOffset ? '<br><button class="today-btn" id="back-today">↩ Back to today</button>' : ""}</span>
         <button id="next-day">›</button>
       </div>
       <div class="card empty-state"><p>${dayNumber < 1 ? "Before Day 1 of the plan." : "Past Day 100 — the plan ends here. 🎉"}</p></div>`;
@@ -165,7 +166,7 @@ export function renderToday() {
     ${backupNoticeHTML()}
     <div class="day-nav">
       <button id="prev-day">‹</button>
-      <span class="current-date">${fmtDate(iso)}</span>
+      <span class="current-date">${fmtDate(iso)}${viewState.todayDayOffset ? '<br><button class="today-btn" id="back-today">↩ Back to today</button>' : ""}</span>
       <button id="next-day">›</button>
     </div>
 
@@ -243,6 +244,8 @@ export function renderToday() {
   function attachDayNav() {
     document.getElementById("prev-day").addEventListener("click", () => { viewState.todayDayOffset -= 1; renderToday(); });
     document.getElementById("next-day").addEventListener("click", () => { viewState.todayDayOffset += 1; renderToday(); });
+    const back = document.getElementById("back-today");
+    if (back) back.addEventListener("click", () => { viewState.todayDayOffset = 0; renderToday(); });
   }
 }
 
@@ -332,9 +335,31 @@ function foodRowHTML(food, state) {
       <div class="reaction-row">
         ${REACTIONS.map((r) => `<button class="reaction-btn ${entry.reaction === r.key ? "selected" : ""}" data-reaction-food="${escapeHTML(food)}" data-reaction="${r.key}">${r.label}</button>`).join("")}
       </div>
-      <textarea class="food-notes" data-notes-food="${escapeHTML(food)}" placeholder="Notes on this food...">${escapeHTML(entry.notes || "")}</textarea>
+      ${foodNotesHTML(food, entry)}
       ` : ""}
     </li>`;
+}
+
+// Same pattern as Today's notes: saved text + Edit, textarea only while
+// empty or being edited.
+function foodNotesHTML(food, entry) {
+  const hasNote = Boolean((entry.notes || "").trim());
+  const editing = viewState.editingFoodNote === food || !hasNote;
+  const f = escapeHTML(food);
+  if (editing) {
+    return `
+      <textarea class="food-notes" data-notes-food="${f}" placeholder="Notes on this food...">${escapeHTML(entry.notes || "")}</textarea>
+      <div class="note-actions">
+        <button class="btn btn-primary" data-save-note="${f}">Save</button>
+        ${hasNote ? `<button class="btn" data-cancel-note="${f}">Cancel</button>` : ""}
+      </div>`;
+  }
+  return `
+      <div class="saved-note">${escapeHTML(entry.notes)}</div>
+      <div class="note-actions">
+        <span class="saved-badge">✓ Saved</span>
+        <button class="btn" data-edit-note="${f}">Edit</button>
+      </div>`;
 }
 
 function attachFoodRowHandlers() {
@@ -356,9 +381,23 @@ function attachFoodRowHandlers() {
       renderTracker();
     });
   });
-  document.querySelectorAll(".food-notes").forEach((ta) => {
-    ta.addEventListener("blur", () => {
-      store.markFood(ta.dataset.notesFood, { notes: ta.value });
+  document.querySelectorAll("[data-save-note]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const food = btn.dataset.saveNote;
+      const ta = document.querySelector(`.food-notes[data-notes-food="${CSS.escape(food)}"]`);
+      store.markFood(food, { notes: ta.value.trim() });
+      viewState.editingFoodNote = null;
+      renderTracker();
+    });
+  });
+  document.querySelectorAll("[data-cancel-note]").forEach((btn) => {
+    btn.addEventListener("click", () => { viewState.editingFoodNote = null; renderTracker(); });
+  });
+  document.querySelectorAll("[data-edit-note]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      viewState.editingFoodNote = btn.dataset.editNote;
+      renderTracker();
+      document.querySelector(`.food-notes[data-notes-food="${CSS.escape(btn.dataset.editNote)}"]`)?.focus();
     });
   });
 }

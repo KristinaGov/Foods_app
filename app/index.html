@@ -11,6 +11,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="stylesheet" href="css/styles.css">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("babyFoodPlan.theme") || "light"; } catch (e) {}</script>
 </head>
 <body>
 <header class="topbar">
@@ -34,6 +35,9 @@
     <label for="start-date-input">Baby's Day 1 date</label>
     <input type="date" id="start-date-input">
     <p class="hint">Day 1 = the first day of solid food introduction. Everything else is calculated from this date.</p>
+
+    <h3>Colour scheme</h3>
+    <div class="theme-row" id="theme-row"></div>
 
     <h3>Your data</h3>
     <p class="hint">Tried foods, reactions and notes are stored on this phone only, in the app's own storage. App updates never touch them, but they are gone if you delete the app icon, clear Safari's website data, or switch phones. Keep a backup in one of the two ways below.</p>

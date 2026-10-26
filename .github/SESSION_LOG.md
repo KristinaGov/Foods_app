@@ -311,3 +311,28 @@ Python, not the project `.venv`.
   `materials/merge_recipes.py` / `extract_recipes.py` rather than by hand.
 - Tracker food notes still save silently on blur; could get the same
   saved-text treatment if it feels unclear there too.
+
+---
+
+## 2026-10-26 (later) — tracker notes, back-to-today, colour schemes
+**Done:**
+- Tracker: food notes use the same saved-text / Edit / Cancel pattern as
+  Today's notes (`foodNotesHTML()`, `viewState.editingFoodNote`); the old
+  silent save-on-blur is gone.
+- Today: "↩ Back to today" button under the date whenever the day nav is
+  away from today (`viewState.todayDayOffset !== 0`).
+- Colour schemes: `app/js/theme.js` (new) with four schemes — Light
+  (unchanged), Plum (purple), Ocean (blue), Orchid (magenta) — picked via
+  swatches at the top of Settings. Preference stored in localStorage
+  `babyFoodPlan.theme` (device setting, not part of the backup), applied as
+  `data-theme` on `<html>` by an inline script in `index.html` before CSS
+  paints, and mirrored into `<meta name="theme-color">`. `styles.css` now
+  uses only tokens (`--accent`, `--accent-strong`, `--on-accent`, `--bg`,
+  `--card`, `--soft`, `--text`, `--muted`, `--border`, `--danger`,
+  `--warn`, `--notice-bg`, `--overlay`) plus `color-scheme` so native
+  inputs go dark too.
+- Service worker cache v6, `theme.js` precached.
+- Verified in headless Chromium: tracker note save/reload/edit/cancel,
+  back-to-today appears and resets the offset, each theme applies, persists
+  across reload and updates the meta colour; screenshots of all four
+  schemes checked by eye.

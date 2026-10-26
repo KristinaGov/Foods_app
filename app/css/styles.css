@@ -1,13 +1,72 @@
+/* Colour schemes. The active one is set as data-theme on <html> (see
+   js/theme.js); every colour below is a token so themes only swap values. */
 :root {
-  --green: #2f8f6f;
-  --green-dark: #1d5c45;
-  --cream: #fff8ec;
+  --accent: #2f8f6f;        /* top bar, primary buttons, pills */
+  --accent-strong: #1d5c45; /* selected chips, link-coloured text */
+  --on-accent: #ffffff;     /* text on top of --accent */
+  --bg: #fff8ec;            /* page background */
+  --card: #ffffff;          /* cards, tab bar, inputs */
+  --soft: #fff8ec;          /* saved notes, tips */
   --text: #2b2b26;
   --muted: #7a7a70;
   --border: #e6ddc9;
   --danger: #c2492c;
   --warn: #c98a1f;
+  --notice-bg: #fff3d6;
+  --overlay: rgba(0, 0, 0, 0.4);
+  color-scheme: light;
   font-size: 16px;
+}
+
+:root[data-theme="plum"] {
+  --accent: #7c4dd4;
+  --accent-strong: #b794ff;
+  --on-accent: #ffffff;
+  --bg: #14101c;
+  --card: #1f182b;
+  --soft: #28203a;
+  --text: #ece6f7;
+  --muted: #a697bf;
+  --border: #3a2f52;
+  --danger: #e2634a;
+  --warn: #e0a63c;
+  --notice-bg: #33261a;
+  --overlay: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+:root[data-theme="ocean"] {
+  --accent: #3f6fdd;
+  --accent-strong: #8fb3ff;
+  --on-accent: #ffffff;
+  --bg: #0e1420;
+  --card: #171f31;
+  --soft: #1f2a40;
+  --text: #e6ecf8;
+  --muted: #94a4c3;
+  --border: #2b3a58;
+  --danger: #e2634a;
+  --warn: #e0a63c;
+  --notice-bg: #2c2618;
+  --overlay: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+:root[data-theme="orchid"] {
+  --accent: #b9358f;
+  --accent-strong: #ff7ad1;
+  --on-accent: #ffffff;
+  --bg: #1a0f1c;
+  --card: #28172c;
+  --soft: #34203a;
+  --text: #f6e9f3;
+  --muted: #bb97b2;
+  --border: #4c2d4a;
+  --danger: #e2634a;
+  --warn: #e0a63c;
+  --notice-bg: #33261a;
+  --overlay: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -15,7 +74,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -31,8 +90,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: calc(env(safe-area-inset-top) + 10px) 16px 10px;
-  background: var(--green);
-  color: white;
+  background: var(--accent);
+  color: var(--on-accent);
   position: sticky;
   top: 0;
   z-index: 5;
@@ -48,7 +107,7 @@ body {
   background: none;
   border: none;
   font-size: 1.3rem;
-  color: white;
+  color: var(--on-accent);
   padding: 4px 8px;
 }
 
@@ -65,7 +124,7 @@ main#view {
   left: 0;
   right: 0;
   display: flex;
-  background: white;
+  background: var(--card);
   border-top: 1px solid var(--border);
   padding-bottom: env(safe-area-inset-bottom);
   z-index: 5;
@@ -90,12 +149,12 @@ main#view {
 }
 
 .tab-btn.active {
-  color: var(--green-dark);
+  color: var(--accent-strong);
 }
 
 /* Cards & sections */
 .card {
-  background: white;
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 14px 16px;
@@ -128,8 +187,8 @@ main#view {
 
 .pill {
   display: inline-block;
-  background: var(--green);
-  color: white;
+  background: var(--accent);
+  color: var(--on-accent);
   border-radius: 999px;
   padding: 2px 10px;
   font-size: 0.75rem;
@@ -182,8 +241,8 @@ main#view {
 }
 
 .status-chip.tried {
-  background: var(--green);
-  color: white;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .reaction-row {
@@ -195,16 +254,16 @@ main#view {
 
 .reaction-btn {
   border: 1px solid var(--border);
-  background: white;
+  background: var(--card);
   border-radius: 999px;
   padding: 5px 10px;
   font-size: 0.78rem;
 }
 
 .reaction-btn.selected {
-  background: var(--green-dark);
-  color: white;
-  border-color: var(--green-dark);
+  background: var(--accent-strong);
+  color: var(--on-accent);
+  border-color: var(--accent-strong);
 }
 
 textarea, input[type="text"], input[type="date"], input[type="search"], input[type="password"] {
@@ -214,7 +273,7 @@ textarea, input[type="text"], input[type="date"], input[type="search"], input[ty
   padding: 10px 12px;
   font-size: 0.95rem;
   font-family: inherit;
-  background: white;
+  background: var(--card);
   color: var(--text);
 }
 
@@ -234,8 +293,8 @@ textarea { min-height: 70px; resize: vertical; }
 }
 
 .btn-primary {
-  background: var(--green);
-  color: white;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .hidden { display: none !important; }
@@ -244,14 +303,14 @@ textarea { min-height: 70px; resize: vertical; }
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: var(--overlay);
   display: flex;
   align-items: flex-end;
   z-index: 20;
 }
 
 .modal-card {
-  background: white;
+  background: var(--card);
   width: 100%;
   max-height: 92vh;
   overflow-y: auto;
@@ -272,7 +331,7 @@ textarea { min-height: 70px; resize: vertical; }
   color: var(--muted);
 }
 
-.status-ok { color: var(--green-dark); }
+.status-ok { color: var(--accent-strong); }
 .status-err { color: var(--danger); }
 
 .btn-link {
@@ -283,7 +342,7 @@ textarea { min-height: 70px; resize: vertical; }
 }
 
 .card.notice {
-  background: #fff3d6;
+  background: var(--notice-bg);
   border-color: var(--warn);
 }
 
@@ -337,7 +396,7 @@ textarea { min-height: 70px; resize: vertical; }
   background: none;
   border: none;
   font-size: 1.3rem;
-  color: var(--green-dark);
+  color: var(--accent-strong);
   padding: 4px 10px;
 }
 
@@ -349,7 +408,7 @@ textarea { min-height: 70px; resize: vertical; }
 /* Saved day note (Today tab) */
 .saved-note {
   white-space: pre-wrap;
-  background: var(--cream);
+  background: var(--soft);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 12px;
@@ -365,7 +424,7 @@ textarea { min-height: 70px; resize: vertical; }
 }
 
 .saved-badge {
-  color: var(--green-dark);
+  color: var(--accent-strong);
   font-size: 0.85rem;
   font-weight: 600;
   margin-right: auto;
@@ -373,8 +432,8 @@ textarea { min-height: 70px; resize: vertical; }
 
 /* Weekly overview */
 .week-tip {
-  background: var(--cream);
-  border-left: 3px solid var(--green);
+  background: var(--soft);
+  border-left: 3px solid var(--accent);
   border-radius: 6px;
   padding: 8px 10px;
   font-size: 0.92rem;
@@ -388,3 +447,53 @@ textarea { min-height: 70px; resize: vertical; }
 .week-day-row:last-child { border-bottom: none; }
 
 .day-nav button:disabled { opacity: 0.35; }
+
+/* Back-to-today button inside the day nav */
+.day-nav .current-date { text-align: center; }
+
+.day-nav .today-btn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Tracker food notes */
+.food-row-wrap .saved-note { margin-top: 6px; }
+
+/* Theme picker (Settings) */
+.theme-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.theme-swatch {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-swatch .dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(128, 128, 128, 0.35);
+}
+
+.theme-swatch.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent) inset;
+}

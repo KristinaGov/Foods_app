@@ -1,5 +1,6 @@
 import { store, loadPlan, loadWeeks } from "./store.js";
 import { sync, hasUserData } from "./sync.js";
+import { THEMES, getTheme, setTheme, applyTheme } from "./theme.js";
 import { setPlan, setWeeks, renderToday, renderTracker, renderGrocery, renderWeeks, renderNotes } from "./views.js";
 
 const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, weeks: renderWeeks, notes: renderNotes };
@@ -57,8 +58,22 @@ async function reconcileAfterConnect(remote) {
   else await sync.push();
 }
 
+function renderThemePicker() {
+  const row = document.getElementById("theme-row");
+  const current = getTheme();
+  row.innerHTML = THEMES.map((t) => `
+    <button class="theme-swatch ${t.key === current ? "selected" : ""}" data-theme-key="${t.key}" aria-pressed="${t.key === current}">
+      <span class="dot" style="background:${t.swatch};"></span>${t.label}
+    </button>`).join("");
+  row.querySelectorAll("[data-theme-key]").forEach((btn) => {
+    btn.addEventListener("click", () => { setTheme(btn.dataset.themeKey); renderThemePicker(); });
+  });
+}
+
 function setupSettings() {
   const modal = document.getElementById("settings-modal");
+  applyTheme(getTheme());
+  renderThemePicker();
   const startDateInput = document.getElementById("start-date-input");
   const state = store.getState();
   if (state.startDate) startDateInput.value = state.startDate;
