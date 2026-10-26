@@ -199,3 +199,9 @@ export async function loadWeeks() {
   if (!res.ok) throw new Error("Could not load week overview data");
   return res.json();
 }
+
+export async function loadGroceries() {
+  const res = await fetch("./data/groceries.json");
+  if (!res.ok) throw new Error("Could not load grocery data");
+  return res.json();
+}

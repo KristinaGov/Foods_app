@@ -1,7 +1,7 @@
-import { store, loadPlan, loadWeeks } from "./store.js";
+import { store, loadPlan, loadWeeks, loadGroceries } from "./store.js";
 import { sync, hasUserData } from "./sync.js";
 import { THEMES, getTheme, setTheme, applyTheme } from "./theme.js";
-import { setPlan, setWeeks, renderToday, renderTracker, renderGrocery, renderWeeks, renderNotes } from "./views.js";
+import { setPlan, setWeeks, setGroceries, renderToday, renderTracker, renderGrocery, renderWeeks, renderNotes } from "./views.js";
 
 const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, weeks: renderWeeks, notes: renderNotes };
 let currentTab = "today";
@@ -178,9 +178,10 @@ async function init() {
   }
 
   try {
-    const [plan, weeks] = await Promise.all([loadPlan(), loadWeeks()]);
+    const [plan, weeks, groceries] = await Promise.all([loadPlan(), loadWeeks(), loadGroceries()]);
     setPlan(plan);
     setWeeks(weeks);
+    setGroceries(groceries);
   } catch (e) {
     console.error(e);
   }

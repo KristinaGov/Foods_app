@@ -361,3 +361,32 @@ Python, not the project `.venv`.
 - Verified in headless Chromium: migration of a legacy entry, Today pills
   on day 1, add/edit reaction/edit date (re-sorts, firstDate follows)/remove,
   food returns to not-tried after last try, chip mark, filter counts.
+
+---
+
+## 2026-10-26 (night) — grocery list from the PDF ingredient tables
+**Problem:** the Grocery tab only listed each week's *new* foods, so anything
+introduced earlier and used again (e.g. broccoli on Day 26) never appeared,
+and it had no quantities or substitutes.
+
+**Done:**
+- `materials/extract_groceries.py` (new, pdfplumber): parses every
+  "Week N: Ingredient List" page into `app/data/groceries.json` keyed by
+  plan week. Column boundaries come from the "Quantity"/"Notes" header
+  words on each page; wrapped rows are merged by vertical proximity.
+  Sections kept in PDF order (Dairy, Meat, or Fish / Pantry / Produce /
+  Check for Leftovers); each item has `item`, `qty`, `note`. Weeks 14 and
+  15 share one list ("14+15" in the PDF) and get identical entries.
+  Checked: 0 items without a quantity; week 4 has 26 items incl. Broccoli.
+- Grocery tab rewritten: shows plan weeks (‹ › like the Weeks tab, weeks
+  14 + 15 as one page), items with quantity on the right and the PDF note
+  underneath; notes containing "substitute" are highlighted with ⇄ as the
+  available alternative. Progress count, "Uncheck all". Checkmarks are
+  keyed `week-N` / `week-14+15` (old keys by week-start date are orphaned,
+  harmless).
+- `categories.js` CATEGORY / PANTRY_STAPLES are no longer used by the
+  Grocery tab (only `iconFor` is imported now); left in place.
+- Service worker cache v8, `groceries.json` precached.
+- Verified in headless Chromium: week 4 shows all 26 items incl. Broccoli
+  with 7 alternative notes, checks persist per week and across reload, nav
+  clamps at 1 and 14, no console errors.

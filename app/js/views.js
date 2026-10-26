@@ -1,5 +1,5 @@
 import { store } from "./store.js";
-import { CATEGORY_ORDER, categoryFor, isPantryStaple, iconFor } from "./categories.js";
+import { iconFor } from "./categories.js";
 import { sync } from "./sync.js";
 
 const BACKUP_REMINDER_DAYS = 14;
@@ -26,10 +26,11 @@ function attachBackupNotice() {
 
 let PLAN = [];
 let WEEKS = [];
+let GROCERIES = {};
 // editingNotesFor: ISO date whose notes textarea is open (null = none).
 // editingFoodNote: food name whose Tracker note textarea is open.
-// overviewWeek: week number shown on the Weeks tab (null = the current week).
-let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, editingFoodNote: null, overviewWeek: null };
+// overviewWeek / groceryWeek: plan week shown on the Weeks / Grocery tab (null = current week).
+let viewState = { todayDayOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, editingFoodNote: null, overviewWeek: null, groceryWeek: null };
 
 export function setPlan(plan) {
   PLAN = plan;
@@ -37,6 +38,10 @@ export function setPlan(plan) {
 
 export function setWeeks(weeks) {
   WEEKS = weeks;
+}
+
+export function setGroceries(groceries) {
+  GROCERIES = groceries;
 }
 
 function todayISO() {
@@ -449,53 +454,50 @@ function attachFoodRowHandlers() {
 
 /* ---------------- Grocery ---------------- */
 
+// Returns the groceries.json entry for a plan week plus the key used for
+// persisting checkmarks. Weeks 14 and 15 share one list in the PDF.
+function groceryWeek(week) {
+  const shared = week >= 14;
+  return { list: GROCERIES[String(week)] || [], key: shared ? "week-14+15" : `week-${week}`, label: shared ? "Weeks 14 + 15" : `Week ${week}` };
+}
+
 export function renderGrocery() {
-  document.getElementById("day-badge").textContent = "Grocery List";
   const view = document.getElementById("view");
-  const state = store.getState();
+  // Weeks 14 and 15 are one shopping list (and one page) here.
+  const GROCERY_LAST = 14;
+  const week = Math.min(GROCERY_LAST, viewState.groceryWeek ?? currentWeekNumber());
+  viewState.groceryWeek = week;
+  const { list, key, label } = groceryWeek(week);
+  const days = PLAN.filter((d) => (week >= GROCERY_LAST ? Number(d.week) >= GROCERY_LAST : Number(d.week) === week));
+  const hasDates = Boolean(store.getState().startDate);
 
-  if (!state.startDate) {
-    view.innerHTML = `<div class="card empty-state"><p>Set your baby's Day 1 date in Settings first.</p></div>`;
-    return;
-  }
+  document.getElementById("day-badge").textContent = "Grocery List";
 
-  const baseDay = store.dayNumberFor(todayISO()) + viewState.weekOffset * 7;
-  const days = [];
-  for (let i = 0; i < 7; i++) {
-    const dn = baseDay + i;
-    if (dn >= 1 && dn <= 100) days.push(dayData(dn));
-  }
+  const firstDay = days[0]?.day;
+  const lastDay = days[days.length - 1]?.day;
+  const rangeLabel = days.length && hasDates
+    ? `${fmtDate(store.isoDateForDay(firstDay))} – ${fmtDate(store.isoDateForDay(lastDay))}`
+    : days.length ? `Days ${firstDay}–${lastDay}` : "";
 
-  const weekStartISO = store.isoDateForDay(baseDay);
-  const weekKey = weekStartISO || `offset-${viewState.weekOffset}`;
-  const checks = store.getGroceryChecks(weekKey);
+  const checks = store.getGroceryChecks(key);
+  const total = list.reduce((n, s) => n + s.items.length, 0);
+  const done = list.reduce((n, s) => n + s.items.filter((it) => checks[it.item]).length, 0);
 
-  const byCategory = {};
-  days.forEach((d) => {
-    d.newFoods.forEach((f) => {
-      if (isPantryStaple(f)) return;
-      const cat = categoryFor(f);
-      byCategory[cat] = byCategory[cat] || new Set();
-      byCategory[cat].add(f);
-    });
-  });
-
-  const rangeLabel = days.length
-    ? `${fmtDate(store.isoDateForDay(baseDay))} – ${fmtDate(store.isoDateForDay(baseDay + days.length - 1))}`
-    : "Outside the 100-day plan";
-
-  const sections = CATEGORY_ORDER.filter((c) => byCategory[c]?.size).map((cat) => {
-    const items = Array.from(byCategory[cat]).sort((a, b) => a.localeCompare(b));
-    return `
+  const sections = list.map((section) => `
       <div class="grocery-category">
-        <h3>${cat}</h3>
-        ${items.map((item) => `
-          <label class="grocery-item ${checks[item] ? "checked" : ""}">
-            <input type="checkbox" data-grocery-item="${escapeHTML(item)}" ${checks[item] ? "checked" : ""}>
-            <span>${escapeHTML(item)}</span>
-          </label>`).join("")}
-      </div>`;
-  }).join("");
+        <h3>${escapeHTML(section.name)}${section.name.startsWith("Check for Leftovers") ? ' <span class="hint-inline">bought in an earlier week</span>' : ""}</h3>
+        ${section.items.map((it) => {
+          const isAlt = /substitute/i.test(it.note);
+          return `
+          <label class="grocery-item ${checks[it.item] ? "checked" : ""}">
+            <input type="checkbox" data-grocery-item="${escapeHTML(it.item)}" ${checks[it.item] ? "checked" : ""}>
+            <span class="grocery-text">
+              <span class="grocery-line"><span class="grocery-name">${escapeHTML(it.item)}</span><span class="grocery-qty">${escapeHTML(it.qty)}</span></span>
+              ${it.note ? `<span class="grocery-note ${isAlt ? "alt" : ""}">${isAlt ? "⇄ " : ""}${escapeHTML(it.note)}</span>` : ""}
+            </span>
+          </label>`;
+        }).join("")}
+      </div>`).join("");
 
   const mealsPreview = days.map((d) => `
     <div class="food-meta" style="margin-bottom:4px;">
@@ -504,15 +506,16 @@ export function renderGrocery() {
 
   view.innerHTML = `
     <div class="day-nav">
-      <button id="prev-week">‹</button>
-      <span class="current-date">${rangeLabel}</span>
-      <button id="next-week">›</button>
+      <button id="prev-week" ${week <= 1 ? "disabled" : ""}>‹</button>
+      <span class="current-date">${label}${rangeLabel ? "<br><span class='food-meta'>" + rangeLabel + "</span>" : ""}</span>
+      <button id="next-week" ${week >= GROCERY_LAST ? "disabled" : ""}>›</button>
     </div>
 
     <div class="card">
-      <h2>🛒 Shopping checklist</h2>
-      <p class="hint">New foods introduced this week, grouped by aisle. Pantry staples (spices, oils, vinegar) are left out; full ingredient lists are in each day's recipe on the Today tab.</p>
-      ${sections || '<p class="empty-state">No new ingredients this week.</p>'}
+      <h2>🛒 Shopping list${total ? ` <span class="grocery-count">${done}/${total}</span>` : ""}</h2>
+      <p class="hint">The plan's full ingredient list for the week, with quantities. Notes marked ⇄ give alternatives you can buy instead.</p>
+      ${sections || '<p class="empty-state">No ingredient list for this week.</p>'}
+      ${done ? '<button class="btn btn-link" id="clear-checks">Uncheck all</button>' : ""}
     </div>
 
     <div class="card">
@@ -521,17 +524,19 @@ export function renderGrocery() {
     </div>
   `;
 
-  document.getElementById("prev-week").addEventListener("click", () => { viewState.weekOffset -= 1; renderGrocery(); });
-  document.getElementById("next-week").addEventListener("click", () => { viewState.weekOffset += 1; renderGrocery(); });
+  document.getElementById("prev-week").addEventListener("click", () => { viewState.groceryWeek = Math.max(1, week - 1); renderGrocery(); });
+  document.getElementById("next-week").addEventListener("click", () => { viewState.groceryWeek = Math.min(GROCERY_LAST, week + 1); renderGrocery(); });
 
   view.querySelectorAll("[data-grocery-item]").forEach((cb) => {
     cb.addEventListener("change", () => {
-      const current = store.getGroceryChecks(weekKey);
+      const current = store.getGroceryChecks(key);
       current[cb.dataset.groceryItem] = cb.checked;
-      store.setGroceryChecks(weekKey, current);
+      store.setGroceryChecks(key, current);
       renderGrocery();
     });
   });
+  const clear = document.getElementById("clear-checks");
+  if (clear) clear.addEventListener("click", () => { store.setGroceryChecks(key, {}); renderGrocery(); });
 }
 
 /* ---------------- Weekly overview ---------------- */

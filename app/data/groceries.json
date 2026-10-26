@@ -1,0 +1,3492 @@
+{
+  "1": [
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Cannellini Beans (Canned)",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute dry beans cooked from scratch"
+        },
+        {
+          "item": "Hulled Hemp Seeds",
+          "qty": "6 tsp (18 g)",
+          "note": "substitute chia seed, pumpkin seed, or sunflower seed"
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "1 c (190 g)",
+          "note": "substitute rolled oats or fortified infant oatmeal"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "1 ½ tsp (7 ml)",
+          "note": "any variety"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Apple",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "2 whole",
+          "note": "Ideally fresh not frozen; substitute banana"
+        }
+      ]
+    }
+  ],
+  "2": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "7",
+          "note": "brown or white hen’s eggs"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Chickpeas (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry chickpeas cooked from scratch"
+        },
+        {
+          "item": "Cumin (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "¼ tsp (1 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Apple",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Corn on the Cob",
+          "qty": "1 ear",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Lemon",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "fresh not frozen, substitute banana"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Broccoli Florets",
+          "qty": "½ c (120 ml)",
+          "note": ""
+        },
+        {
+          "item": "Cauliflower Florets",
+          "qty": "1 c (240 ml)",
+          "note": ""
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "½ c (96 g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (optional)",
+          "qty": "2 tsp (6 g)",
+          "note": ""
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅓ c (75 ml)",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "3": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "6",
+          "note": "brown or white hen’s eggs"
+        },
+        {
+          "item": "Fresh Mozzarella Cheese",
+          "qty": "1 large ball",
+          "note": "fresh not salted"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Apple Cider Vinegar",
+          "qty": "2 tsp (10 ml)",
+          "note": "substitute rice vinegar"
+        },
+        {
+          "item": "Artichoke Hearts (Canned)",
+          "qty": "1 14-oz (400-g) can",
+          "note": "whole, halved, or quartered packed in oil or water"
+        },
+        {
+          "item": "Corn Tortillas (Small)",
+          "qty": "3 tortillas",
+          "note": "corn not wheat, ideally 6-inch tortillas"
+        },
+        {
+          "item": "Dried Oregano",
+          "qty": "½ tsp (1 g)",
+          "note": "substitute 1 tsp (2 g) fresh leaves"
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "⅛ tsp (¼ g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Kidney Beans",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry kidney beans cooked from scratch"
+        },
+        {
+          "item": "Paprika (optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Pitted Olives",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "White Rice",
+          "qty": "¼ c (45 g)",
+          "note": "short or long grain, ideally basmati (which is lower in arsenic)"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Basil",
+          "qty": "2 sprigs",
+          "note": "fresh not dried"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Chayote",
+          "qty": "1 whole",
+          "note": "substitute apple (any variety)"
+        },
+        {
+          "item": "Lime",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Nopal (Cactus)",
+          "qty": "1 pad",
+          "note": "substitute pre-cooked cactus strips"
+        },
+        {
+          "item": "Pear",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "2 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Cooked Bell Pepper",
+          "qty": "1 half",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "4 tsp (12 g)",
+          "note": "substitute chia seeds, pumpkin seeds, or sunflower seeds"
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "½ c (96 g)",
+          "note": ""
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "¼ c (60 ml)",
+          "note": ""
+        },
+        {
+          "item": "Sesame-Free Hummus",
+          "qty": "½ c (120 ml)",
+          "note": "see batch recipe on Week 2 | Day 13"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "5 ½ tsp (28 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        }
+      ]
+    }
+  ],
+  "4": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "3",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Fresh Goat Cheese (optional)",
+          "qty": "2 oz (56 g)",
+          "note": "fresh not aged, log or pre-crumbled"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "¾ c (180 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "2 tbsp (28 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "3 tbsp (45 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Black Beans (Canned)",
+          "qty": "1 15-oz (425-g) can",
+          "note": "substitute dry black beans cooked from scratch"
+        },
+        {
+          "item": "Black Pepper (Optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": "pre-ground or whole peppercorns to grind at home"
+        },
+        {
+          "item": "Polenta (Corn Grits)",
+          "qty": "1 c (240 ml)",
+          "note": "ideally \"instant\" not coarse grinds (which take longer to cook)"
+        },
+        {
+          "item": "Unsalted Hulled Pumpkin Seeds",
+          "qty": "3 tbsp (24 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Stock",
+          "qty": "3 c (720 ml)",
+          "note": "any low-sodium meat or vegetable stock"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Apple",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "3 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cantaloupe",
+          "qty": "1 whole",
+          "note": "whole not pre-cut, substitute honeydew or any melon variety"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Fresh Cilantro (Optional)",
+          "qty": "2 sprigs",
+          "note": "substitute fresh chives, parsley, or scallion"
+        },
+        {
+          "item": "Fresh Thyme (Optional)",
+          "qty": "3 sprigs",
+          "note": "substitute ½ tsp (1 g) dried thyme"
+        },
+        {
+          "item": "Lime (optional)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Sweet Potatoes (Large)",
+          "qty": "2 whole",
+          "note": "substitute yams"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Corn Tortillas (Small)",
+          "qty": "4 tortillas",
+          "note": ""
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": ""
+        },
+        {
+          "item": "Ground Cumin (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "3 tsp (9 g)",
+          "note": ""
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "½ c (96 g)",
+          "note": ""
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅓ c (80 ml)",
+          "note": ""
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "3 tsp (15 g)",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "5": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "4",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Fresh Goat Cheese",
+          "qty": "4 oz (112 g)",
+          "note": "fresh not aged, log or pre-crumbled"
+        },
+        {
+          "item": "Fresh Ricotta Cheese",
+          "qty": "½ c (120 ml)",
+          "note": "substitute low-sodium cottage cheese"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "1 tbsp (14 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 tbsp (15 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Chickpeas (Canned)",
+          "qty": "2 15-oz (425 g) cans",
+          "note": "substitute dry chickpeas cooked from scratch"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds (optional)",
+          "qty": "3 tbsp (27 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "1 tbsp (9 g)",
+          "note": "raw or roasted"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "4 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        },
+        {
+          "item": "Wheat Farina",
+          "qty": "¼ c (44 g)",
+          "note": "substitute infant wheat cereal"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Beets (Pre-Cooked)",
+          "qty": "2 c (480 ml)",
+          "note": "canned or vacuum-packed, substitute fresh beets cooked from scratch"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Lemon (optional)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime (optional)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Papaya (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety; substitute banana"
+        },
+        {
+          "item": "Zucchini",
+          "qty": "1 whole",
+          "note": "any variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Cumin (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "4 tsp (12 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅔ c (160 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        }
+      ]
+    }
+  ],
+  "6": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Chicken Drumsticks and Thighs",
+          "qty": "1 lb (454 g)",
+          "note": "bone-in, skin-on"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "3",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "2 tbsp (28 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "⅔ c (160 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Buckwheat Cereal",
+          "qty": "¼ c (40 g)",
+          "note": "substitute wheat farina or fortified infant wheat cereal"
+        },
+        {
+          "item": "Chickpeas (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry chickpeas cooked from scratch"
+        },
+        {
+          "item": "Coriander",
+          "qty": "½ tsp (1 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Egg Noodles",
+          "qty": "6 oz (170 g)",
+          "note": "ideally \"wide\" style and enriched with iron"
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Maple Syrup (Optional)",
+          "qty": "1 tbsp (15 ml)",
+          "note": "substitute agave syrup (avoid honey)"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "2 tsp (6 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smoked Paprika (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "substitute sweet paprika"
+        },
+        {
+          "item": "Soy Sauce",
+          "qty": "2 tbsp (30 ml)",
+          "note": "ideally low-sodium, substitute coconut aminos"
+        },
+        {
+          "item": "Toasted Sesame Oil",
+          "qty": "2 tbsp (30 ml)",
+          "note": ""
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "1 slice",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Acorn Squash",
+          "qty": "2 whole",
+          "note": "substitute butternut squash or another winter squash variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Lemon",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Okra",
+          "qty": "2 whole",
+          "note": "whole not pre-cut okra, fresh not canned"
+        },
+        {
+          "item": "Persimmon",
+          "qty": "1 whole",
+          "note": "ideally fuyu or a non-astringent variety, substitute apple (any variety)"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "1 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "Whole Green Beans",
+          "qty": "4 whole",
+          "note": "whole not pre-cut beans, fresh or frozen"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Cumin",
+          "qty": "2 tsp (4 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅔ c (160 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Papaya (Ripe)",
+          "qty": "2-3 spears/handles",
+          "note": "any variety; substitute banana"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "⅔ c (160 ml)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "1 tbsp (9 g)",
+          "note": "raw or roasted"
+        },
+        {
+          "item": "Wheat Farina",
+          "qty": "¼ c (44 g)",
+          "note": "substitute infant wheat cereal"
+        }
+      ]
+    }
+  ],
+  "7": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "4",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "2 tbsp (30 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Pork Shoulder",
+          "qty": "2 lbs (908 g)",
+          "note": "boneless, fat cap on"
+        },
+        {
+          "item": "Pork Spare Ribs",
+          "qty": "2 lbs (908 g)",
+          "note": "bone-in"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "6 tbsp (84 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 c (240 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Corn Tortillas (Small)",
+          "qty": "1 package",
+          "note": "corn not wheat, ideally 6-inch tortillas"
+        },
+        {
+          "item": "Diced Tomatoes",
+          "qty": "2 14-oz (400-g) cans",
+          "note": "substitute crushed tomatoes or passata"
+        },
+        {
+          "item": "Peanut Oil",
+          "qty": "4 tbsp (60 ml)",
+          "note": "substitute olive oil"
+        },
+        {
+          "item": "Rice Vinegar",
+          "qty": "1 tsp (5 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Soba Noodles",
+          "qty": "3 oz (84 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Stock",
+          "qty": "3 c (720 ml)",
+          "note": "meat or vegetable, substitute water"
+        },
+        {
+          "item": "Tomato Paste",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "2 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "2 heads",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Edamame",
+          "qty": "¾ c (180 ml)",
+          "note": "fresh or frozen, ideally shelled"
+        },
+        {
+          "item": "Fresh Cilantro",
+          "qty": "4 sprigs",
+          "note": "substitute fresh parsley"
+        },
+        {
+          "item": "Fresh Garlic",
+          "qty": "9 cloves",
+          "note": "substitute ½ tsp (1 g) garlic powder per clove"
+        },
+        {
+          "item": "Fresh Ginger",
+          "qty": "1 inch (2 cm)",
+          "note": "substitute ½ tsp (1 g) ground ginger"
+        },
+        {
+          "item": "Fresh Rosemary (optional)",
+          "qty": "4 sprigs",
+          "note": "substitute 2 tsp (4 g) dried rosemary"
+        },
+        {
+          "item": "Lime",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mushroom (Button)",
+          "qty": "1 whole",
+          "note": "substitute cremini, shiitake, or any cultivated variety"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Pineapple",
+          "qty": "1 whole",
+          "note": "substitute canned pineapple spears or rings packed in water (not syrup)"
+        },
+        {
+          "item": "Star Fruit (Ripe)",
+          "qty": "1 whole",
+          "note": "substitute pineapple (whole or canned fruit packed in water, not syrup)"
+        },
+        {
+          "item": "Tofu (Firm or Extra-Firm)",
+          "qty": "1 14-oz (400-g) package",
+          "note": "packed in water with minimal added ingredients"
+        },
+        {
+          "item": "Turnip (Large)",
+          "qty": "1 whole",
+          "note": "any variety; substitute potato"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Black Pepper (optional)",
+          "qty": "1 tbsp (6 g)",
+          "note": "pre-ground or whole peppercorns to grind at home"
+        },
+        {
+          "item": "Buckwheat Cereal",
+          "qty": "¼ c (40 g)",
+          "note": "substitute wheat farina or fortified infant wheat cereal"
+        },
+        {
+          "item": "Cumin (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Garlic Powder",
+          "qty": "2 tsp (4 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "2 tbsp (30 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Polenta (Corn Grits)",
+          "qty": "1 c (240 ml)",
+          "note": "ideally \"instant\" over coarse grinds (which take longer to cook)"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "2 tsp (10 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "3 tbsp (45 ml)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds (optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        }
+      ]
+    }
+  ],
+  "8": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Chicken Liver",
+          "qty": "6 oz (168 g)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "3",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "¼ c (60 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "⅓ c (75 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "3 tbsp (42 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Bay Leaf (Optional)",
+          "qty": "1 whole",
+          "note": "fresh or dried, any variety"
+        },
+        {
+          "item": "Black Beans (Canned)",
+          "qty": "¼ c (71 g)",
+          "note": "substitute dry black beans cooked from scratch"
+        },
+        {
+          "item": "Cardamom (Optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": "pre-ground or whole pods with seeds to grind at home"
+        },
+        {
+          "item": "Chia Seeds",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Coconut Oil",
+          "qty": "3 tbsp (45 ml)",
+          "note": ""
+        },
+        {
+          "item": "Quinoa",
+          "qty": "1 c (170 g)",
+          "note": "any variety, substitute rice"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "3 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "2 13 ½-oz (400-ml) cans",
+          "note": "no added sugar (not coconut cream or cream of coconut)"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes",
+          "qty": "5 tsp (10 g)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Bananas",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Blueberries",
+          "qty": "2 ½ c (370 g)",
+          "note": "fresh or frozen, substitute any berry"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "½ c (120 ml)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Collard Greens",
+          "qty": "1 bunch",
+          "note": "fresh or frozen, substitute kale or spinach"
+        },
+        {
+          "item": "Fresh Garlic",
+          "qty": "1 clove",
+          "note": "substitute ½ tsp garlic powder (not granules)"
+        },
+        {
+          "item": "Fresh Ginger",
+          "qty": "1 inch (2 cm)",
+          "note": "substitute ½ tsp ground ginger"
+        },
+        {
+          "item": "Fresh Rosemary (optional)",
+          "qty": "1 sprig",
+          "note": "substitute ½ tsp (1 g) dried rosemary"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety, substitute banana"
+        },
+        {
+          "item": "Onion (Small)",
+          "qty": "1 whole",
+          "note": "ideally shallot"
+        },
+        {
+          "item": "Orange (Large)",
+          "qty": "1 whole",
+          "note": "navel or any large variety (not clementines or small oranges)"
+        },
+        {
+          "item": "Sapodilla (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety, substitute banana"
+        },
+        {
+          "item": "Sweet Potato",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Tofu (Firm or Extra-Firm)",
+          "qty": "1 14-oz (400-g) package",
+          "note": "packed in water, minimal added ingredients"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Cumin (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "¼ c (48 g)",
+          "note": "substitute rolled oats or fortified infant oatmeal"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "1 tsp (5 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "2 tsp (6 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "¼ c (36 g)",
+          "note": "raw or roasted"
+        }
+      ]
+    }
+  ],
+  "9": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Boneless Salmon (Canned)",
+          "qty": "4 6-oz (170-g) cans",
+          "note": "substitute freshly cooked salmon from scratch"
+        },
+        {
+          "item": "Boneless Salmon (Fresh)",
+          "qty": "1 lbs (454 g)",
+          "note": "fresh or frozen, skin on or off"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "5",
+          "note": "brown or white hen’s eggs"
+        },
+        {
+          "item": "Ghee",
+          "qty": "3 tbsp (45 ml)",
+          "note": "substitute unsalted butter"
+        },
+        {
+          "item": "Labneh",
+          "qty": "4 c (960 ml)",
+          "note": "substitute plain yogurt"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "¼ c (60 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "4 tbsp (56 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 tbsp (15 ml)",
+          "note": "ideally “whole” milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Garam Masala",
+          "qty": "1 ½ tsp (3 g)",
+          "note": "substitute with your own blend of ground cinnamon, cumin, coriander, and turmeric"
+        },
+        {
+          "item": "Ground Turmeric (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute 2 inch (2 cm) freshly grated turmeric"
+        },
+        {
+          "item": "Yellow Lentils",
+          "qty": "1 c (200 g)",
+          "note": "substitute brown, red, or yellow lentils"
+        },
+        {
+          "item": "Onion Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "1 13 ½-oz (400-ml) can",
+          "note": "no added sugar (not coconut cream or cream of coconut)"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "2 heads",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "2 heads",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cucumber (Small)",
+          "qty": "2 whole",
+          "note": "any small variety"
+        },
+        {
+          "item": "Edamame (Shelled)",
+          "qty": "1 ½ c (360 ml)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Fresh Garlic",
+          "qty": "1 clove",
+          "note": "substitute ½ tsp garlic powder (not granules)"
+        },
+        {
+          "item": "Fresh Mint (Optional)",
+          "qty": "2 sprigs",
+          "note": "substitute fresh parsley or 1 tsp (2 g) dried mint or dried parsley"
+        },
+        {
+          "item": "Lemon",
+          "qty": "4 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety, substitute banana"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "1 whole",
+          "note": "ideally purple or red onion"
+        },
+        {
+          "item": "Onion (Small)",
+          "qty": "1 whole",
+          "note": "ideally shallot"
+        },
+        {
+          "item": "Raspberries",
+          "qty": "1 pint",
+          "note": "ideally fresh, substitute frozen berries"
+        },
+        {
+          "item": "Star Fruit (Ripe)",
+          "qty": "1 whole",
+          "note": "substitute pineapple"
+        },
+        {
+          "item": "Sweet Plantains",
+          "qty": "2 whole",
+          "note": "yellow with lots of brown spots, substitute white potato"
+        },
+        {
+          "item": "Sweet Potato",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "1 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "White Potato",
+          "qty": "2 whole",
+          "note": "russet or any starchy variety"
+        },
+        {
+          "item": "Whole Asparagus Spears",
+          "qty": "1 bunch",
+          "note": "whole not pre-cut, substitute whole green beans"
+        },
+        {
+          "item": "Whole Green Beans",
+          "qty": "4 whole",
+          "note": "whole not pre-cut beans, fresh or frozen"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "1 c (240 ml)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Coconut Oil",
+          "qty": "1 tbsp (15 ml)",
+          "note": "substitute butter, ghee, or another oil"
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "1 c (240 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Paprika (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "1 tsp (3 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "2 tsp (10 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "2 tbsp (30 g)",
+          "note": "creamy or smooth (not “chunky”) with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds (optional)",
+          "qty": "¼ c (60 ml)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "White Rice",
+          "qty": "1 c (200 g)",
+          "note": "short or long grain, ideally basmati (which is lower in arsenic)"
+        }
+      ]
+    }
+  ],
+  "10": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "5",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Fresh Mozzarella Cheese",
+          "qty": "3 oz (84 g)",
+          "note": ""
+        },
+        {
+          "item": "Fresh Ricotta Cheese",
+          "qty": "1 ½ c (360 ml)",
+          "note": "no added sweeteners, substitute low-sodium cottage cheese"
+        },
+        {
+          "item": "Grated Parmesan Cheese (Optional)",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Ground Lamb",
+          "qty": "1 lbs (454 g)",
+          "note": "substitute ground beef"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "3 c (720 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Sardines (Canned)",
+          "qty": "2 4 ½-oz (125-g) cans",
+          "note": "boneless, packed in oil or water, minimal seasonings"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "4 tbsp (57 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "½ c (118 ml)",
+          "note": "ideally “whole” milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Almond Flour",
+          "qty": "⅓ c (33 g)",
+          "note": "substitute flour made of a tree nut that has been safely introduced"
+        },
+        {
+          "item": "Baking Powder",
+          "qty": "1 tsp (5 g)",
+          "note": "ideally low sodium"
+        },
+        {
+          "item": "Baking Soda",
+          "qty": "1 tsp (5 g)",
+          "note": ""
+        },
+        {
+          "item": "Balsamic Vinegar (Optional)",
+          "qty": "½ tsp (3 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Bulgur",
+          "qty": "¼ c (45 g)",
+          "note": "substitute couscous or wheat farina"
+        },
+        {
+          "item": "Chickpeas (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry chickpeas cooked from scratch"
+        },
+        {
+          "item": "Pinto Beans (Canned)",
+          "qty": "½ c (113 g)",
+          "note": "substitute dry pinto beans cooked from scratch"
+        },
+        {
+          "item": "Penne Pasta",
+          "qty": "3 oz (84 g)",
+          "note": "ideally pasta made with chickpeas or lentils for added iron"
+        },
+        {
+          "item": "Pumpkin Purée",
+          "qty": "½ c (113 g)",
+          "note": "substitute canned squash purée or freshly cooked squash purée"
+        },
+        {
+          "item": "Rolled Oats",
+          "qty": "½ c (48 g)",
+          "note": ""
+        },
+        {
+          "item": "Smooth Almond Butter (Honey-Free)",
+          "qty": "¼ c (60 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "2 13 ½-oz (400-ml) cans",
+          "note": "no added sugar (not coconut cream or cream of coconut)"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "2 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        },
+        {
+          "item": "Wheat Flour",
+          "qty": "½ c (120 g)",
+          "note": "any variety, ideally enriched with iron"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Acorn Squash",
+          "qty": "2 whole",
+          "note": "substitute butternut squash or another winter squash variety"
+        },
+        {
+          "item": "Apple",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Asparagus Spears",
+          "qty": "12 whole",
+          "note": "whole not pre-cut or canned, substitute whole greens"
+        },
+        {
+          "item": "Baby Potatoes",
+          "qty": "½ lb (227 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Banana",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Basil (Optional)",
+          "qty": "6 sprigs",
+          "note": "fresh not dried, substitute fresh parsley"
+        },
+        {
+          "item": "Corn on the Cob",
+          "qty": "1 ear",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Cucumber (Small)",
+          "qty": "2 whole",
+          "note": "hothouse, kirby, persian, or any small variety"
+        },
+        {
+          "item": "Edamame (Shelled)",
+          "qty": "1 ¾ c (240 ml)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Garlic",
+          "qty": "3 cloves",
+          "note": "substitute 1 ½ tsp (3 g) garlic powder"
+        },
+        {
+          "item": "Garden Peas (Shelled)",
+          "qty": "¾ c (180 ml)",
+          "note": "fresh or frozen, substitute edamame"
+        },
+        {
+          "item": "Lemon",
+          "qty": "6 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "substitute banana"
+        },
+        {
+          "item": "Mint (Optional)",
+          "qty": "5 sprigs",
+          "note": "substitute 2 ½ tsp (5 g) dried mint"
+        },
+        {
+          "item": "Onion (Small)",
+          "qty": "2 whole",
+          "note": "ideally shallot"
+        },
+        {
+          "item": "Papaya (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety, substitute cantaloupe or another melon"
+        },
+        {
+          "item": "Parsley (Optional)",
+          "qty": "4 sprigs",
+          "note": "substitute 2 tsp (4 g) dried parsley"
+        },
+        {
+          "item": "Raspberries",
+          "qty": "1 pint",
+          "note": "ideally fresh, substitute frozen berries"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "4 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "White Potato",
+          "qty": "2 whole",
+          "note": "russet or any starchy variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Apple Cider Vinegar",
+          "qty": "1 tsp (5 ml)",
+          "note": ""
+        },
+        {
+          "item": "Buckwheat Cereal (Optional)",
+          "qty": "¼ c (40 g)",
+          "note": "substitute wheat farina or fortified infant wheat cereal"
+        },
+        {
+          "item": "Coconut Oil",
+          "qty": "2 tbsp (30 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Cumin (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Dried Mint (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": ""
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Ground Cinnamon",
+          "qty": "½ tsp (1 g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "3 tsp (9 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "½ c (96 g)",
+          "note": "substitute rolled oats or fortified infant oatmeal"
+        },
+        {
+          "item": "Onion Powder",
+          "qty": "½ tsp (1 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "2 c (480 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Salmon Cake",
+          "qty": "1 cake",
+          "note": "use recipe from Week 9 | Day 61 | Family Meal"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "⅔ c (160 ml)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "2 tsp (10 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds",
+          "qty": "2 tsp (6 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes",
+          "qty": "1 tsp (2 g)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        }
+      ]
+    }
+  ],
+  "11": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Canned Salmon",
+          "qty": "1 5-oz (142-g) can",
+          "note": "boneless, skinless, packed in oil or water"
+        },
+        {
+          "item": "Chicken Breast",
+          "qty": "1 lbs (454 g)",
+          "note": "boneless, skinless"
+        },
+        {
+          "item": "Crumbled Blue Cheese (Optional)",
+          "qty": "2 oz (56 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "5",
+          "note": "any variety"
+        },
+        {
+          "item": "Mascarpone Cheese",
+          "qty": "½ c (120 ml)",
+          "note": "substitute ricotta cheese"
+        },
+        {
+          "item": "Steelhead Trout",
+          "qty": "1 lbs (454 g)",
+          "note": ""
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Yogurt (Plain)",
+          "qty": "¾ c (180 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Cooked Bell Pepper (Canned)",
+          "qty": "½ c (120 ml)",
+          "note": "packed in oil or water (minimal seasoning)"
+        },
+        {
+          "item": "Dijon Mustard",
+          "qty": "4 tsp (20 ml)",
+          "note": ""
+        },
+        {
+          "item": "Pinto Beans (Canned)",
+          "qty": "½ c (120 ml)",
+          "note": "substitute dry pinto beans cooked from scratch"
+        },
+        {
+          "item": "Quinoa",
+          "qty": "⅓ c (80 ml)",
+          "note": "substitute amaranth, millet, or gluten-free rolled oats"
+        },
+        {
+          "item": "Smooth Cashew Butter (Honey-Free)",
+          "qty": "4 tsp (20 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smoked Paprika (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute sweet paprika"
+        },
+        {
+          "item": "Ramen Noodles",
+          "qty": "2 3-oz (85-g) packets",
+          "note": "any flavor (pre-made seasoning packet set aside for another use)"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "3 slices",
+          "note": "1 whole or pre-sliced loaf"
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "½ c (120 ml)",
+          "note": "no added sugar (not coconut cream or cream of coconut)"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Baby Bok Choy",
+          "qty": "4 heads",
+          "note": "substitute broccoli, cabbage, or swiss chard"
+        },
+        {
+          "item": "Baby Spinach",
+          "qty": "¾ c (180 ml)",
+          "note": "fresh not frozen"
+        },
+        {
+          "item": "Blackberries (Large)",
+          "qty": "⅔ c (160 ml)",
+          "note": "fresh not frozen, substitute blueberries (fresh or frozen)"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Edamame (Shelled)",
+          "qty": "¾ c (180 ml)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Fresh Cilantro (Optional)",
+          "qty": "2 sprigs",
+          "note": ""
+        },
+        {
+          "item": "Garlic",
+          "qty": "1 clove",
+          "note": "substitute ¼ tsp (1 g) dried"
+        },
+        {
+          "item": "Ginger (Optional)",
+          "qty": "1-inch (2 cm)",
+          "note": "substitute ¼ tsp (1 g) dried"
+        },
+        {
+          "item": "Green Beans",
+          "qty": "8 whole",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Green Onion",
+          "qty": "3",
+          "note": ""
+        },
+        {
+          "item": "Kiwi",
+          "qty": "1 whole",
+          "note": "substitute ripe pear"
+        },
+        {
+          "item": "Lemon",
+          "qty": "3 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "substitute banana"
+        },
+        {
+          "item": "Romaine Lettuce",
+          "qty": "1 head",
+          "note": ""
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "6 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "Tofu (Extra-Firm)",
+          "qty": "1 14-oz (400-g) container",
+          "note": "any variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Apple Cider Vinegar",
+          "qty": "4 tbsp (60 ml)",
+          "note": ""
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "¼ tsp (½ g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "substitute chia seed, pumpkin seed, or sunflower seed"
+        },
+        {
+          "item": "Hulled Sunflower Seeds (Unsalted)",
+          "qty": "3 tsp (9 g)",
+          "note": ""
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "¼ c (48 g)",
+          "note": "substitute rolled oats or fortified infant oatmeal"
+        },
+        {
+          "item": "Lamb Meatball",
+          "qty": "1",
+          "note": "see batch recipe on Week 10 | Day 68 | Family Meal"
+        },
+        {
+          "item": "Maple Syrup (Optional)",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "½ c (120 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Pumpkin Almond Pancake",
+          "qty": "1",
+          "note": "see batch recipe on Week 10 | Day 68 | Meal 1"
+        },
+        {
+          "item": "Sesame Oil",
+          "qty": "4 tbsp (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "1 tsp (3 g)",
+          "note": "hulled, any variety"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "3 tbsp (45 ml)",
+          "note": "no added sweeteners"
+        },
+        {
+          "item": "Smooth Almond Butter (Honey Free)",
+          "qty": "⅔ c (160 ml)",
+          "note": "creamy or smooth (not “chunky”) with no added sweeteners"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey Free)",
+          "qty": "3 tbsp (45 ml)",
+          "note": "creamy or smooth (not “chunky”) with no added sweeteners"
+        },
+        {
+          "item": "Soy Sauce",
+          "qty": "2 tbsp (30 ml)",
+          "note": "ideally low-sodium"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes",
+          "qty": "2 tsp (4 g)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        }
+      ]
+    }
+  ],
+  "12": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Eggs (Large)",
+          "qty": "5",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Fresh Ricotta Cheese",
+          "qty": "½ c (120 ml)",
+          "note": "no added sweeteners, substitute plain unsweetened yogurt"
+        },
+        {
+          "item": "Grated Parmesan Cheese (Optional)",
+          "qty": "2 tbsp (30 ml)",
+          "note": ""
+        },
+        {
+          "item": "Ground Beef",
+          "qty": "1 lbs (454 g)",
+          "note": "substitute ground lamb"
+        },
+        {
+          "item": "Ground Turkey",
+          "qty": "1 ½ lbs (681 g)",
+          "note": "substitute ground chicken"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "1 c (240 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Tilapia",
+          "qty": "1 lbs (454 g)",
+          "note": "fresh or frozen, boneless, skin on or off, substitute cod, haddock, or hake"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "4 tbsp (56 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "½ c (120 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Almond Flour",
+          "qty": "½ c (49 g)",
+          "note": "substitute flour made of a tree nut that has been safely introduced"
+        },
+        {
+          "item": "Bay Leaves (Optional)",
+          "qty": "2 leaves",
+          "note": ""
+        },
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "⅓ c (80 ml)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Chickpeas (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry chickpeas cooked from scratch"
+        },
+        {
+          "item": "Diced Tomatoes",
+          "qty": "2 14-oz (400-g) cans",
+          "note": "substitute crushed tomatoes or passata"
+        },
+        {
+          "item": "Ground Nutmeg",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute ground cinnamon"
+        },
+        {
+          "item": "Madras Curry Powder",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute blend of cinnamon, coriander, cumin, and turmeric"
+        },
+        {
+          "item": "Penne Pasta",
+          "qty": "6 oz (168 g)",
+          "note": "ideally pasta made with chickpeas or lentils for added iron"
+        },
+        {
+          "item": "Tomato Paste",
+          "qty": "1 6-oz (170-g) cans",
+          "note": ""
+        },
+        {
+          "item": "Unsalted Cashews",
+          "qty": "½ c (120 ml)",
+          "note": "substitute unsalted shelled peanuts"
+        },
+        {
+          "item": "Unsalted Walnut",
+          "qty": "⅔ c (160 ml)",
+          "note": "substitute smooth walnut butter (honey-free)"
+        },
+        {
+          "item": "Unsweetened Applesauce",
+          "qty": "2 c (480 ml)",
+          "note": ""
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "2 13 ½-oz (400-ml) cans",
+          "note": "no added sugar (not coconut cream or cream of coconut)"
+        },
+        {
+          "item": "Vanilla Extract (Optional)",
+          "qty": "1 tsp (5 ml)",
+          "note": ""
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "1 slice",
+          "note": "any style, ideally country-style loaf and iron-fortified"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Broccoli",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Carrots (Medium)",
+          "qty": "6 whole",
+          "note": "fresh or frozen, whole not pre-cut"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Cilantro",
+          "qty": "6 sprigs",
+          "note": "substitute fresh parsley"
+        },
+        {
+          "item": "Cucumber (Small)",
+          "qty": "1 whole",
+          "note": "any small variety"
+        },
+        {
+          "item": "Edamame (Shelled)",
+          "qty": "1 c (240 ml)",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Garlic",
+          "qty": "6 cloves",
+          "note": "substitute 2 tsp (4 g) garlic powder"
+        },
+        {
+          "item": "Ginger",
+          "qty": "2 inch (4 cm)",
+          "note": "substitute 1 tsp (2 g) dried ginger"
+        },
+        {
+          "item": "Hot Pepper (Optional)",
+          "qty": "1 whole",
+          "note": "fresno, serrano, or another spicy variety"
+        },
+        {
+          "item": "Lemon",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Orange (Large)",
+          "qty": "1 whole",
+          "note": "navel or any large variety (not clementines or small oranges)"
+        },
+        {
+          "item": "Pear (Ripe)",
+          "qty": "1 whole",
+          "note": "substitute apple"
+        },
+        {
+          "item": "Rosemary",
+          "qty": "1 sprig",
+          "note": "substitute ½ tsp (1 g) dried rosemary"
+        },
+        {
+          "item": "Strawberries (Large)",
+          "qty": "1 pint",
+          "note": "ideally ripe strawberries, fresh or frozen"
+        },
+        {
+          "item": "Snow Peas",
+          "qty": "4 whole",
+          "note": "substitute sugar snap peas or whole green beans (fresh or frozen)"
+        },
+        {
+          "item": "Taro Root",
+          "qty": "2 whole",
+          "note": "substitute sweet potato"
+        },
+        {
+          "item": "Zucchini",
+          "qty": "1 whole",
+          "note": "any variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Baking Powder",
+          "qty": "1 tsp (5 g)",
+          "note": "ideally low sodium"
+        },
+        {
+          "item": "Coconut Oil",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Cumin (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "¼ tsp (1 g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "2 tsp (6 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Instant Oatmeal",
+          "qty": "¼ c (48 g)",
+          "note": "substitute rolled oats or fortified infant oatmeal"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "½ c (120 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion Powder (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "1 ½ tsp (5 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "⅓ c (80 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Almond Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Cashew Butter (Honey-Free)",
+          "qty": "1 ½ tsp (8 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "2 ½ tsp (13 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds",
+          "qty": "1 tsp (3 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "Wheat Flour",
+          "qty": "½ c (120 g)",
+          "note": "any variety, ideally enriched with iron"
+        }
+      ]
+    }
+  ],
+  "13": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Cottage Cheese (Low Sodium)",
+          "qty": "1 c (240 ml)",
+          "note": "substitute fresh ricotta cheese"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "10",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Fresh Goat Cheese (Optional)",
+          "qty": "4 oz (112 g)",
+          "note": "fresh not aged, log or pre-crumbled"
+        },
+        {
+          "item": "Parmesan Cheese (Optional)",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Sardines (Canned)",
+          "qty": "2 4 ½-oz (125-g) cans",
+          "note": "boneless, packed in oil or water, minimal seasonings"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "8 tbsp (112 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "⅓ c (80 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Freeze-Dried Strawberries (Optional)",
+          "qty": "1 ½ c (34 g)",
+          "note": "substitute any freeze-dried fruit"
+        },
+        {
+          "item": "Ground Cayenne Pepper",
+          "qty": "⅛ tsp (1/4 g)",
+          "note": "substitute sweet paprika"
+        },
+        {
+          "item": "Kidney Beans (Canned)",
+          "qty": "1 c (84 g)",
+          "note": "substitute dry kidney beans cooked from scratch"
+        },
+        {
+          "item": "Unsalted Almonds",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsalted Cashews",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsalted Pecan",
+          "qty": "1 c (240 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsweetened Coconut Milk (Canned)",
+          "qty": "1 13 ½-oz (400-ml) can",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "5 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        },
+        {
+          "item": "Wide Rice Noodles",
+          "qty": "6 oz (168 g)",
+          "note": "substitute any rice noodle"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Arugula",
+          "qty": "2 c (480 ml)",
+          "note": "substitute baby spinach or watercress"
+        },
+        {
+          "item": "Asian Pear",
+          "qty": "1 whole",
+          "note": "substitute any variety of pear"
+        },
+        {
+          "item": "Asparagus",
+          "qty": "8 whole",
+          "note": "whole not pre-cut or canned, substitute whole greens"
+        },
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Baby Potatoes",
+          "qty": "8 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Baby Spinach",
+          "qty": "2 c (480 ml)",
+          "note": "substitute butter lettuce or romaine lettuce"
+        },
+        {
+          "item": "Basil",
+          "qty": "1 bunch",
+          "note": "fresh not frozen, substitute fresh parsley"
+        },
+        {
+          "item": "Bananas",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Beets (Pre-Cooked)",
+          "qty": "2 c (480 ml)",
+          "note": "canned or vacuum-packed, substitute fresh beets cooked from scratch"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Carrots (Medium)",
+          "qty": "14 whole",
+          "note": "fresh or frozen, whole not pre-cut"
+        },
+        {
+          "item": "Cucumber (Small)",
+          "qty": "5 whole",
+          "note": "hothouse, kirby, persian, or any small variety"
+        },
+        {
+          "item": "Dill (Optional)",
+          "qty": "4 sprigs",
+          "note": "substitute 1 tsp (2 g) dried dill"
+        },
+        {
+          "item": "Edamame (shelled)",
+          "qty": "1 ¼ c (300 ml)",
+          "note": ""
+        },
+        {
+          "item": "Garlic",
+          "qty": "1 clove",
+          "note": "substitute ½ tsp (1 g) garlic powder (not granules)"
+        },
+        {
+          "item": "Green Onion",
+          "qty": "1 bunch",
+          "note": "any variety"
+        },
+        {
+          "item": "Grapefruit",
+          "qty": "1 whole",
+          "note": "any variety, ideally seedless, substitute large orange"
+        },
+        {
+          "item": "Guava (Soft)",
+          "qty": "2 whole",
+          "note": "substitute any variety of apple"
+        },
+        {
+          "item": "Leek",
+          "qty": "2 whole",
+          "note": "substitute 1 large onion"
+        },
+        {
+          "item": "Lemon",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Mango (Ripe)",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "2 whole",
+          "note": "ideally purple or red variety"
+        },
+        {
+          "item": "Orange (Large)",
+          "qty": "1 whole",
+          "note": "navel or any large variety (not clementines or small oranges)"
+        },
+        {
+          "item": "Parsley (Optional)",
+          "qty": "1 bunch",
+          "note": "fresh not dried"
+        },
+        {
+          "item": "Purple Cabbage",
+          "qty": "1 head",
+          "note": "substitute green or white cabbage"
+        },
+        {
+          "item": "Ramps",
+          "qty": "2 whole",
+          "note": "substitute 2 garlic cloves"
+        },
+        {
+          "item": "Rutabaga",
+          "qty": "1 whole",
+          "note": "substitute kohlrabi, sweet potato, turnip, or white potato"
+        },
+        {
+          "item": "Spaghetti Squash",
+          "qty": "1 whole",
+          "note": "substitute sweet potato noodles or zucchini noodles"
+        },
+        {
+          "item": "Strawberries (Large)",
+          "qty": "2 ½ c (300 g)",
+          "note": "ideally ripe strawberries, fresh or frozen"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "2 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Apple Cider Vinegar (Optional)",
+          "qty": "1 tbsp (15 ml)",
+          "note": "substitute rice vinegar"
+        },
+        {
+          "item": "Apple Nut Pancake",
+          "qty": "1 pancake",
+          "note": "see batch recipe on Week 12 | Day 82 | Meal 1"
+        },
+        {
+          "item": "Bolognese Sauce",
+          "qty": "2 ½ c (600 ml)",
+          "note": "see batch recipe on Week 12 | Day 78 | Family Meal"
+        },
+        {
+          "item": "Cardamom (Optional)",
+          "qty": "¼ tsp (1/2 g)",
+          "note": "pre-ground or whole pods with seeds to grind at home"
+        },
+        {
+          "item": "Chia Seeds",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Coconut Oil",
+          "qty": "½ c (120 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Coriander",
+          "qty": "½ tsp (1 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Cumin",
+          "qty": "½ tsp (1 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Ground Turmeric (Optional)",
+          "qty": "¼ tsp (1/2 g)",
+          "note": ""
+        },
+        {
+          "item": "Hulled Hemp Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "substitute chia, pumpkin, or sunflower seeds"
+        },
+        {
+          "item": "Maple Syrup (Optional)",
+          "qty": "3 tbsp (45 ml)",
+          "note": "substitute agave syrup (avoid honey)"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "½ c (120 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Paprika (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Quinoa",
+          "qty": "½ c (85 g)",
+          "note": "any variety, substitute rice"
+        },
+        {
+          "item": "Rolled Oats",
+          "qty": "2 c (192 g)",
+          "note": ""
+        },
+        {
+          "item": "Sesame Oil",
+          "qty": "4 tbsp (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "⅓ c (80 ml)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "3 tbsp (45 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smoked Paprika (Optional)",
+          "qty": "½ tsp (1 g)",
+          "note": "substitute sweet paprika"
+        },
+        {
+          "item": "Smooth Almond Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Cashew Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "¼ c (60 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Soy Sauce",
+          "qty": "2 tbsp (30 ml)",
+          "note": "ideally low-sodium, substitute coconut aminos"
+        },
+        {
+          "item": "Tomato Paste",
+          "qty": "1 tbsp (15 ml)",
+          "note": ""
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "¼ c (36 g)",
+          "note": "raw or roasted"
+        },
+        {
+          "item": "Unsalted Walnut (Optional)",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes",
+          "qty": "⅔ c (160 ml)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        }
+      ]
+    }
+  ],
+  "14": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Boneless Cod",
+          "qty": "2 lbs (908 g)",
+          "note": "fresh or frozen, not canned or dried, skin on or off"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "10",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Mackerel (Canned)",
+          "qty": "2 5-oz (142-g) cans",
+          "note": "boneless, ideally North Atlantic or chub, packed in oil or water"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "3 c (720 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Queso Fresco",
+          "qty": "4 oz (112 g)",
+          "note": "substitute queso blanco or fresh goat cheese"
+        },
+        {
+          "item": "Sour Cream",
+          "qty": "½ c (120 ml)",
+          "note": "substitute plain yogurt"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "16 tbsp (224 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 ¼ c (300 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Ancho Chili Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute another chili powder or sweet paprika"
+        },
+        {
+          "item": "Black Beans (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry black beans cooked from scratch"
+        },
+        {
+          "item": "Chipotle Chili Powder (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "substitute another chili powder or sweet paprika"
+        },
+        {
+          "item": "Corn Tortillas (Small)",
+          "qty": "1 package",
+          "note": "corn not wheat, ideally 6-inch tortillas"
+        },
+        {
+          "item": "Dijon Mustard (Honey-Free)",
+          "qty": "2 tsp (10 ml)",
+          "note": "substitute any variety (honey-free)"
+        },
+        {
+          "item": "Pizza (Frozen or Take-Out)",
+          "qty": "1 large pizza",
+          "note": "ideally with low sodium toppings, such as mozzarella and vegetables"
+        },
+        {
+          "item": "Pumpkin Purée",
+          "qty": "1 15-oz (425-g) can",
+          "note": "substitute canned squash purée or freshly cooked squash purée"
+        },
+        {
+          "item": "Smooth Mixed Nut Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "substitute homemade with nuts and seeds of your choice"
+        },
+        {
+          "item": "Store-Bought Mayonnaise (Honey-Free)",
+          "qty": "3 tbsp (45 ml)",
+          "note": "substitute plain yogurt"
+        },
+        {
+          "item": "Tomato Sauce (Low Sodium)",
+          "qty": "½ c (120 ml)",
+          "note": "substitute crushed tomatoes or passata"
+        },
+        {
+          "item": "Unsalted Hazelnut",
+          "qty": "⅓ c (80 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "5 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Baby Spinach (Optional)",
+          "qty": "½ c (120 ml)",
+          "note": "substitute butter lettuce or romaine lettuce"
+        },
+        {
+          "item": "Banana",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "5 whole",
+          "note": "mix of colors"
+        },
+        {
+          "item": "Blackberries (Large)",
+          "qty": "1 pint",
+          "note": "substitute blueberries (fresh or frozen)"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Celery (Optional)",
+          "qty": "1 stalk",
+          "note": ""
+        },
+        {
+          "item": "Cilantro",
+          "qty": "8 sprigs",
+          "note": "substitute fresh parsley"
+        },
+        {
+          "item": "Corn on the Cob",
+          "qty": "6 ears",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Fresh Figs",
+          "qty": "3 whole",
+          "note": "substitute ripe pear or stewed apple"
+        },
+        {
+          "item": "Fresh Parsley",
+          "qty": "5 sprigs",
+          "note": ""
+        },
+        {
+          "item": "Garden Peas (Shelled)",
+          "qty": "1 c (240 ml)",
+          "note": "fresh or frozen, substitute edamame"
+        },
+        {
+          "item": "Garlic",
+          "qty": "1 clove",
+          "note": "substitute ½ tsp (1 g) garlic powder (not granules)"
+        },
+        {
+          "item": "Green Onion",
+          "qty": "1 bunch",
+          "note": "any variety"
+        },
+        {
+          "item": "Hot Pepper or Green Chile Pepper (Optional)",
+          "qty": "1 whole",
+          "note": "fresno, serrano, or another spicy variety"
+        },
+        {
+          "item": "Jicama",
+          "qty": "1 whole",
+          "note": "substitute cucumber"
+        },
+        {
+          "item": "Kimchi",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute sauerkraut"
+        },
+        {
+          "item": "Lemon",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "6 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "3 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Orange (Large)",
+          "qty": "1 whole",
+          "note": "navel or any large variety (not clementines or small oranges)"
+        },
+        {
+          "item": "Portobello Mushroom",
+          "qty": "2 caps",
+          "note": "substitute 4 oz (112 g) button mushrooms"
+        },
+        {
+          "item": "Sweet Potato (Large)",
+          "qty": "3 whole",
+          "note": "substitute yam"
+        },
+        {
+          "item": "Tofu (Firm or Extra-Firm)",
+          "qty": "1 14-oz (400-g) package",
+          "note": "packed in water, minimal added ingredients"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "3 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "Watermelon",
+          "qty": "1 whole",
+          "note": "whole not pre-cut, substitute cantaloupe or any melon variety"
+        },
+        {
+          "item": "Waxy Potatoes (Large)",
+          "qty": "2 lb (908 g)",
+          "note": "substitute starchy (russet) potatoes"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "1 ½ c (168 g)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Chia Seed Pudding",
+          "qty": "½ c (120 ml)",
+          "note": "see batch recipe on Week 13 | Day 86 | Meal 1"
+        },
+        {
+          "item": "Coriander",
+          "qty": "¼ tsp (½ g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Cumin",
+          "qty": "1 ½ tsp (3 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "½ tsp (1 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Ground Nutmeg",
+          "qty": "½ tsp (1 g)",
+          "note": "substitute ground cinnamon"
+        },
+        {
+          "item": "Ground Turmeric",
+          "qty": "⅛ tsp (¼ g)",
+          "note": "substitute 2 inch (2 cm) freshly grated turmeric"
+        },
+        {
+          "item": "Ground-Up Granola",
+          "qty": "4 tsp (20 ml)",
+          "note": "see batch recipe on Week 13 | Day 90 | Meal 1"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅔ c (160 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Paprika",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "1 tsp (3 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Oil",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "1 ½ tsp (8 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Almond Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Cashew Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Pumpkin Seeds",
+          "qty": "2 tbsp (16 g)",
+          "note": "substitute sunflower seeds"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "Unsalted Pecan",
+          "qty": "2 nuts",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "1 tbsp (9 g)",
+          "note": "raw or roasted"
+        },
+        {
+          "item": "Unsalted Walnut",
+          "qty": "2 nuts",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        },
+        {
+          "item": "White Rice",
+          "qty": "1 ¾ c (350 g)",
+          "note": "short or long grain, ideally basmati (which is lower in arsenic)"
+        }
+      ]
+    }
+  ],
+  "15": [
+    {
+      "name": "Dairy, Meat, or Fish",
+      "items": [
+        {
+          "item": "Boneless Cod",
+          "qty": "2 lbs (908 g)",
+          "note": "fresh or frozen, not canned or dried, skin on or off"
+        },
+        {
+          "item": "Eggs (Large)",
+          "qty": "10",
+          "note": "brown or white hen's eggs"
+        },
+        {
+          "item": "Mackerel (Canned)",
+          "qty": "2 5-oz (142-g) cans",
+          "note": "boneless, ideally North Atlantic or chub, packed in oil or water"
+        },
+        {
+          "item": "Plain Yogurt",
+          "qty": "3 c (720 ml)",
+          "note": "no added fruit or sugar, any style (Australian, Greek, Kefir, Skyr)"
+        },
+        {
+          "item": "Queso Fresco",
+          "qty": "4 oz (112 g)",
+          "note": "substitute queso blanco or fresh goat cheese"
+        },
+        {
+          "item": "Sour Cream",
+          "qty": "½ c (120 ml)",
+          "note": "substitute plain yogurt"
+        },
+        {
+          "item": "Unsalted Butter",
+          "qty": "16 tbsp (224 g)",
+          "note": "any style (clarified, cultured, sweet cream, etc.)"
+        },
+        {
+          "item": "Whole Milk",
+          "qty": "1 ¼ c (300 ml)",
+          "note": "ideally \"whole\" milk rather than 1%, 2%, or skim milk"
+        }
+      ]
+    },
+    {
+      "name": "Pantry",
+      "items": [
+        {
+          "item": "Ancho Chili Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "substitute another chili powder or sweet paprika"
+        },
+        {
+          "item": "Black Beans (Canned)",
+          "qty": "1 15-oz (425 g) can",
+          "note": "substitute dry black beans cooked from scratch"
+        },
+        {
+          "item": "Chipotle Chili Powder (Optional)",
+          "qty": "2 tsp (4 g)",
+          "note": "substitute another chili powder or sweet paprika"
+        },
+        {
+          "item": "Corn Tortillas (Small)",
+          "qty": "1 package",
+          "note": "corn not wheat, ideally 6-inch tortillas"
+        },
+        {
+          "item": "Dijon Mustard (Honey-Free)",
+          "qty": "2 tsp (10 ml)",
+          "note": "substitute any variety (honey-free)"
+        },
+        {
+          "item": "Pizza (Frozen or Take-Out)",
+          "qty": "1 large pizza",
+          "note": "ideally with low sodium toppings, such as mozzarella and vegetables"
+        },
+        {
+          "item": "Pumpkin Purée",
+          "qty": "1 15-oz (425-g) can",
+          "note": "substitute canned squash purée or freshly cooked squash purée"
+        },
+        {
+          "item": "Smooth Mixed Nut Butter (Honey-Free)",
+          "qty": "1 tsp (5 g)",
+          "note": "substitute homemade with nuts and seeds of your choice"
+        },
+        {
+          "item": "Store-Bought Mayonnaise (Honey-Free)",
+          "qty": "3 tbsp (45 ml)",
+          "note": "substitute plain yogurt"
+        },
+        {
+          "item": "Tomato Sauce (Low Sodium)",
+          "qty": "½ c (120 ml)",
+          "note": "substitute crushed tomatoes or passata"
+        },
+        {
+          "item": "Unsalted Hazelnut",
+          "qty": "⅓ c (80 ml)",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Wheat Bread",
+          "qty": "5 slices",
+          "note": "any style, ideally country-style loaf and/or iron-fortified"
+        }
+      ]
+    },
+    {
+      "name": "Produce",
+      "items": [
+        {
+          "item": "Avocado (Ripe)",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Baby Spinach (Optional)",
+          "qty": "½ c (120 ml)",
+          "note": "substitute butter lettuce or romaine lettuce"
+        },
+        {
+          "item": "Banana",
+          "qty": "1 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Bell Pepper",
+          "qty": "5 whole",
+          "note": "mix of colors"
+        },
+        {
+          "item": "Blackberries (Large)",
+          "qty": "1 pint",
+          "note": "substitute blueberries (fresh or frozen)"
+        },
+        {
+          "item": "Cauliflower",
+          "qty": "1 head",
+          "note": "substitute pre-cut fresh or frozen florets"
+        },
+        {
+          "item": "Celery (Optional)",
+          "qty": "1 stalk",
+          "note": ""
+        },
+        {
+          "item": "Cilantro",
+          "qty": "8 sprigs",
+          "note": "substitute fresh parsley"
+        },
+        {
+          "item": "Corn on the Cob",
+          "qty": "6 ears",
+          "note": "fresh or frozen"
+        },
+        {
+          "item": "Fresh Figs",
+          "qty": "3 whole",
+          "note": "substitute ripe pear or stewed apple"
+        },
+        {
+          "item": "Fresh Parsley",
+          "qty": "5 sprigs",
+          "note": ""
+        },
+        {
+          "item": "Garden Peas (Shelled)",
+          "qty": "1 c (240 ml)",
+          "note": "fresh or frozen, substitute edamame"
+        },
+        {
+          "item": "Garlic",
+          "qty": "1 clove",
+          "note": "substitute ½ tsp (1 g) garlic powder (not granules)"
+        },
+        {
+          "item": "Green Onion",
+          "qty": "1 bunch",
+          "note": "any variety"
+        },
+        {
+          "item": "Hot Pepper or Green Chile Pepper (Optional)",
+          "qty": "1 whole",
+          "note": "fresno, serrano, or another spicy variety"
+        },
+        {
+          "item": "Jicama",
+          "qty": "1 whole",
+          "note": "substitute cucumber"
+        },
+        {
+          "item": "Kimchi",
+          "qty": "¼ c (60 ml)",
+          "note": "substitute sauerkraut"
+        },
+        {
+          "item": "Lemon",
+          "qty": "2 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Lime",
+          "qty": "6 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion (Large)",
+          "qty": "3 whole",
+          "note": "any variety"
+        },
+        {
+          "item": "Orange (Large)",
+          "qty": "1 whole",
+          "note": "navel or any large variety (not clementines or small oranges)"
+        },
+        {
+          "item": "Portobello Mushroom",
+          "qty": "2 caps",
+          "note": "substitute 4 oz (112 g) button mushrooms"
+        },
+        {
+          "item": "Sweet Potato (Large)",
+          "qty": "3 whole",
+          "note": "substitute yam"
+        },
+        {
+          "item": "Tofu (Firm or Extra-Firm)",
+          "qty": "1 14-oz (400-g) package",
+          "note": "packed in water, minimal added ingredients"
+        },
+        {
+          "item": "Tomato (Large)",
+          "qty": "3 whole",
+          "note": "beefsteak, heirloom, plum, or any large variety"
+        },
+        {
+          "item": "Watermelon",
+          "qty": "1 whole",
+          "note": "whole not pre-cut, substitute cantaloupe or any melon variety"
+        },
+        {
+          "item": "Waxy Potatoes (Large)",
+          "qty": "2 lb (908 g)",
+          "note": "substitute starchy (russet) potatoes"
+        }
+      ]
+    },
+    {
+      "name": "Check for Leftovers",
+      "items": [
+        {
+          "item": "Breadcrumbs (Low-Sodium)",
+          "qty": "1 ½ c (168 g)",
+          "note": "substitute breadcrumbs made from scratch with wheat bread"
+        },
+        {
+          "item": "Chia Seed Pudding",
+          "qty": "½ c (120 ml)",
+          "note": "see batch recipe on Week 13 | Day 86 | Meal 1"
+        },
+        {
+          "item": "Coriander",
+          "qty": "¼ tsp (½ g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Cumin",
+          "qty": "1 ½ tsp (3 g)",
+          "note": "pre-ground or whole seeds to grind at home"
+        },
+        {
+          "item": "Garlic Powder (Optional)",
+          "qty": "½ tsp (1 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Ground Cinnamon (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Ground Nutmeg",
+          "qty": "½ tsp (1 g)",
+          "note": "substitute ground cinnamon"
+        },
+        {
+          "item": "Ground Turmeric",
+          "qty": "⅛ tsp (¼ g)",
+          "note": "substitute 2 inch (2 cm) freshly grated turmeric"
+        },
+        {
+          "item": "Ground-Up Granola",
+          "qty": "4 tsp (20 ml)",
+          "note": "see batch recipe on Week 13 | Day 90 | Meal 1"
+        },
+        {
+          "item": "Olive Oil",
+          "qty": "⅔ c (160 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Onion Powder (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "powder not granules"
+        },
+        {
+          "item": "Paprika",
+          "qty": "1 tsp (2 g)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Seeds",
+          "qty": "1 tsp (3 g)",
+          "note": "any variety, raw or roasted"
+        },
+        {
+          "item": "Sesame Oil",
+          "qty": "¼ c (60 ml)",
+          "note": "any variety"
+        },
+        {
+          "item": "Sesame Tahini",
+          "qty": "1 ½ tsp (8 g)",
+          "note": "substitute sesame seeds"
+        },
+        {
+          "item": "Smooth Almond Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Cashew Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Smooth Peanut Butter (Honey-Free)",
+          "qty": "½ tsp (3 g)",
+          "note": "creamy or smooth (not \"chunky\") with no added sweeteners"
+        },
+        {
+          "item": "Unsalted Hulled Pumpkin Seeds",
+          "qty": "2 tbsp (16 g)",
+          "note": "substitute sunflower seeds"
+        },
+        {
+          "item": "Unsalted Hulled Sunflower Seeds (Optional)",
+          "qty": "1 tsp (3 g)",
+          "note": "raw or roasted, substitute chia, hemp, or pumpkin seed"
+        },
+        {
+          "item": "Unsalted Pecan",
+          "qty": "2 nuts",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsalted Shelled Peanuts",
+          "qty": "1 tbsp (9 g)",
+          "note": "raw or roasted"
+        },
+        {
+          "item": "Unsalted Walnut",
+          "qty": "2 nuts",
+          "note": "substitute any tree nut that has been safely introduced"
+        },
+        {
+          "item": "Unsweetened Desiccated Coconut Flakes (Optional)",
+          "qty": "1 tsp (2 g)",
+          "note": "dried and finely shredded, not \"chips\" which are choking hazards"
+        },
+        {
+          "item": "White Rice",
+          "qty": "1 ¾ c (350 g)",
+          "note": "short or long grain, ideally basmati (which is lower in arsenic)"
+        }
+      ]
+    }
+  ]
+}
