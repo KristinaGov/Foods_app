@@ -134,3 +134,9 @@ export async function loadPlan() {
   if (!res.ok) throw new Error("Could not load plan data");
   return res.json();
 }
+
+export async function loadWeeks() {
+  const res = await fetch("./data/weeks.json");
+  if (!res.ok) throw new Error("Could not load week overview data");
+  return res.json();
+}

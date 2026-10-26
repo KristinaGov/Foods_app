@@ -281,3 +281,33 @@ Python, not the project `.venv`.
   Settings on the phone; confirm the reminder card and restore flow look
   right.
 - Possible follow-up: show a small sync indicator outside Settings.
+
+---
+
+## 2026-10-26 — saved-note feedback & weekly overview tab
+**Done:**
+- `app/js/views.js` (Today): a note is now shown as read-only text with a
+  "✓ Saved" badge and an Edit button once saved; the textarea only appears
+  while nothing is saved yet or after tapping Edit (Save / Cancel). Saving
+  an empty box clears the note. State: `viewState.editingNotesFor`.
+- New "Weeks" tab (`📖`, between Grocery and Notes): `renderWeeks()` shows
+  one week at a time with ‹ › navigation, defaulting to the current week.
+  Each page has a hand-written summary of that week's intro pages from the
+  PDF (`app/data/weeks.json`, 15 entries; weeks 14+15 share one PDF
+  chapter), plus "This week at a glance": allergens appearing for the first
+  time, new foods, family meals, and a day-by-day meal list with dates.
+- `app/js/store.js`: `loadWeeks()`; `app/js/app.js` loads plan and weeks in
+  parallel and registers the tab; `app/service-worker.js`: cache v5,
+  `weeks.json` precached; `app/css/styles.css`: saved-note, note-actions,
+  week-tip, week-day-row styles.
+- Verified in headless Chromium (Playwright, files served via request
+  interception since the sandbox blocks local sockets): save → text +
+  badge, survives reload, Edit/Cancel/re-save, other days keep their own
+  textarea, Weeks nav clamps at 1 and 15, no console errors.
+
+**Open questions / next steps:**
+- `plan.json` Day 19 has `familyMeal: "Antipasto Salad Artichoke"` — the
+  parser glued the new food "Artichoke" onto the meal name. Fix in
+  `materials/merge_recipes.py` / `extract_recipes.py` rather than by hand.
+- Tracker food notes still save silently on blur; could get the same
+  saved-text treatment if it feels unclear there too.

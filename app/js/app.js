@@ -1,8 +1,8 @@
-import { store, loadPlan } from "./store.js";
+import { store, loadPlan, loadWeeks } from "./store.js";
 import { sync, hasUserData } from "./sync.js";
-import { setPlan, renderToday, renderTracker, renderGrocery, renderNotes } from "./views.js";
+import { setPlan, setWeeks, renderToday, renderTracker, renderGrocery, renderWeeks, renderNotes } from "./views.js";
 
-const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, notes: renderNotes };
+const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, weeks: renderWeeks, notes: renderNotes };
 let currentTab = "today";
 
 function renderCurrentTab() {
@@ -163,8 +163,9 @@ async function init() {
   }
 
   try {
-    const plan = await loadPlan();
+    const [plan, weeks] = await Promise.all([loadPlan(), loadWeeks()]);
     setPlan(plan);
+    setWeeks(weeks);
   } catch (e) {
     console.error(e);
   }

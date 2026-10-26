@@ -25,10 +25,17 @@ function attachBackupNotice() {
 }
 
 let PLAN = [];
-let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "" };
+let WEEKS = [];
+// editingNotesFor: ISO date whose notes textarea is open (null = none).
+// overviewWeek: week number shown on the Weeks tab (null = the current week).
+let viewState = { todayDayOffset: 0, weekOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, overviewWeek: null };
 
 export function setPlan(plan) {
   PLAN = plan;
+}
+
+export function setWeeks(weeks) {
+  WEEKS = weeks;
 }
 
 function todayISO() {
@@ -136,6 +143,24 @@ export function renderToday() {
   const allergensHTML = data.allergens.map((a) => `<span class="pill allergen">⚠ ${escapeHTML(a)}</span>`).join("");
   const recipesHTML = (data.recipes || []).map(recipeCardHTML).join("");
 
+  // A saved note is shown as text with an Edit button; the textarea only
+  // appears while there is nothing saved yet or the user tapped Edit.
+  const hasNote = Boolean((log.notes || "").trim());
+  const editing = viewState.editingNotesFor === iso || !hasNote;
+  const notesHTML = editing
+    ? `
+      <textarea id="day-notes" placeholder="Any notes about today's meals or reactions...">${escapeHTML(log.notes || "")}</textarea>
+      <div class="note-actions">
+        <button class="btn btn-primary" id="save-day-notes">Save</button>
+        ${hasNote ? '<button class="btn" id="cancel-day-notes">Cancel</button>' : ""}
+      </div>`
+    : `
+      <div class="saved-note">${escapeHTML(log.notes)}</div>
+      <div class="note-actions">
+        <span class="saved-badge">✓ Saved</span>
+        <button class="btn" id="edit-day-notes">Edit</button>
+      </div>`;
+
   view.innerHTML = `
     ${backupNoticeHTML()}
     <div class="day-nav">
@@ -168,8 +193,7 @@ export function renderToday() {
       <div class="reaction-row" id="day-reaction-row">
         ${REACTIONS.map((r) => `<button class="reaction-btn ${log.reaction === r.key ? "selected" : ""}" data-reaction="${r.key}">${r.label}</button>`).join("")}
       </div>
-      <textarea id="day-notes" placeholder="Any notes about today's meals or reactions...">${escapeHTML(log.notes || "")}</textarea>
-      <button class="btn btn-primary" id="save-day-notes" style="margin-top:8px;">Save</button>
+      ${notesHTML}
     </div>
   `;
 
@@ -196,12 +220,25 @@ export function renderToday() {
     });
   });
 
-  document.getElementById("save-day-notes").addEventListener("click", () => {
-    const notes = document.getElementById("day-notes").value;
-    store.setDailyLog(iso, { day: dayNumber, notes });
-    document.getElementById("save-day-notes").textContent = "Saved ✓";
-    setTimeout(() => { document.getElementById("save-day-notes").textContent = "Save"; }, 1200);
-  });
+  const saveBtn = document.getElementById("save-day-notes");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      const notes = document.getElementById("day-notes").value.trim();
+      store.setDailyLog(iso, { day: dayNumber, notes });
+      viewState.editingNotesFor = null;
+      renderToday();
+    });
+  }
+  const cancelBtn = document.getElementById("cancel-day-notes");
+  if (cancelBtn) cancelBtn.addEventListener("click", () => { viewState.editingNotesFor = null; renderToday(); });
+  const editBtn = document.getElementById("edit-day-notes");
+  if (editBtn) {
+    editBtn.addEventListener("click", () => {
+      viewState.editingNotesFor = iso;
+      renderToday();
+      document.getElementById("day-notes").focus();
+    });
+  }
 
   function attachDayNav() {
     document.getElementById("prev-day").addEventListener("click", () => { viewState.todayDayOffset -= 1; renderToday(); });
@@ -411,6 +448,88 @@ export function renderGrocery() {
       renderGrocery();
     });
   });
+}
+
+/* ---------------- Weekly overview ---------------- */
+
+const LAST_WEEK = 15;
+
+function weekNumberFor(dayNumber) {
+  return Math.min(LAST_WEEK, Math.max(1, Math.ceil(dayNumber / 7)));
+}
+
+function currentWeekNumber() {
+  const baseDay = store.dayNumberFor(todayISO());
+  return baseDay === null ? 1 : weekNumberFor(baseDay);
+}
+
+export function renderWeeks() {
+  const view = document.getElementById("view");
+  const week = viewState.overviewWeek ?? currentWeekNumber();
+  viewState.overviewWeek = week;
+  const info = WEEKS.find((w) => w.week === week);
+  const days = PLAN.filter((d) => Number(d.week) === week);
+  const firstDay = days[0]?.day;
+  const lastDay = days[days.length - 1]?.day;
+
+  document.getElementById("day-badge").textContent = `Week ${week} of ${LAST_WEEK}`;
+
+  const hasDates = Boolean(store.getState().startDate);
+  const rangeLabel = days.length
+    ? hasDates
+      ? `${fmtDate(store.isoDateForDay(firstDay))} – ${fmtDate(store.isoDateForDay(lastDay))}`
+      : `Days ${firstDay}–${lastDay}`
+    : "";
+
+  // Allergens that appear in this week's plan but on no earlier day.
+  const seenBefore = new Set();
+  PLAN.filter((d) => d.day < firstDay).forEach((d) => d.allergens.forEach((a) => seenBefore.add(a)));
+  const newAllergens = [];
+  days.forEach((d) => d.allergens.forEach((a) => { if (!seenBefore.has(a) && !newAllergens.includes(a)) newAllergens.push(a); }));
+  const newFoods = [];
+  days.forEach((d) => d.newFoods.forEach((f) => { if (!newFoods.includes(f)) newFoods.push(f); }));
+  const familyMeals = days.filter((d) => d.familyMeal).map((d) => d.familyMeal);
+
+  const summaryHTML = info
+    ? `
+    <div class="card">
+      <h2>${escapeHTML(info.title)}</h2>
+      ${info.summary.map((para) => `<p>${escapeHTML(para)}</p>`).join("")}
+      ${info.tip ? `<p class="week-tip"><strong>Tip:</strong> ${escapeHTML(info.tip)}</p>` : ""}
+    </div>`
+    : '<div class="card empty-state"><p>No overview for this week.</p></div>';
+
+  const dayRows = days.map((d) => {
+    const dateLabel = hasDates ? ` · ${fmtDate(store.isoDateForDay(d.day))}` : "";
+    return `
+      <div class="week-day-row">
+        <div class="food-name">Day ${d.day}${dateLabel}</div>
+        <div class="food-meta">${escapeHTML(d.meals.join(", "))}${d.familyMeal ? ` · <em>Family: ${escapeHTML(d.familyMeal)}</em>` : ""}</div>
+        ${d.newFoods.length ? `<div class="food-meta">New: ${escapeHTML(d.newFoods.join(", "))}</div>` : ""}
+      </div>`;
+  }).join("");
+
+  view.innerHTML = `
+    <div class="day-nav">
+      <button id="prev-week-ov" ${week <= 1 ? "disabled" : ""}>‹</button>
+      <span class="current-date">Week ${week}${rangeLabel ? " · " + rangeLabel : ""}</span>
+      <button id="next-week-ov" ${week >= LAST_WEEK ? "disabled" : ""}>›</button>
+    </div>
+
+    ${summaryHTML}
+
+    <div class="card">
+      <h2>This week at a glance</h2>
+      ${newAllergens.length ? `<h3>New allergens</h3><div>${newAllergens.map((a) => `<span class="pill allergen">⚠ ${escapeHTML(a)}</span>`).join("")}</div>` : ""}
+      ${newFoods.length ? `<h3>New foods (${newFoods.length})</h3><div>${newFoods.map((f) => `<span class="pill outline">${escapeHTML(f)}</span>`).join("")}</div>` : ""}
+      ${familyMeals.length ? `<h3>Family meals</h3><p>${escapeHTML(familyMeals.join(", "))}</p>` : ""}
+      <h3>Day by day</h3>
+      ${dayRows || '<p class="empty-state">Nothing planned.</p>'}
+    </div>
+  `;
+
+  document.getElementById("prev-week-ov").addEventListener("click", () => { viewState.overviewWeek = Math.max(1, week - 1); renderWeeks(); });
+  document.getElementById("next-week-ov").addEventListener("click", () => { viewState.overviewWeek = Math.min(LAST_WEEK, week + 1); renderWeeks(); });
 }
 
 /* ---------------- Notes history ---------------- */

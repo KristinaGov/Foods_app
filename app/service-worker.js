@@ -1,4 +1,4 @@
-const CACHE_NAME = "baby-food-plan-v4";
+const CACHE_NAME = "baby-food-plan-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const ASSETS = [
   "./js/views.js",
   "./js/sync.js",
   "./data/plan.json",
+  "./data/weeks.json",
   "./manifest.webmanifest",
   "./icons/icon-180.png",
   "./icons/icon-512.png"
