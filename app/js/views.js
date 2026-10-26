@@ -1,5 +1,5 @@
 import { store } from "./store.js";
-import { CATEGORY_ORDER, categoryFor, isPantryStaple } from "./categories.js";
+import { CATEGORY_ORDER, categoryFor, isPantryStaple, iconFor } from "./categories.js";
 import { sync } from "./sync.js";
 
 const BACKUP_REMINDER_DAYS = 14;
@@ -137,9 +137,9 @@ export function renderToday() {
   }
 
   const newFoodsHTML = data.newFoods.map((f) => {
-    const entry = store.getFoodEntry(f);
-    const tried = entry && entry.status === "tried";
-    return `<button class="pill ${tried ? "" : "outline"} new-food-pill" data-food="${escapeHTML(f)}">${tried ? "✓ " : ""}${escapeHTML(f)}</button>`;
+    const triedToday = store.tryIndexOn(f, iso) >= 0;
+    const triedBefore = !triedToday && store.getFoodEntry(f)?.status === "tried";
+    return `<button class="pill ${triedToday ? "" : "outline"} new-food-pill" data-food="${escapeHTML(f)}">${triedToday ? "✓ " : triedBefore ? "↻ " : ""}${escapeHTML(f)}</button>`;
   }).join("");
   const allergensHTML = data.allergens.map((a) => `<span class="pill allergen">⚠ ${escapeHTML(a)}</span>`).join("");
   const recipesHTML = (data.recipes || []).map(recipeCardHTML).join("");
@@ -178,7 +178,7 @@ export function renderToday() {
     ${data.newFoods.length ? `
     <div class="card">
       <h2>🆕 New foods today</h2>
-      <p class="hint">Tap a food once it's been offered to mark it as tried.</p>
+      <p class="hint">Tap a food once it's been offered to log a try for this day (↻ = tried on an earlier day). Reactions per try are set in the Tracker.</p>
       <div>${newFoodsHTML}</div>
     </div>` : ""}
 
@@ -204,12 +204,9 @@ export function renderToday() {
   view.querySelectorAll(".new-food-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       const food = btn.dataset.food;
-      const entry = store.getFoodEntry(food);
-      if (entry && entry.status === "tried") {
-        store.unmarkFood(food);
-      } else {
-        store.markFood(food, { status: "tried", date: iso });
-      }
+      const idx = store.tryIndexOn(food, iso);
+      if (idx >= 0) store.removeTry(food, idx);
+      else store.addTry(food, { date: iso });
       renderToday();
     });
   });
@@ -325,19 +322,46 @@ function foodRowHTML(food, state) {
   return `
     <li class="food-row-wrap" data-food="${escapeHTML(food)}">
       <div class="food-row">
-        <div>
+        <span class="food-icon" aria-hidden="true">${iconFor(food)}</span>
+        <div class="food-row-text">
           <div class="food-name">${escapeHTML(food)}</div>
-          <div class="food-meta">${tried ? `First tried ${fmtDate(entry.firstDate)}${entry.reaction && entry.reaction !== "none" ? " • " + REACTIONS.find(r => r.key === entry.reaction)?.label : ""}` : "Not tried yet"}</div>
+          <div class="food-meta">${tried ? triedMeta(entry) : "Not tried yet"}</div>
         </div>
         <button class="status-chip ${tried ? "tried" : "not-tried"}" data-toggle="${escapeHTML(food)}">${tried ? "Tried ✓" : "Mark tried"}</button>
       </div>
       ${tried ? `
-      <div class="reaction-row">
-        ${REACTIONS.map((r) => `<button class="reaction-btn ${entry.reaction === r.key ? "selected" : ""}" data-reaction-food="${escapeHTML(food)}" data-reaction="${r.key}">${r.label}</button>`).join("")}
-      </div>
+      ${triesHTML(food, entry)}
       ${foodNotesHTML(food, entry)}
       ` : ""}
     </li>`;
+}
+
+function reactionLabel(key) {
+  return REACTIONS.find((r) => r.key === key)?.label || key;
+}
+
+function triedMeta(entry) {
+  const n = entry.tries.length;
+  const latest = entry.reaction && entry.reaction !== "none" ? ` • last: ${reactionLabel(entry.reaction)}` : "";
+  return `First tried ${fmtDate(entry.firstDate)} • ${n} ${n === 1 ? "try" : "tries"}${latest}`;
+}
+
+// One row per try: editable date, reaction picker, remove. Newest first.
+function triesHTML(food, entry) {
+  const f = escapeHTML(food);
+  const rows = entry.tries.map((t, i) => ({ t, i })).reverse().map(({ t, i }) => `
+    <div class="try-row">
+      <input type="date" value="${t.date}" data-try-date="${f}" data-idx="${i}" aria-label="Date tried">
+      <select data-try-reaction="${f}" data-idx="${i}" aria-label="Reaction">
+        ${REACTIONS.map((r) => `<option value="${r.key}" ${t.reaction === r.key ? "selected" : ""}>${r.label}</option>`).join("")}
+      </select>
+      <button class="try-remove" data-try-remove="${f}" data-idx="${i}" aria-label="Remove this try">✕</button>
+    </div>`).join("");
+  return `
+    <div class="try-list">
+      ${rows}
+      <button class="btn try-add" data-add-try="${f}">+ Add another try</button>
+    </div>`;
 }
 
 // Same pattern as Today's notes: saved text + Edit, textarea only while
@@ -368,16 +392,37 @@ function attachFoodRowHandlers() {
       const food = btn.dataset.toggle;
       const entry = store.getFoodEntry(food);
       if (entry && entry.status === "tried") {
+        const n = entry.tries.length;
+        if (n > 1 && !confirm(`Remove all ${n} tries of ${food} and its notes?`)) return;
         store.unmarkFood(food);
       } else {
-        store.markFood(food, { status: "tried", date: todayISO() });
+        store.addTry(food, { date: todayISO() });
       }
       renderTracker();
     });
   });
-  document.querySelectorAll("[data-reaction-food]").forEach((btn) => {
+  document.querySelectorAll("[data-add-try]").forEach((btn) => {
+    btn.addEventListener("click", () => { store.addTry(btn.dataset.addTry, { date: todayISO() }); renderTracker(); });
+  });
+  document.querySelectorAll("[data-try-date]").forEach((input) => {
+    input.addEventListener("change", () => {
+      if (!input.value) return;
+      store.updateTry(input.dataset.tryDate, Number(input.dataset.idx), { date: input.value });
+      renderTracker();
+    });
+  });
+  document.querySelectorAll("[data-try-reaction]").forEach((sel) => {
+    sel.addEventListener("change", () => {
+      store.updateTry(sel.dataset.tryReaction, Number(sel.dataset.idx), { reaction: sel.value });
+      renderTracker();
+    });
+  });
+  document.querySelectorAll("[data-try-remove]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      store.markFood(btn.dataset.reactionFood, { reaction: btn.dataset.reaction });
+      const food = btn.dataset.tryRemove;
+      const entry = store.getFoodEntry(food);
+      if (entry.tries.length === 1 && !confirm(`This is the only try of ${food}. Remove it and mark the food as not tried?`)) return;
+      store.removeTry(food, Number(btn.dataset.idx));
       renderTracker();
     });
   });

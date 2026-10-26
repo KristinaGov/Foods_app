@@ -336,3 +336,28 @@ Python, not the project `.venv`.
   back-to-today appears and resets the offset, each theme applies, persists
   across reload and updates the meta colour; screenshots of all four
   schemes checked by eye.
+
+---
+
+## 2026-10-26 (evening) — tracker icons and per-try history
+**Done:**
+- `categories.js`: `ICON` map (every plan food + common custom foods) and
+  `iconFor()` — exact match, then longest-keyword match ("Baked Sweet
+  Potato Mash" → 🍠), then the category's icon. Shown at the left of each
+  Tracker row (`.food-icon`).
+- Try history: `foodTracker[food].tries = [{ date, reaction }]`.
+  `firstDate`, `reaction` (= latest try) and `timesServed` are now derived
+  by `recompute()`; `migrate()` on load and import turns old entries into a
+  single try. New store methods `addTry`, `updateTry`, `removeTry`,
+  `tryIndexOn`; `markFood` keeps working for notes/legacy callers.
+- Tracker row: tries listed newest first, each with a native date input, a
+  reaction `<select>` and ✕; "+ Add another try" adds today's date. Removing
+  the only try (or unmarking a food with several tries) asks to confirm.
+  Meta line: "First tried … • N tries • last: …". Per-food note unchanged.
+- Today tab: a food pill now logs/removes a try for the day being viewed
+  (✓ = tried that day, ↻ = tried on an earlier day), so browsing back to an
+  earlier day and tapping records the right date.
+- Service worker cache v7.
+- Verified in headless Chromium: migration of a legacy entry, Today pills
+  on day 1, add/edit reaction/edit date (re-sorts, firstDate follows)/remove,
+  food returns to not-tried after last try, chip mark, filter counts.

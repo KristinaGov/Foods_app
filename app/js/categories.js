@@ -87,3 +87,65 @@ export function isPantryStaple(food) {
 export function categoryFor(food) {
   return CATEGORY[food] || "Other";
 }
+
+// Emoji shown next to each food in the Tracker. Foods not listed here get a
+// keyword match (so a custom "Baked Apple" still shows an apple), then the
+// category's icon.
+export const ICON = {
+  "Acorn Squash": "🎃", "Almond": "🌰", "Ancho Chili": "🌶️", "Apple": "🍎",
+  "Asian Pear": "🍐", "Asparagus": "🌱", "Banana": "🍌", "Basil": "🌿",
+  "Beet": "🫜", "Bell Pepper": "🫑", "Black Beans": "🫘", "Black Pepper": "🧂",
+  "Blackberry": "🫐", "Blueberries": "🫐", "Bok Choy": "🥬", "Bread": "🍞",
+  "Broccoli": "🥦", "Buckwheat": "🌾", "Bulgur": "🌾", "Butter": "🧈",
+  "Cabbage": "🥬", "Cannelini Beans": "🫘", "Cantaloupe": "🍈", "Cardamom": "🌿",
+  "Carrot": "🥕", "Cashew": "🥜", "Cauliflower": "🥦", "Cayenne": "🌶️",
+  "Celery": "🥬", "Chayote": "🥒", "Chicken": "🍗", "Chicken Liver": "🍗",
+  "Chickpea": "🫘", "Chipotle": "🌶️", "Cilantro": "🌿", "Cinnamon": "🪵",
+  "Coconut": "🥥", "Coconut Milk": "🥥", "Cod": "🐟", "Collard Greens": "🥬",
+  "Corn": "🌽", "Corn Tortilla": "🌮", "Cottage Cheese": "🧀", "Cucumber": "🥒",
+  "Cumin": "🧂", "Dill": "🌿", "Edamame": "🫛", "Egg": "🥚", "Fig": "🍇",
+  "Garam Masala": "🧂", "Garden Peas": "🫛", "Garlic": "🧄", "Ghee": "🧈",
+  "Ginger": "🫚", "Goat Cheese": "🧀", "Grapefruit": "🍊", "Green Bean": "🫛",
+  "Ground Beef": "🥩", "Guava": "🍈", "Hazelnut": "🌰", "Hemp Seeds": "🌱",
+  "Jicama": "🥔", "Kidney Beans": "🫘", "Kimchi": "🥬", "Kiwi": "🥝",
+  "Labneh": "🥛", "Lamb": "🍖", "Leeks": "🧅", "Lemon": "🍋", "Lentils": "🫘",
+  "Lime": "🍋", "Mackerel": "🐟", "Mango": "🥭", "Mascarpone": "🧀",
+  "Mint": "🌿", "Mozzarella Cheese": "🧀", "Mushroom": "🍄", "Noodles": "🍜",
+  "Nopal": "🌵", "Nutmeg": "🧂", "Oats": "🥣", "Okra": "🌱", "Olive Oil": "🫒",
+  "Onion": "🧅", "Orange": "🍊", "Papaya": "🍈", "Paprika": "🌶️",
+  "Parsley": "🌿", "Pasta": "🍝", "Peanut": "🥜", "Pear": "🍐", "Pecan": "🌰",
+  "Persimmon": "🟠", "Pineapple": "🍍", "Pinto Beans": "🫘", "Pizza": "🍕",
+  "Plantain": "🍌", "Pork": "🥓", "Pumpkin": "🎃", "Pumpkin Seeds": "🌱",
+  "Queso Fresco": "🧀", "Quinoa": "🌾", "Ramps": "🧅", "Raspberry": "🍓",
+  "Rice": "🍚", "Ricotta": "🧀", "Romaine": "🥬", "Rosemary": "🌿",
+  "Rutabaga": "🥔", "Salmon": "🐟", "Sapodilla": "🟤", "Sardines": "🐟",
+  "Sesame": "🌱", "Snow Pea": "🫛", "Sour Cream": "🥛", "Spaghetti Squash": "🎃",
+  "Spinach": "🥬", "Star Fruit": "⭐", "Strawberry": "🍓", "Sunflower Seeds": "🌻",
+  "Sweet Potato": "🍠", "Taro": "🥔", "Thyme": "🌿", "Tilapia": "🐟",
+  "Tofu": "⬜", "Tomato": "🍅", "Trout": "🐟", "Turkey": "🦃", "Turmeric": "🧂",
+  "Turnip": "🫜", "Vanilla Extract": "🍶", "Vinegar": "🍶", "Walnut": "🌰",
+  "Watermelon": "🍉", "Wheat Farina": "🌾", "White Potato": "🥔", "Yogurt": "🥛",
+  "Zucchini": "🥒",
+  // Common custom additions
+  "Avocado": "🥑", "Grapes": "🍇", "Cherry": "🍒", "Peach": "🍑", "Plum": "🫐",
+  "Melon": "🍈", "Eggplant": "🍆", "Shrimp": "🦐", "Beef": "🥩", "Milk": "🥛",
+  "Cheese": "🧀", "Fish": "🐟", "Potato": "🥔", "Olive": "🫒", "Pepper": "🫑",
+  "Bean": "🫘", "Nut": "🌰", "Berry": "🫐", "Lettuce": "🥬", "Honeydew": "🍈",
+  "Date": "🟤", "Prune": "🫐", "Apricot": "🍑", "Pomegranate": "🔴"
+};
+
+const CATEGORY_ICON = {
+  "Produce": "🥬", "Protein": "🍖", "Dairy": "🥛", "Grains & Pantry": "🌾",
+  "Nuts & Seeds": "🥜", "Other": "🍽️"
+};
+
+// Longest keys first so "Sweet Potato" wins over "Potato" in keyword matching.
+const ICON_KEYS = Object.keys(ICON).sort((a, b) => b.length - a.length);
+
+export function iconFor(food) {
+  if (ICON[food]) return ICON[food];
+  const lower = food.toLowerCase();
+  const hit = ICON_KEYS.find((k) => lower.includes(k.toLowerCase()));
+  if (hit) return ICON[hit];
+  return CATEGORY_ICON[categoryFor(food)];
+}
