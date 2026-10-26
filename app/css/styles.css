@@ -588,3 +588,41 @@ textarea { min-height: 70px; resize: vertical; }
   padding: 8px;
   font-size: 0.82rem;
 }
+
+/* Activity grid (Tracker) */
+.activity-card { padding-bottom: 12px; }
+
+.activity-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.activity-head h2 { margin: 0; font-size: 0.95rem; }
+
+.activity-legend { display: inline-flex; gap: 3px; align-items: center; }
+.activity-legend .tile { width: 10px; height: 10px; }
+
+.activity-grid {
+  display: grid;
+  justify-content: start;
+  --tile: 12px;
+}
+
+.tile {
+  display: block;
+  width: var(--tile, 12px);
+  height: var(--tile, 12px);
+  border-radius: 2px;
+  border: none;
+  padding: 0;
+  background: var(--accent);
+}
+
+.tile.t0 { background: var(--border); }
+.tile.t1 { opacity: 0.45; }
+.tile.t2 { opacity: 0.72; }
+.tile.t3 { opacity: 1; }
+.tile.rash { background: var(--danger); }

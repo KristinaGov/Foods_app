@@ -390,3 +390,21 @@ and it had no quantities or substitutes.
 - Verified in headless Chromium: week 4 shows all 26 items incl. Broccoli
   with 7 alternative notes, checks persist per week and across reload, nav
   clamps at 1 and 14, no console errors.
+
+---
+
+## 2026-10-26 (late) — activity grid on the Tracker
+**Done:**
+- GitHub-style grid card at the top of the Tracker (`renderActivityGrid()`
+  in views.js): one tile per food in plan-introduction order (custom foods
+  last). Untried = border colour; tried = accent at 45% / 72% / 100% for
+  1 / 2 / 3+ tries; latest reaction "rash" = danger colour. Heading
+  "N of M foods tried", legend, tapping a tile searches for that food.
+- Sizing: measured at render time from the grid's width and `#view`
+  height; the largest tile size (22px down to 4px, gap ≈ 22% of tile) is
+  chosen such that all rows fit in `viewHeight / 3 − 84px` of card
+  overhead. Re-laid out on resize/rotation (debounced).
+  Measured share of the content area: iPhone 13 0.29 (16 cols × 16px),
+  SE 0.26 (20 × 12px), 15 Pro Max 0.29 (16 × 19px), landscape 0.27
+  (60 × 11px).
+- Service worker cache v9.

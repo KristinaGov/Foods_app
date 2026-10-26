@@ -279,6 +279,14 @@ export function renderTracker() {
   const triedCount = foods.filter((f) => state.foodTracker[f]?.status === "tried").length;
 
   view.innerHTML = `
+    <div class="card activity-card">
+      <div class="activity-head">
+        <h2>${triedCount} of ${foods.length} foods tried</h2>
+        <span class="activity-legend"><span class="tile t0"></span><span class="tile t1"></span><span class="tile t2"></span><span class="tile t3"></span></span>
+      </div>
+      <div class="activity-grid" id="activity-grid" role="img" aria-label="${triedCount} of ${foods.length} foods tried"></div>
+    </div>
+
     <div class="card search-bar">
       <input type="search" id="tracker-search" placeholder="Search foods..." value="${escapeHTML(viewState.trackerQuery)}">
       <div class="reaction-row" style="margin-top:10px;">
@@ -303,6 +311,8 @@ export function renderTracker() {
     </div>
   `;
 
+  renderActivityGrid(foods, state);
+
   document.getElementById("tracker-search").addEventListener("input", (e) => {
     viewState.trackerQuery = e.target.value;
     renderTracker();
@@ -320,6 +330,71 @@ export function renderTracker() {
 
   attachFoodRowHandlers();
 }
+
+// GitHub-style activity grid: one tile per food, in the order the plan
+// introduces them (custom foods last). Tile size and column count are
+// chosen from the actual screen so the whole card stays within a third of
+// the app's content area; the grid is laid out widest-first and shrinks the
+// tiles until all rows fit.
+const GRID_MAX_SHARE = 1 / 3;
+const GRID_CARD_OVERHEAD = 84; // card padding + heading row + margin, in px
+
+function planOrder() {
+  const order = new Map();
+  PLAN.forEach((d) => d.newFoods.forEach((f) => { if (!order.has(f)) order.set(f, d.day); }));
+  return order;
+}
+
+function tileLevel(entry) {
+  if (!entry || entry.status !== "tried") return "t0";
+  if (entry.reaction === "rash") return "rash";
+  const n = (entry.tries || []).length;
+  return n >= 3 ? "t3" : n === 2 ? "t2" : "t1";
+}
+
+function renderActivityGrid(foods, state) {
+  const grid = document.getElementById("activity-grid");
+  const view = document.getElementById("view");
+  if (!grid || !view) return;
+
+  const order = planOrder();
+  const sorted = foods.slice().sort((a, b) => {
+    const da = order.get(a) ?? 999, db = order.get(b) ?? 999;
+    return da - db || a.localeCompare(b);
+  });
+
+  const width = grid.clientWidth || 300;
+  const maxHeight = Math.max(40, view.clientHeight * GRID_MAX_SHARE - GRID_CARD_OVERHEAD);
+  let size = 4, gap = 2, cols = 1;
+  for (let s = 22; s >= 4; s--) {
+    const g = Math.max(2, Math.round(s * 0.22));
+    const c = Math.max(1, Math.floor((width + g) / (s + g)));
+    const rows = Math.ceil(sorted.length / c);
+    if (rows * (s + g) - g <= maxHeight) { size = s; gap = g; cols = c; break; }
+  }
+
+  grid.style.gridTemplateColumns = `repeat(${cols}, ${size}px)`;
+  grid.style.gap = `${gap}px`;
+  grid.style.setProperty("--tile", `${size}px`);
+  grid.innerHTML = sorted.map((f) => {
+    const entry = state.foodTracker[f];
+    const lvl = tileLevel(entry);
+    const tries = entry?.tries?.length || 0;
+    const title = `${f}${tries ? ` · tried ${tries}×` : " · not tried"}`;
+    return `<button class="tile ${lvl}" data-tile-food="${escapeHTML(f)}" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}"></button>`;
+  }).join("");
+
+  grid.querySelectorAll("[data-tile-food]").forEach((t) => {
+    t.addEventListener("click", () => { viewState.trackerQuery = t.dataset.tileFood; renderTracker(); });
+  });
+}
+
+// Re-fit the grid when the screen rotates or the window is resized.
+let resizeTimer = null;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (document.getElementById("activity-grid")) renderTracker(); }, 150);
+});
 
 function foodRowHTML(food, state) {
   const entry = state.foodTracker[food];
