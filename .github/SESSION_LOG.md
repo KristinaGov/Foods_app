@@ -436,3 +436,13 @@ v9 and rendered the grid in a fresh browser).
 **Note for the phone:** the currently installed old worker lacks all of
 this, so one more manual cycle is needed: wait >10 min after the deploy,
 force-quit and reopen the app twice. From v10 on, updates self-apply.
+
+---
+
+## 2026-10-26 (late night) — clearing the tile filter
+**Problem:** tapping an activity tile filled the search box with that food
+and the only way back to the full list was to empty the search field.
+
+**Done:** tapping the selected tile again clears the filter; the selected
+tile gets an outline ring; a "✕ Show all" button appears next to the search
+box whenever any filter text is set (tile tap or typed). Cache v11.

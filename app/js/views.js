@@ -288,7 +288,10 @@ export function renderTracker() {
     </div>
 
     <div class="card search-bar">
-      <input type="search" id="tracker-search" placeholder="Search foods..." value="${escapeHTML(viewState.trackerQuery)}">
+      <div class="search-row">
+        <input type="search" id="tracker-search" placeholder="Search foods..." value="${escapeHTML(viewState.trackerQuery)}">
+        ${viewState.trackerQuery ? '<button class="btn" id="tracker-clear">✕ Show all</button>' : ""}
+      </div>
       <div class="reaction-row" style="margin-top:10px;">
         <button class="reaction-btn ${viewState.trackerFilter === "all" ? "selected" : ""}" data-filter="all">All (${foods.length})</button>
         <button class="reaction-btn ${viewState.trackerFilter === "tried" ? "selected" : ""}" data-filter="tried">Tried (${triedCount})</button>
@@ -317,6 +320,8 @@ export function renderTracker() {
     viewState.trackerQuery = e.target.value;
     renderTracker();
   });
+  const clearBtn = document.getElementById("tracker-clear");
+  if (clearBtn) clearBtn.addEventListener("click", () => { viewState.trackerQuery = ""; renderTracker(); });
   view.querySelectorAll("[data-filter]").forEach((btn) => {
     btn.addEventListener("click", () => { viewState.trackerFilter = btn.dataset.filter; renderTracker(); });
   });
@@ -381,11 +386,16 @@ function renderActivityGrid(foods, state) {
     const lvl = tileLevel(entry);
     const tries = entry?.tries?.length || 0;
     const title = `${f}${tries ? ` · tried ${tries}×` : " · not tried"}`;
-    return `<button class="tile ${lvl}" data-tile-food="${escapeHTML(f)}" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}"></button>`;
+    const selected = viewState.trackerQuery === f ? " selected" : "";
+    return `<button class="tile ${lvl}${selected}" data-tile-food="${escapeHTML(f)}" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}"></button>`;
   }).join("");
 
+  // Tap a tile to show just that food; tap it again (or "Show all") to clear.
   grid.querySelectorAll("[data-tile-food]").forEach((t) => {
-    t.addEventListener("click", () => { viewState.trackerQuery = t.dataset.tileFood; renderTracker(); });
+    t.addEventListener("click", () => {
+      viewState.trackerQuery = viewState.trackerQuery === t.dataset.tileFood ? "" : t.dataset.tileFood;
+      renderTracker();
+    });
   });
 }
 

@@ -626,3 +626,14 @@ textarea { min-height: 70px; resize: vertical; }
 .tile.t2 { opacity: 0.72; }
 .tile.t3 { opacity: 1; }
 .tile.rash { background: var(--danger); }
+
+/* Tracker search row with clear button */
+.search-row { display: flex; gap: 8px; align-items: center; }
+.search-row input { flex: 1; min-width: 0; }
+.search-row .btn { flex-shrink: 0; white-space: nowrap; }
+
+.tile.selected {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+  opacity: 1;
+}
