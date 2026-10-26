@@ -446,3 +446,24 @@ and the only way back to the full list was to empty the search field.
 **Done:** tapping the selected tile again clears the filter; the selected
 tile gets an outline ring; a "✕ Show all" button appears next to the search
 box whenever any filter text is set (tile tap or typed). Cache v11.
+
+---
+
+## 2026-10-26 (late night) — worker v11 serving older files
+**Problem:** the phone reported v11 but lacked v11's UI. The worker's
+`cache.addAll()` at install fetches through the browser HTTP cache, and
+GitHub Pages marks every file `max-age=600`, so a freshly installed worker
+can cache JS/CSS that are up to 10 minutes stale.
+
+**Done:**
+- `service-worker.js`: install requests use `cache: "reload"` so the new
+  cache is always filled from the network. Cache v12.
+- `app.js`: `APP_VERSION` constant (bump together with `CACHE_NAME` on
+  every deploy). Settings shows just the version when worker and files
+  agree, and a red "v13, but the app files are v12 — tap Check for
+  updates" line when they don't.
+- Verified with a real worker on the local server: v12 shown; bumping only
+  the worker produced the mismatch warning after the auto-reload.
+
+**Deploy checklist from now on:** bump `CACHE_NAME` in service-worker.js
+AND `APP_VERSION` in app.js, commit, push.

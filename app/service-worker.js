@@ -1,4 +1,4 @@
-const CACHE_NAME = "baby-food-plan-v11";
+const CACHE_NAME = "baby-food-plan-v12";
 const ASSETS = [
   "./",
   "./index.html",
@@ -18,8 +18,12 @@ const ASSETS = [
 ];
 
 self.addEventListener("install", (event) => {
+  // cache: "reload" bypasses the browser's HTTP cache (GitHub Pages sends
+  // max-age=600), so a new worker never fills its cache with stale files.
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(ASSETS.map((url) => new Request(url, { cache: "reload" }))))
+      .then(() => self.skipWaiting())
   );
 });
 

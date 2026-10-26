@@ -3,6 +3,10 @@ import { sync, hasUserData } from "./sync.js";
 import { THEMES, getTheme, setTheme, applyTheme } from "./theme.js";
 import { setPlan, setWeeks, setGroceries, renderToday, renderTracker, renderGrocery, renderWeeks, renderNotes } from "./views.js";
 
+// Bump together with CACHE_NAME in service-worker.js on every deploy. Settings
+// compares the two so a worker serving stale files is visible.
+const APP_VERSION = "v12";
+
 const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, weeks: renderWeeks, notes: renderNotes };
 let currentTab = "today";
 
@@ -227,7 +231,15 @@ async function swVersion() {
 
 async function showVersion() {
   const el = document.getElementById("app-version");
-  if (el) el.textContent = await swVersion();
+  if (!el) return;
+  const sw = await swVersion();
+  if (sw === APP_VERSION || !sw.startsWith("v")) {
+    el.textContent = APP_VERSION;
+    el.className = "";
+  } else {
+    el.textContent = `${sw}, but the app files are ${APP_VERSION} — tap Check for updates`;
+    el.className = "status-err";
+  }
 }
 
 function setupUpdates() {
