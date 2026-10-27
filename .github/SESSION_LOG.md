@@ -498,3 +498,9 @@ AND `APP_VERSION` in app.js, commit, push.
   list to allergen foods and regroups it by allergen type instead of food
   category. Combines with tried / not-tried, search and tile taps.
 - Cache v14 / APP_VERSION v14.
+
+---
+
+## 2026-10-27 — tab order
+Tab bar reordered to Week · Today · Tracker · Grocery · Notes (the Weeks
+tab label shortened to "Week"). App still opens on Today. Cache v15.
