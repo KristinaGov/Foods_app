@@ -686,3 +686,13 @@ textarea { min-height: 70px; resize: vertical; }
   background: var(--danger);
   border-color: var(--danger);
 }
+
+.sub-title {
+  margin: 10px 0 2px;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.sub-title.allergen { color: var(--danger); }

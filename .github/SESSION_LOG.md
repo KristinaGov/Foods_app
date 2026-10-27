@@ -504,3 +504,13 @@ AND `APP_VERSION` in app.js, commit, push.
 ## 2026-10-27 — tab order
 Tab bar reordered to Week · Today · Tracker · Grocery · Notes (the Weeks
 tab label shortened to "Week"). App still opens on Today. Cache v15.
+
+---
+
+## 2026-10-27 — allergens as a sub-group, not a regrouping
+Per user: allergens must cut across the nine major categories rather than
+replace them. Each category card now lists its allergen foods first under a
+red "⚠ Allergens" sub-heading, then "Other foods" (sub-headings only when
+the card has both kinds; Dairy is all allergens). The Allergens chip keeps
+the category grouping and hides non-allergen foods. `ALLERGEN_ORDER` is no
+longer used by the view. Cache v16.

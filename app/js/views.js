@@ -1,5 +1,5 @@
 import { store } from "./store.js";
-import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON, allergenFor, ALLERGEN_ORDER } from "./categories.js";
+import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON, allergenFor } from "./categories.js";
 import { sync } from "./sync.js";
 
 const BACKUP_REMINDER_DAYS = 14;
@@ -291,17 +291,16 @@ export function renderTracker() {
   const categories = CATEGORY_ORDER.filter((c) => catTotals[c]);
   const allergenFoods = foods.filter(allergenFor);
   const allergenTried = allergenFoods.filter(isTried).length;
-  // With the Allergens chip on, the list is grouped by allergen type instead
-  // of by food category, so the same group sits together (all dairy, all fish…).
-  const grouped = viewState.trackerAllergens
-    ? ALLERGEN_ORDER
-        .map((a) => ({ name: a, icon: "⚠️", items: filtered.filter((f) => allergenFor(f) === a),
-                       tried: allergenFoods.filter((f) => allergenFor(f) === a && isTried(f)).length,
-                       total: allergenFoods.filter((f) => allergenFor(f) === a).length }))
-        .filter((g) => g.items.length)
-    : categories
-        .map((c) => ({ name: c, icon: CATEGORY_ICON[c], items: filtered.filter((f) => categoryFor(f) === c), tried: catTried[c] || 0, total: catTotals[c] }))
-        .filter((g) => g.items.length);
+  // Allergens are a sub-group inside each major category: they are listed
+  // first under their own sub-heading. The Allergens chip hides everything
+  // else but keeps the category grouping.
+  const grouped = categories
+    .map((c) => {
+      const items = filtered.filter((f) => categoryFor(f) === c);
+      return { name: c, icon: CATEGORY_ICON[c], tried: catTried[c] || 0, total: catTotals[c],
+               allergens: items.filter(allergenFor), others: items.filter((f) => !allergenFor(f)) };
+    })
+    .filter((g) => g.allergens.length || g.others.length);
   const categoryChips = `
       <div class="chip-scroll">
         <button class="reaction-btn ${viewState.trackerCategory === "all" ? "selected" : ""}" data-category="all">All</button>
@@ -342,9 +341,12 @@ export function renderTracker() {
     ${grouped.map((g) => `
     <div class="card">
       <h2 class="category-title">${g.icon} ${escapeHTML(g.name)} <span class="chip-count">${g.tried}/${g.total} tried</span></h2>
-      <ul class="food-list">
-        ${g.items.map((f) => foodRowHTML(f, state)).join("")}
-      </ul>
+      ${g.allergens.length ? `
+      <h3 class="sub-title allergen">⚠ Allergens</h3>
+      <ul class="food-list">${g.allergens.map((f) => foodRowHTML(f, state)).join("")}</ul>` : ""}
+      ${g.others.length ? `
+      ${g.allergens.length ? '<h3 class="sub-title">Other foods</h3>' : ""}
+      <ul class="food-list">${g.others.map((f) => foodRowHTML(f, state)).join("")}</ul>` : ""}
     </div>`).join("") || '<div class="card"><p class="empty-state">No foods match.</p></div>'}
   `;
 
