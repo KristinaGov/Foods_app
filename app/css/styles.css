@@ -667,3 +667,22 @@ textarea { min-height: 70px; resize: vertical; }
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
 }
+
+/* Allergen marking in the Tracker */
+.allergen-badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--danger);
+  color: var(--on-accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.reaction-btn.allergen-chip.selected {
+  background: var(--danger);
+  border-color: var(--danger);
+}

@@ -5,7 +5,7 @@ import { setPlan, setWeeks, setGroceries, renderToday, renderTracker, renderGroc
 
 // Bump together with CACHE_NAME in service-worker.js on every deploy. Settings
 // compares the two so a worker serving stale files is visible.
-const APP_VERSION = "v13";
+const APP_VERSION = "v14";
 
 const renderers = { today: renderToday, tracker: renderTracker, grocery: renderGrocery, weeks: renderWeeks, notes: renderNotes };
 let currentTab = "today";

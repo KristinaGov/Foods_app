@@ -1,5 +1,5 @@
 import { store } from "./store.js";
-import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON } from "./categories.js";
+import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON, allergenFor, ALLERGEN_ORDER } from "./categories.js";
 import { sync } from "./sync.js";
 
 const BACKUP_REMINDER_DAYS = 14;
@@ -30,7 +30,7 @@ let GROCERIES = {};
 // editingNotesFor: ISO date whose notes textarea is open (null = none).
 // editingFoodNote: food name whose Tracker note textarea is open.
 // overviewWeek / groceryWeek: plan week shown on the Weeks / Grocery tab (null = current week).
-let viewState = { todayDayOffset: 0, trackerFilter: "all", trackerQuery: "", trackerCategory: "all", editingNotesFor: null, editingFoodNote: null, overviewWeek: null, groceryWeek: null };
+let viewState = { todayDayOffset: 0, trackerFilter: "all", trackerQuery: "", trackerCategory: "all", trackerAllergens: false, editingNotesFor: null, editingFoodNote: null, overviewWeek: null, groceryWeek: null };
 
 export function setPlan(plan) {
   PLAN = plan;
@@ -273,6 +273,7 @@ export function renderTracker() {
     if (viewState.trackerFilter === "tried" && !tried) return false;
     if (viewState.trackerFilter === "nottried" && tried) return false;
     if (viewState.trackerCategory !== "all" && categoryFor(f) !== viewState.trackerCategory) return false;
+    if (viewState.trackerAllergens && !allergenFor(f)) return false;
     if (viewState.trackerQuery && !f.toLowerCase().includes(viewState.trackerQuery.toLowerCase())) return false;
     return true;
   });
@@ -288,12 +289,23 @@ export function renderTracker() {
     if (isTried(f)) catTried[c] = (catTried[c] || 0) + 1;
   });
   const categories = CATEGORY_ORDER.filter((c) => catTotals[c]);
-  const grouped = categories
-    .map((c) => ({ name: c, items: filtered.filter((f) => categoryFor(f) === c) }))
-    .filter((g) => g.items.length);
+  const allergenFoods = foods.filter(allergenFor);
+  const allergenTried = allergenFoods.filter(isTried).length;
+  // With the Allergens chip on, the list is grouped by allergen type instead
+  // of by food category, so the same group sits together (all dairy, all fish…).
+  const grouped = viewState.trackerAllergens
+    ? ALLERGEN_ORDER
+        .map((a) => ({ name: a, icon: "⚠️", items: filtered.filter((f) => allergenFor(f) === a),
+                       tried: allergenFoods.filter((f) => allergenFor(f) === a && isTried(f)).length,
+                       total: allergenFoods.filter((f) => allergenFor(f) === a).length }))
+        .filter((g) => g.items.length)
+    : categories
+        .map((c) => ({ name: c, icon: CATEGORY_ICON[c], items: filtered.filter((f) => categoryFor(f) === c), tried: catTried[c] || 0, total: catTotals[c] }))
+        .filter((g) => g.items.length);
   const categoryChips = `
       <div class="chip-scroll">
         <button class="reaction-btn ${viewState.trackerCategory === "all" ? "selected" : ""}" data-category="all">All</button>
+        <button class="reaction-btn allergen-chip ${viewState.trackerAllergens ? "selected" : ""}" id="allergen-chip">⚠ Allergens <span class="chip-count">${allergenTried}/${allergenFoods.length}</span></button>
         ${categories.map((c) => `<button class="reaction-btn ${viewState.trackerCategory === c ? "selected" : ""}" data-category="${escapeHTML(c)}">${CATEGORY_ICON[c]} ${escapeHTML(c)} <span class="chip-count">${catTried[c] || 0}/${catTotals[c]}</span></button>`).join("")}
       </div>`;
 
@@ -329,7 +341,7 @@ export function renderTracker() {
 
     ${grouped.map((g) => `
     <div class="card">
-      <h2 class="category-title">${CATEGORY_ICON[g.name]} ${escapeHTML(g.name)} <span class="chip-count">${catTried[g.name] || 0}/${catTotals[g.name]} tried</span></h2>
+      <h2 class="category-title">${g.icon} ${escapeHTML(g.name)} <span class="chip-count">${g.tried}/${g.total} tried</span></h2>
       <ul class="food-list">
         ${g.items.map((f) => foodRowHTML(f, state)).join("")}
       </ul>
@@ -346,6 +358,10 @@ export function renderTracker() {
   if (clearBtn) clearBtn.addEventListener("click", () => { viewState.trackerQuery = ""; renderTracker(); });
   view.querySelectorAll("[data-filter]").forEach((btn) => {
     btn.addEventListener("click", () => { viewState.trackerFilter = btn.dataset.filter; renderTracker(); });
+  });
+  document.getElementById("allergen-chip").addEventListener("click", () => {
+    viewState.trackerAllergens = !viewState.trackerAllergens;
+    renderTracker();
   });
   view.querySelectorAll("[data-category]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -442,7 +458,7 @@ function foodRowHTML(food, state) {
       <div class="food-row">
         <span class="food-icon" aria-hidden="true">${iconFor(food)}</span>
         <div class="food-row-text">
-          <div class="food-name">${escapeHTML(food)}</div>
+          <div class="food-name">${escapeHTML(food)}${allergenFor(food) ? ` <span class="allergen-badge">⚠ ${escapeHTML(allergenFor(food))}</span>` : ""}</div>
           <div class="food-meta">${tried ? triedMeta(entry) : "Not tried yet"}</div>
         </div>
         <button class="status-chip ${tried ? "tried" : "not-tried"}" data-toggle="${escapeHTML(food)}">${tried ? "Tried ✓" : "Mark tried"}</button>

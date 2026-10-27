@@ -484,3 +484,17 @@ AND `APP_VERSION` in app.js, commit, push.
   tried / not-tried buttons, the search box and tile taps. Tapping the
   active chip again clears it.
 - Cache v13 / APP_VERSION v13.
+
+---
+
+## 2026-10-27 — allergen marking in the Tracker
+**Done:**
+- `categories.js`: `ALLERGEN` map food → group (Egg, Peanut, Dairy, Wheat,
+  Sesame, Soy, Coconut, Finned Fish, Tree Nut), `ALLERGEN_ORDER`,
+  `allergenFor()` with keyword matching for custom foods. 38 of the 138
+  plan foods are allergens.
+- Tracker: red "⚠ Egg"-style badge after the name of every allergen food;
+  an "⚠ Allergens" chip (with tried/total) in the chip row that limits the
+  list to allergen foods and regroups it by allergen type instead of food
+  category. Combines with tried / not-tried, search and tile taps.
+- Cache v14 / APP_VERSION v14.

@@ -163,3 +163,34 @@ export function iconFor(food) {
   if (hit) return ICON[hit];
   return CATEGORY_ICON[categoryFor(food)];
 }
+
+// Common allergen groups as the plan labels them. Foods not listed are not
+// allergens; custom foods get a keyword match ("Scrambled Egg" → Egg).
+export const ALLERGEN = {
+  "Egg": "Egg",
+  "Peanut": "Peanut",
+  "Butter": "Dairy", "Cheese": "Dairy", "Cottage Cheese": "Dairy", "Ghee": "Dairy",
+  "Goat Cheese": "Dairy", "Labneh": "Dairy", "Mascarpone": "Dairy", "Mozzarella Cheese": "Dairy",
+  "Queso Fresco": "Dairy", "Ricotta": "Dairy", "Sour Cream": "Dairy", "Yogurt": "Dairy", "Milk": "Dairy",
+  "Bread": "Wheat", "Bulgur": "Wheat", "Noodles": "Wheat", "Pasta": "Wheat", "Pizza": "Wheat",
+  "Wheat Farina": "Wheat", "Wheat": "Wheat",
+  "Sesame": "Sesame",
+  "Edamame": "Soy", "Tofu": "Soy", "Soy": "Soy",
+  "Coconut": "Coconut", "Coconut Milk": "Coconut",
+  "Cod": "Finned Fish", "Mackerel": "Finned Fish", "Salmon": "Finned Fish", "Sardines": "Finned Fish",
+  "Tilapia": "Finned Fish", "Trout": "Finned Fish", "Fish": "Finned Fish",
+  "Almond": "Tree Nut", "Cashew": "Tree Nut", "Hazelnut": "Tree Nut", "Pecan": "Tree Nut",
+  "Walnut": "Tree Nut", "Nut": "Tree Nut"
+};
+
+export const ALLERGEN_ORDER = ["Egg", "Peanut", "Dairy", "Wheat", "Sesame", "Soy", "Coconut", "Finned Fish", "Tree Nut"];
+
+const ALLERGEN_KEYS = Object.keys(ALLERGEN).sort((a, b) => b.length - a.length);
+
+// Returns the allergen group for a food, or null if it is not a common allergen.
+export function allergenFor(food) {
+  if (ALLERGEN[food]) return ALLERGEN[food];
+  const lower = food.toLowerCase();
+  const hit = ALLERGEN_KEYS.find((k) => lower.includes(k.toLowerCase()));
+  return hit ? ALLERGEN[hit] : null;
+}
