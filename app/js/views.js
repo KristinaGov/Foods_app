@@ -1,5 +1,5 @@
 import { store } from "./store.js";
-import { iconFor } from "./categories.js";
+import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON } from "./categories.js";
 import { sync } from "./sync.js";
 
 const BACKUP_REMINDER_DAYS = 14;
@@ -30,7 +30,7 @@ let GROCERIES = {};
 // editingNotesFor: ISO date whose notes textarea is open (null = none).
 // editingFoodNote: food name whose Tracker note textarea is open.
 // overviewWeek / groceryWeek: plan week shown on the Weeks / Grocery tab (null = current week).
-let viewState = { todayDayOffset: 0, trackerFilter: "all", trackerQuery: "", editingNotesFor: null, editingFoodNote: null, overviewWeek: null, groceryWeek: null };
+let viewState = { todayDayOffset: 0, trackerFilter: "all", trackerQuery: "", trackerCategory: "all", editingNotesFor: null, editingFoodNote: null, overviewWeek: null, groceryWeek: null };
 
 export function setPlan(plan) {
   PLAN = plan;
@@ -267,16 +267,35 @@ export function renderTracker() {
   const foods = allKnownFoods();
   const state = store.getState();
 
+  const isTried = (f) => state.foodTracker[f]?.status === "tried";
   const filtered = foods.filter((f) => {
-    const entry = state.foodTracker[f];
-    const tried = entry && entry.status === "tried";
+    const tried = isTried(f);
     if (viewState.trackerFilter === "tried" && !tried) return false;
     if (viewState.trackerFilter === "nottried" && tried) return false;
+    if (viewState.trackerCategory !== "all" && categoryFor(f) !== viewState.trackerCategory) return false;
     if (viewState.trackerQuery && !f.toLowerCase().includes(viewState.trackerQuery.toLowerCase())) return false;
     return true;
   });
 
-  const triedCount = foods.filter((f) => state.foodTracker[f]?.status === "tried").length;
+  const triedCount = foods.filter(isTried).length;
+
+  // Per-category counts (over all foods, independent of the current filters)
+  // for the chips, and the filtered list grouped by category for display.
+  const catTotals = {}, catTried = {};
+  foods.forEach((f) => {
+    const c = categoryFor(f);
+    catTotals[c] = (catTotals[c] || 0) + 1;
+    if (isTried(f)) catTried[c] = (catTried[c] || 0) + 1;
+  });
+  const categories = CATEGORY_ORDER.filter((c) => catTotals[c]);
+  const grouped = categories
+    .map((c) => ({ name: c, items: filtered.filter((f) => categoryFor(f) === c) }))
+    .filter((g) => g.items.length);
+  const categoryChips = `
+      <div class="chip-scroll">
+        <button class="reaction-btn ${viewState.trackerCategory === "all" ? "selected" : ""}" data-category="all">All</button>
+        ${categories.map((c) => `<button class="reaction-btn ${viewState.trackerCategory === c ? "selected" : ""}" data-category="${escapeHTML(c)}">${CATEGORY_ICON[c]} ${escapeHTML(c)} <span class="chip-count">${catTried[c] || 0}/${catTotals[c]}</span></button>`).join("")}
+      </div>`;
 
   view.innerHTML = `
     <div class="card activity-card">
@@ -297,6 +316,7 @@ export function renderTracker() {
         <button class="reaction-btn ${viewState.trackerFilter === "tried" ? "selected" : ""}" data-filter="tried">Tried (${triedCount})</button>
         <button class="reaction-btn ${viewState.trackerFilter === "nottried" ? "selected" : ""}" data-filter="nottried">Not tried (${foods.length - triedCount})</button>
       </div>
+      ${categoryChips}
     </div>
 
     <div class="card">
@@ -307,11 +327,13 @@ export function renderTracker() {
       </div>
     </div>
 
+    ${grouped.map((g) => `
     <div class="card">
-      <ul class="food-list" id="food-list">
-        ${filtered.map((f) => foodRowHTML(f, state)).join("") || '<li class="empty-state">No foods match.</li>'}
+      <h2 class="category-title">${CATEGORY_ICON[g.name]} ${escapeHTML(g.name)} <span class="chip-count">${catTried[g.name] || 0}/${catTotals[g.name]} tried</span></h2>
+      <ul class="food-list">
+        ${g.items.map((f) => foodRowHTML(f, state)).join("")}
       </ul>
-    </div>
+    </div>`).join("") || '<div class="card"><p class="empty-state">No foods match.</p></div>'}
   `;
 
   renderActivityGrid(foods, state);
@@ -324,6 +346,12 @@ export function renderTracker() {
   if (clearBtn) clearBtn.addEventListener("click", () => { viewState.trackerQuery = ""; renderTracker(); });
   view.querySelectorAll("[data-filter]").forEach((btn) => {
     btn.addEventListener("click", () => { viewState.trackerFilter = btn.dataset.filter; renderTracker(); });
+  });
+  view.querySelectorAll("[data-category]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      viewState.trackerCategory = viewState.trackerCategory === btn.dataset.category ? "all" : btn.dataset.category;
+      renderTracker();
+    });
   });
   document.getElementById("add-custom-food").addEventListener("click", () => {
     const input = document.getElementById("custom-food-input");

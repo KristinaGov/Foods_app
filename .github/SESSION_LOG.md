@@ -467,3 +467,20 @@ can cache JS/CSS that are up to 10 minutes stale.
 
 **Deploy checklist from now on:** bump `CACHE_NAME` in service-worker.js
 AND `APP_VERSION` in app.js, commit, push.
+
+---
+
+## 2026-10-27 — tracker grouped by category
+**Done:**
+- `categories.js`: CATEGORY map reworked into tracker-oriented groups —
+  Vegetables, Fruit, Meat, Fish & Eggs, Beans & Soy, Dairy, Grains & Bread,
+  Nuts & Seeds, Herbs & Spices, Pantry & Condiments (+ Other fallback);
+  `CATEGORY_ICON` per group; `categoryFor()` now does longest-keyword
+  matching for custom foods ("Baked Sweet Potato Mash" → Vegetables).
+  All 138 plan foods map to a group (checked, none fall to Other).
+- Tracker: the list is split into one card per category with "N/M tried"
+  in the header; a horizontally scrolling chip row (All + each category
+  with tried/total) filters to one category, combinable with the
+  tried / not-tried buttons, the search box and tile taps. Tapping the
+  active chip again clears it.
+- Cache v13 / APP_VERSION v13.

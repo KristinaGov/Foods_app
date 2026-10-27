@@ -1,79 +1,92 @@
-// Maps ingredient names (as they appear in data/plan.json "newFoods") to a
-// grocery-list category. Anything not listed falls back to "Other" at runtime.
+// Maps food names (as in data/plan.json "newFoods") to a Tracker category.
+// Custom foods fall back to a keyword match ("Baked Sweet Potato" → Vegetables),
+// then to "Other".
 export const CATEGORY = {
-  // Produce (vegetables, fruit, fresh herbs)
-  "Acorn Squash": "Produce", "Apple": "Produce", "Asian Pear": "Produce",
-  "Asparagus": "Produce", "Banana": "Produce", "Basil": "Produce",
-  "Beet": "Produce", "Bell Pepper": "Produce", "Blackberry": "Produce",
-  "Blueberries": "Produce", "Bok Choy": "Produce", "Broccoli": "Produce",
-  "Cabbage": "Produce", "Cantaloupe": "Produce", "Carrot": "Produce",
-  "Cauliflower": "Produce", "Celery": "Produce", "Chayote": "Produce",
-  "Cilantro": "Produce", "Collard Greens": "Produce", "Corn": "Produce",
-  "Cucumber": "Produce", "Dill": "Produce", "Fig": "Produce",
-  "Garden Peas": "Produce", "Garlic": "Produce", "Ginger": "Produce",
-  "Grapefruit": "Produce", "Green Bean": "Produce", "Guava": "Produce",
-  "Jicama": "Produce",
-  "Kiwi": "Produce", "Leeks": "Produce", "Lemon": "Produce", "Lime": "Produce",
-  "Mango": "Produce", "Mint": "Produce", "Mushroom": "Produce",
-  "Nopal": "Produce", "Okra": "Produce", "Onion": "Produce",
-  "Orange": "Produce", "Papaya": "Produce", "Parsley": "Produce",
-  "Pear": "Produce", "Persimmon": "Produce", "Pineapple": "Produce",
-  "Plantain": "Produce", "Pumpkin": "Produce", "Ramps": "Produce",
-  "Raspberry": "Produce", "Romaine": "Produce", "Rosemary": "Produce",
-  "Rutabaga": "Produce", "Sapodilla": "Produce", "Snow Pea": "Produce",
-  "Spaghetti Squash": "Produce",
-  "Spinach": "Produce", "Star Fruit": "Produce", "Strawberry": "Produce",
-  "Sweet Potato": "Produce", "Taro": "Produce", "Thyme": "Produce",
-  "Tomato": "Produce", "Turnip": "Produce", "Watermelon": "Produce",
-  "White Potato": "Produce", "Zucchini": "Produce",
+  // Vegetables
+  "Acorn Squash": "Vegetables", "Asparagus": "Vegetables", "Beet": "Vegetables",
+  "Bell Pepper": "Vegetables", "Bok Choy": "Vegetables", "Broccoli": "Vegetables",
+  "Cabbage": "Vegetables", "Carrot": "Vegetables", "Cauliflower": "Vegetables",
+  "Celery": "Vegetables", "Chayote": "Vegetables", "Collard Greens": "Vegetables",
+  "Corn": "Vegetables", "Cucumber": "Vegetables", "Garden Peas": "Vegetables",
+  "Garlic": "Vegetables", "Green Bean": "Vegetables", "Jicama": "Vegetables",
+  "Leeks": "Vegetables", "Mushroom": "Vegetables", "Nopal": "Vegetables",
+  "Okra": "Vegetables", "Onion": "Vegetables", "Plantain": "Vegetables",
+  "Pumpkin": "Vegetables", "Ramps": "Vegetables", "Romaine": "Vegetables",
+  "Rutabaga": "Vegetables", "Snow Pea": "Vegetables", "Spaghetti Squash": "Vegetables",
+  "Spinach": "Vegetables", "Sweet Potato": "Vegetables", "Taro": "Vegetables",
+  "Tomato": "Vegetables", "Turnip": "Vegetables", "White Potato": "Vegetables",
+  "Zucchini": "Vegetables", "Eggplant": "Vegetables", "Lettuce": "Vegetables",
+  "Potato": "Vegetables", "Squash": "Vegetables", "Pepper": "Vegetables",
 
-  // Protein (meat, fish, eggs, legumes, tofu)
-  "Black Beans": "Protein", "Cannelini Beans": "Protein", "Chicken": "Protein",
-  "Chicken Liver": "Protein", "Chickpea": "Protein", "Cod": "Protein",
-  "Edamame": "Protein", "Egg": "Protein", "Ground Beef": "Protein",
-  "Kidney Beans": "Protein", "Lamb": "Protein", "Lentils": "Protein",
-  "Mackerel": "Protein", "Pinto Beans": "Protein", "Pork": "Protein",
-  "Salmon": "Protein", "Sardines": "Protein", "Tilapia": "Protein",
-  "Tofu": "Protein", "Trout": "Protein", "Turkey": "Protein",
+  // Fruit
+  "Apple": "Fruit", "Asian Pear": "Fruit", "Banana": "Fruit", "Blackberry": "Fruit",
+  "Blueberries": "Fruit", "Cantaloupe": "Fruit", "Fig": "Fruit", "Grapefruit": "Fruit",
+  "Guava": "Fruit", "Kiwi": "Fruit", "Lemon": "Fruit", "Lime": "Fruit", "Mango": "Fruit",
+  "Orange": "Fruit", "Papaya": "Fruit", "Pear": "Fruit", "Persimmon": "Fruit",
+  "Pineapple": "Fruit", "Raspberry": "Fruit", "Sapodilla": "Fruit", "Star Fruit": "Fruit",
+  "Strawberry": "Fruit", "Watermelon": "Fruit", "Avocado": "Fruit", "Grapes": "Fruit",
+  "Cherry": "Fruit", "Peach": "Fruit", "Plum": "Fruit", "Melon": "Fruit", "Apricot": "Fruit",
+  "Berry": "Fruit", "Date": "Fruit", "Prune": "Fruit", "Pomegranate": "Fruit",
+
+  // Meat, fish & eggs
+  "Chicken": "Meat, Fish & Eggs", "Chicken Liver": "Meat, Fish & Eggs", "Cod": "Meat, Fish & Eggs",
+  "Egg": "Meat, Fish & Eggs", "Ground Beef": "Meat, Fish & Eggs", "Lamb": "Meat, Fish & Eggs",
+  "Mackerel": "Meat, Fish & Eggs", "Pork": "Meat, Fish & Eggs", "Salmon": "Meat, Fish & Eggs",
+  "Sardines": "Meat, Fish & Eggs", "Tilapia": "Meat, Fish & Eggs", "Trout": "Meat, Fish & Eggs",
+  "Turkey": "Meat, Fish & Eggs", "Beef": "Meat, Fish & Eggs", "Fish": "Meat, Fish & Eggs",
+  "Shrimp": "Meat, Fish & Eggs",
+
+  // Beans & soy
+  "Black Beans": "Beans & Soy", "Cannelini Beans": "Beans & Soy", "Chickpea": "Beans & Soy",
+  "Edamame": "Beans & Soy", "Kidney Beans": "Beans & Soy", "Lentils": "Beans & Soy",
+  "Pinto Beans": "Beans & Soy", "Tofu": "Beans & Soy", "Bean": "Beans & Soy",
 
   // Dairy
-  "Butter": "Dairy", "Cheese": "Dairy", "Cottage Cheese": "Dairy",
-  "Ghee": "Dairy", "Goat Cheese": "Dairy", "Labneh": "Dairy", "Mascarpone": "Dairy",
-  "Mozzarella Cheese": "Dairy", "Queso Fresco": "Dairy", "Ricotta": "Dairy",
-  "Sour Cream": "Dairy", "Yogurt": "Dairy",
+  "Butter": "Dairy", "Cheese": "Dairy", "Cottage Cheese": "Dairy", "Ghee": "Dairy",
+  "Goat Cheese": "Dairy", "Labneh": "Dairy", "Mascarpone": "Dairy", "Mozzarella Cheese": "Dairy",
+  "Queso Fresco": "Dairy", "Ricotta": "Dairy", "Sour Cream": "Dairy", "Yogurt": "Dairy",
+  "Milk": "Dairy",
 
-  // Nuts & seeds
-  "Almond": "Nuts & Seeds", "Cashew": "Nuts & Seeds",
-  "Hazelnut": "Nuts & Seeds", "Hemp Seeds": "Nuts & Seeds",
-  "Peanut": "Nuts & Seeds", "Pecan": "Nuts & Seeds",
-  "Pumpkin Seeds": "Nuts & Seeds", "Sesame": "Nuts & Seeds",
-  "Sunflower Seeds": "Nuts & Seeds", "Walnut": "Nuts & Seeds",
+  // Grains & bread
+  "Bread": "Grains & Bread", "Buckwheat": "Grains & Bread", "Bulgur": "Grains & Bread",
+  "Corn Tortilla": "Grains & Bread", "Noodles": "Grains & Bread", "Oats": "Grains & Bread",
+  "Pasta": "Grains & Bread", "Pizza": "Grains & Bread", "Quinoa": "Grains & Bread",
+  "Rice": "Grains & Bread", "Wheat Farina": "Grains & Bread",
 
-  // Grains & pantry (grains, starches, oils, spices, condiments)
-  "Bread": "Grains & Pantry", "Buckwheat": "Grains & Pantry",
-  "Bulgur": "Grains & Pantry", "Corn Tortilla": "Grains & Pantry",
-  "Noodles": "Grains & Pantry", "Oats": "Grains & Pantry",
-  "Pasta": "Grains & Pantry", "Quinoa": "Grains & Pantry",
-  "Rice": "Grains & Pantry", "Wheat Farina": "Grains & Pantry",
-  "Olive Oil": "Grains & Pantry", "Vinegar": "Grains & Pantry",
-  "Vanilla Extract": "Grains & Pantry", "Coconut": "Grains & Pantry",
-  "Coconut Milk": "Grains & Pantry", "Kimchi": "Grains & Pantry",
-  "Black Pepper": "Grains & Pantry", "Cardamom": "Grains & Pantry",
-  "Cayenne": "Grains & Pantry", "Chipotle": "Grains & Pantry",
-  "Ancho Chili": "Grains & Pantry", "Cinnamon": "Grains & Pantry",
-  "Cumin": "Grains & Pantry", "Garam Masala": "Grains & Pantry",
-  "Nutmeg": "Grains & Pantry", "Paprika": "Grains & Pantry",
-  "Turmeric": "Grains & Pantry",
+  // Nuts & seeds (coconut counts as a tree nut for allergy purposes)
+  "Almond": "Nuts & Seeds", "Cashew": "Nuts & Seeds", "Coconut": "Nuts & Seeds",
+  "Coconut Milk": "Nuts & Seeds", "Hazelnut": "Nuts & Seeds", "Hemp Seeds": "Nuts & Seeds",
+  "Peanut": "Nuts & Seeds", "Pecan": "Nuts & Seeds", "Pumpkin Seeds": "Nuts & Seeds",
+  "Sesame": "Nuts & Seeds", "Sunflower Seeds": "Nuts & Seeds", "Walnut": "Nuts & Seeds",
+  "Nut": "Nuts & Seeds",
 
-  // Other (prepared dishes / not raw groceries)
-  "Pizza": "Other"
+  // Herbs & spices
+  "Basil": "Herbs & Spices", "Cilantro": "Herbs & Spices", "Dill": "Herbs & Spices",
+  "Ginger": "Herbs & Spices", "Mint": "Herbs & Spices", "Parsley": "Herbs & Spices",
+  "Rosemary": "Herbs & Spices", "Thyme": "Herbs & Spices", "Black Pepper": "Herbs & Spices",
+  "Cardamom": "Herbs & Spices", "Cayenne": "Herbs & Spices", "Chipotle": "Herbs & Spices",
+  "Ancho Chili": "Herbs & Spices", "Cinnamon": "Herbs & Spices", "Cumin": "Herbs & Spices",
+  "Garam Masala": "Herbs & Spices", "Nutmeg": "Herbs & Spices", "Paprika": "Herbs & Spices",
+  "Turmeric": "Herbs & Spices", "Vanilla Extract": "Herbs & Spices",
+
+  // Pantry & condiments
+  "Olive Oil": "Pantry & Condiments", "Vinegar": "Pantry & Condiments",
+  "Kimchi": "Pantry & Condiments", "Olive": "Pantry & Condiments"
 };
 
-export const CATEGORY_ORDER = ["Produce", "Protein", "Dairy", "Grains & Pantry", "Nuts & Seeds", "Other"];
+export const CATEGORY_ORDER = [
+  "Vegetables", "Fruit", "Meat, Fish & Eggs", "Beans & Soy", "Dairy",
+  "Grains & Bread", "Nuts & Seeds", "Herbs & Spices", "Pantry & Condiments", "Other"
+];
+
+export const CATEGORY_ICON = {
+  "Vegetables": "🥦", "Fruit": "🍎", "Meat, Fish & Eggs": "🍗", "Beans & Soy": "🫘",
+  "Dairy": "🧀", "Grains & Bread": "🍞", "Nuts & Seeds": "🥜", "Herbs & Spices": "🌿",
+  "Pantry & Condiments": "🫒", "Other": "🍽️"
+};
 
 // Pantry staples assumed to already be in the kitchen (spices, oils, vinegar,
-// extracts). They stay in the Tracker as foods to introduce, but are left off
-// the weekly Grocery checklist so it only lists things that need buying.
+// extracts). Kept for reference; the Grocery tab now uses the PDF's own lists.
 export const PANTRY_STAPLES = new Set([
   "Olive Oil", "Vinegar", "Vanilla Extract", "Black Pepper", "Cardamom",
   "Cayenne", "Chipotle", "Ancho Chili", "Cinnamon", "Cumin", "Garam Masala",
@@ -84,8 +97,14 @@ export function isPantryStaple(food) {
   return PANTRY_STAPLES.has(food);
 }
 
+// Longest keys first so "Sweet Potato" wins over "Potato".
+const CATEGORY_KEYS = Object.keys(CATEGORY).sort((a, b) => b.length - a.length);
+
 export function categoryFor(food) {
-  return CATEGORY[food] || "Other";
+  if (CATEGORY[food]) return CATEGORY[food];
+  const lower = food.toLowerCase();
+  const hit = CATEGORY_KEYS.find((k) => lower.includes(k.toLowerCase()));
+  return hit ? CATEGORY[hit] : "Other";
 }
 
 // Emoji shown next to each food in the Tracker. Foods not listed here get a
@@ -132,11 +151,6 @@ export const ICON = {
   "Cheese": "🧀", "Fish": "🐟", "Potato": "🥔", "Olive": "🫒", "Pepper": "🫑",
   "Bean": "🫘", "Nut": "🌰", "Berry": "🫐", "Lettuce": "🥬", "Honeydew": "🍈",
   "Date": "🟤", "Prune": "🫐", "Apricot": "🍑", "Pomegranate": "🔴"
-};
-
-const CATEGORY_ICON = {
-  "Produce": "🥬", "Protein": "🍖", "Dairy": "🥛", "Grains & Pantry": "🌾",
-  "Nuts & Seeds": "🥜", "Other": "🍽️"
 };
 
 // Longest keys first so "Sweet Potato" wins over "Potato" in keyword matching.
