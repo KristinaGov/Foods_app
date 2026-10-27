@@ -557,3 +557,13 @@ longer used by the view. Cache v16.
 - Old grocery tick keys (week-start dates) are dropped on load and written
   back without touching `updatedAt`.
 - Cache v18 / APP_VERSION v18. All 11 tests pass.
+
+---
+
+## 2026-10-27 — wrong yield lines (source PDF typos)
+User spotted Day 23 "Cauliflower Two Ways with Yogurt" showing "1 apple
+half + ½ c swirl". The PDF itself prints that (it is Day 24's yield); Day
+24 prints Day 20's yield, and Day 64 says "mango" for a papaya recipe.
+Extraction was faithful. Added `YIELD_FIXES` to merge_recipes.py keyed by
+(day, title) and patched plan.json / parsed_plan.json. A scan of all yields
+for foods absent from the recipe found no other cases. Cache v19.

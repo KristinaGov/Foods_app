@@ -694,7 +694,7 @@
       {
         "mealType": "Solid Foods Meal",
         "title": "Cauliflower Two Ways with Yogurt",
-        "yield": "1 apple half + \u00bd c (120 ml) swirl",
+        "yield": "1 c (240 ml) florets + yogurt swirl",
         "cookTime": "15 minutes",
         "ingredients": [
           "1 head cauliflower",
@@ -722,7 +722,7 @@
       {
         "mealType": "Solid Foods Meal",
         "title": "Apple Swirl Yogurt",
-        "yield": "1-2 pepper half + \u00bc c (60 ml) beans + 1-2 tomato wedges",
+        "yield": "1 apple half + \u00bd c (120 ml) swirl",
         "cookTime": "20 minutes",
         "ingredients": [
           "1 apple",
@@ -2405,7 +2405,7 @@
       {
         "mealType": "Solid Foods Meal 1",
         "title": "Coconut Porridge with Sesame Tahini Swirl + Papaya Two Ways",
-        "yield": "1 c (240 ml) porridge + 1 mango pit + 4-6 mango spears",
+        "yield": "1 c (240 ml) porridge + 4-6 papaya spears",
         "cookTime": "20 minutes",
         "ingredients": [
           "\u00bd c (120 ml) unsweetened coconut milk",

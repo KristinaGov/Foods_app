@@ -23,10 +23,21 @@ TITLE_FIXES = {
     "Antipasto Salad Artichoke": "Antipasto Salad",
 }
 
+# Yield lines that are wrong in the source PDF itself (copy-paste slips:
+# Day 23 shows Day 24's yield, Day 24 shows Day 20's, Day 64 says mango for
+# a papaya recipe). Keyed by (day, title); values derived from each recipe's
+# own ingredients and steps.
+YIELD_FIXES = {
+    (23, "Cauliflower Two Ways with Yogurt"): "1 c (240 ml) florets + yogurt swirl",
+    (24, "Apple Swirl Yogurt"): "1 apple half + ½ c (120 ml) swirl",
+    (64, "Coconut Porridge with Sesame Tahini Swirl + Papaya Two Ways"): "1 c (240 ml) porridge + 4-6 papaya spears",
+}
+
 with open(RAW_PATH) as f:
     recipes = json.load(f)
 for r in recipes:
     r["title"] = TITLE_FIXES.get(r["title"], r["title"])
+    r["yield"] = YIELD_FIXES.get((r["day"], r["title"]), r["yield"])
 
 by_day = {}
 for r in recipes:
