@@ -43,9 +43,9 @@ with sync_playwright() as p:
         page.click(f'[data-theme-key="{key}"]')
         print(key, "html data-theme:", page.evaluate("document.documentElement.dataset.theme"), "| meta:", page.get_attribute('meta[name="theme-color"]', "content"),
               "| stored:", page.evaluate("localStorage.getItem('babyFoodPlan.theme')"))
-        page.screenshot(path=f"s2_settings_{key}.png")
+        page.screenshot(path=f"_out/s2_settings_{key}.png")
         page.click("#close-settings"); page.click('.tab-btn[data-tab="today"]'); page.wait_for_selector("#day-notes, .saved-note")
-        page.screenshot(path=f"s2_today_{key}.png", full_page=True)
+        page.screenshot(path=f"_out/s2_today_{key}.png", full_page=True)
     page.reload(); page.wait_for_selector("#prev-day")
     print("after reload theme:", page.evaluate("document.documentElement.dataset.theme"))
     page.click('.tab-btn[data-tab="weeks"]'); page.wait_for_selector(".week-day-row"); page.screenshot(path="_out/s2_weeks_orchid.png")
