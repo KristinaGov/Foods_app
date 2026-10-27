@@ -514,3 +514,46 @@ red "⚠ Allergens" sub-heading, then "Other foods" (sub-headings only when
 the card has both kinds; Dairy is all allergens). The Allergens chip keeps
 the category grouping and hides non-allergen foods. `ALLERGEN_ORDER` is no
 longer used by the view. Cache v16.
+
+---
+
+## 2026-10-27 — improvement round (bugs, plan-driven features, housekeeping)
+**Bugs fixed:**
+- Tracker search lost focus after one character (every keystroke rebuilt
+  the whole tab). The list now lives in `#tracker-results` and typing
+  refreshes only that part (`refreshTrackerResults()`); the "Show all"
+  button is always in the DOM and toggled with `.hidden`.
+- Today re-render folded open recipes. Open `<details>` indexes are kept in
+  `viewState.openRecipes` and restored after each render of the same day.
+
+**Features:**
+- Today → "🔁 Also in today's recipes": tracker foods detected in the day's
+  ingredient lines (`foodsInIngredients()` in categories.js, longest match
+  first with `FOOD_ALIASES` for spellings like oatmeal/tahini/eggs), minus
+  the day's new foods, allergens first. Same one-tap try logging as the new
+  food pills. Heuristic: unusual spellings may be missed.
+- Today → "🔁 Allergen check": for every allergen group with at least one
+  try, days since last served as of the viewed day; ≥7 days is flagged
+  "serve again" (plan: repeat each allergen at least twice a week).
+- Notes tab → "Timeline": one dated log of daily reactions/notes, every
+  food try (with reaction, "first try" tag, allergen badge) and food notes
+  (shown under the food's latest try). Filters: Everything / Reactions /
+  Notes.
+- Custom foods: "Add a food" now adds to `state.customFoods` as not tried
+  (no fake try date); untried custom foods have a ✕ to remove them; adding
+  an existing name just searches for it.
+
+**Housekeeping:**
+- `views.js` split into `views/shared.js` (state, helpers) and one module
+  per tab (`today`, `tracker`, `grocery`, `weeks`, `notes`); `views.js` is
+  now a barrel so app.js is unchanged. All new files precached.
+- Browser tests moved into the repo: `tests/ui/*.py` with `_helper.py`
+  (request-interception serving), `run_all.sh`, `tests/README.md` (venv
+  setup; Playwright needs a pip upgrade on this Python 3.9). The service
+  worker test is version-agnostic now and needs a real HTTP server.
+- Day 19 title "Antipasto Salad Artichoke" → "Antipasto Salad" in
+  plan.json/parsed_plan.json, with `TITLE_FIXES` in merge_recipes.py so a
+  regeneration keeps it.
+- Old grocery tick keys (week-start dates) are dropped on load and written
+  back without touching `updatedAt`.
+- Cache v18 / APP_VERSION v18. All 11 tests pass.

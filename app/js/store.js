@@ -11,8 +11,10 @@ const DEFAULT_STATE = {
   foodTracker: {},
   // ISO date -> { day, notes, reaction, customFoods: [] }
   dailyLogs: {},
-  // persists which grocery items have been checked off, keyed by week start ISO date
-  groceryChecks: {}
+  // persists which grocery items have been checked off, keyed "week-N"
+  groceryChecks: {},
+  // foods the user added that are not in the plan (kept even while untried)
+  customFoods: []
 };
 
 // Keeps the derived summary fields of a food entry in step with its tries.
@@ -30,6 +32,9 @@ function recompute(entry) {
 // Entries written before try history existed get one try from their
 // firstDate and overall reaction.
 function migrate(state) {
+  // Grocery ticks were once keyed by week-start date; those keys are dead.
+  Object.keys(state.groceryChecks).forEach((k) => { if (!k.startsWith("week-")) { delete state.groceryChecks[k]; state._dirty = true; } });
+  state.customFoods = Array.isArray(state.customFoods) ? state.customFoods : [];
   Object.values(state.foodTracker).forEach((e) => {
     if (e.status === "tried" && !(e.tries && e.tries.length)) {
       e.tries = [{ date: e.firstDate || new Date().toISOString().slice(0, 10), reaction: e.reaction || "none" }];
@@ -53,6 +58,12 @@ function load() {
 
 let state = load();
 const listeners = [];
+if (state._dirty) {
+  // Migration changed something: write it back without touching updatedAt,
+  // so the cleanup is not mistaken for a newer edit when syncing.
+  delete state._dirty;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
 
 // touch=false keeps the existing updatedAt (used when restoring a backup so
 // the restored copy is not mistaken for a newer edit).
@@ -138,6 +149,23 @@ export const store = {
     if (!entry.tries.length) delete state.foodTracker[foodName];
     else recompute(entry);
     save();
+  },
+
+  addCustomFood(foodName) {
+    if (!state.customFoods.includes(foodName)) {
+      state.customFoods.push(foodName);
+      save();
+    }
+  },
+
+  removeCustomFood(foodName) {
+    state.customFoods = state.customFoods.filter((f) => f !== foodName);
+    delete state.foodTracker[foodName];
+    save();
+  },
+
+  isCustomFood(foodName) {
+    return state.customFoods.includes(foodName);
   },
 
   tryIndexOn(foodName, isoDate) {

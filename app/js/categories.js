@@ -194,3 +194,51 @@ export function allergenFor(food) {
   const hit = ALLERGEN_KEYS.find((k) => lower.includes(k.toLowerCase()));
   return hit ? ALLERGEN[hit] : null;
 }
+
+// Extra spellings used in recipe ingredient lines, so a tracker food can be
+// recognised in a day's recipes ("dry instant oatmeal" → Oats).
+export const FOOD_ALIASES = {
+  "Oats": ["oatmeal", "rolled oats"], "Egg": ["eggs"], "Sesame": ["tahini", "sesame seeds", "sesame oil"],
+  "Chickpea": ["chickpeas", "hummus"], "Cannelini Beans": ["cannellini beans", "cannellini"],
+  "Peanut": ["peanut butter", "peanuts"], "Almond": ["almond butter", "almond flour", "almonds"],
+  "Cashew": ["cashew butter", "cashews"], "Walnut": ["walnuts"], "Pecan": ["pecans"], "Hazelnut": ["hazelnuts"],
+  "Wheat Farina": ["farina"], "Bread": ["toast", "breadcrumbs", "wheat bread"], "Pasta": ["penne", "spaghetti", "macaroni", "fusilli"],
+  "Noodles": ["egg noodles"], "Cheese": ["parmesan", "cheddar"], "Ground Beef": ["beef"], "Chicken": ["chicken breast", "drumstick", "chicken thigh"],
+  "Chicken Liver": ["chicken livers", "liver"], "White Potato": ["russet potato", "potato", "potatoes", "baby potatoes"],
+  "Sweet Potato": ["sweet potatoes", "yam"], "Garden Peas": ["peas"], "Green Bean": ["green beans"], "Snow Pea": ["snow peas"],
+  "Blueberries": ["blueberry"], "Strawberry": ["strawberries"], "Raspberry": ["raspberries"], "Blackberry": ["blackberries"],
+  "Tomato": ["tomatoes", "tomato sauce"], "Coconut": ["coconut flakes", "desiccated coconut"], "Coconut Milk": [],
+  "Yogurt": ["yoghurt"], "Bell Pepper": ["bell peppers", "sweet pepper"], "Black Beans": ["black bean"], "Kidney Beans": ["kidney bean"],
+  "Pinto Beans": ["pinto bean"], "Lentils": ["lentil"], "Mushroom": ["mushrooms", "portobello"], "Onion": ["onions", "shallot", "green onion"],
+  "Garlic": ["garlic powder"], "Lemon": ["lemons", "lemon juice"], "Lime": ["limes", "lime juice"], "Corn": ["corn on the cob", "corn kernels"],
+  "Corn Tortilla": ["corn tortillas"], "Pumpkin": ["pumpkin purée", "pumpkin puree"], "Pumpkin Seeds": ["pumpkin seed"],
+  "Sunflower Seeds": ["sunflower seed"], "Hemp Seeds": ["hemp seed", "hemp hearts"], "Olive Oil": [], "Butter": ["unsalted butter"],
+  "Fig": ["figs"], "Apple": ["apples", "applesauce"], "Pear": ["pears"], "Banana": ["bananas"], "Mango": ["mangos", "mangoes"],
+  "Kiwi": ["kiwis"], "Orange": ["oranges"], "Carrot": ["carrots"], "Zucchini": ["zucchinis", "courgette"], "Cucumber": ["cucumbers"],
+  "Asparagus": ["asparagus spears"], "Beet": ["beets", "beetroot"], "Turnip": ["turnips"], "Leeks": ["leek"], "Cabbage": ["kimchi"] 
+};
+
+const WORD = "[a-z0-9]";
+function escapeRegExp(str) { return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+// Returns the known foods whose name (or alias) appears in the given recipe
+// ingredient lines. Longer names are matched first and blanked out, so
+// "corn tortillas" counts as Corn Tortilla, not Corn.
+export function foodsInIngredients(lines, knownFoods) {
+  let text = " " + lines.join(" \n ").toLowerCase() + " ";
+  const terms = [];
+  knownFoods.forEach((food) => {
+    const names = [food, ...(FOOD_ALIASES[food] || [])];
+    names.forEach((n) => terms.push({ food, term: n.toLowerCase() }));
+  });
+  terms.sort((a, b) => b.term.length - a.term.length);
+  const found = new Set();
+  terms.forEach(({ food, term }) => {
+    const re = new RegExp(`(?<!${WORD})${escapeRegExp(term)}(?:s|es)?(?!${WORD})`, "g");
+    if (re.test(text)) {
+      found.add(food);
+      text = text.replace(re, (m) => " ".repeat(m.length));
+    }
+  });
+  return Array.from(found);
+}

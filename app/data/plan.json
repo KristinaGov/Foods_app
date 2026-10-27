@@ -531,7 +531,7 @@
     "meals": [
       "Peanut Butter Swirl Oatmeal Two Ways"
     ],
-    "familyMeal": "Antipasto Salad Artichoke",
+    "familyMeal": "Antipasto Salad",
     "newFoods": [
       "Cinnamon",
       "Kidney Beans",
@@ -559,7 +559,7 @@
       },
       {
         "mealType": "Family Meal to Share with Baby",
-        "title": "Antipasto Salad Artichoke",
+        "title": "Antipasto Salad",
         "yield": "3 c (720 ml)",
         "cookTime": "30 minutes",
         "ingredients": [

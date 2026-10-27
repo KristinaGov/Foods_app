@@ -17,8 +17,16 @@ RAW_PATH = "materials/recipes_raw.json"
 OUT_PATH = "materials/parsed_plan.json"
 APP_PATH = "app/data/plan.json"
 
+# Known extraction glitches: where a wrapped "New Foods" cell was glued onto
+# the end of a recipe title by extract_recipes.py.
+TITLE_FIXES = {
+    "Antipasto Salad Artichoke": "Antipasto Salad",
+}
+
 with open(RAW_PATH) as f:
     recipes = json.load(f)
+for r in recipes:
+    r["title"] = TITLE_FIXES.get(r["title"], r["title"])
 
 by_day = {}
 for r in recipes:
