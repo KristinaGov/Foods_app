@@ -102,6 +102,13 @@ later reversed, add a new bullet noting the change and why.
   debounce; on launch/foreground the newest copy (by `updatedAt`) wins, so
   two devices can share one backup. The data is NOT stored in the public
   app repo.
+- **Skipped days shift the plan (user decision 2026-11-10):** a day with no
+  solids is marked skipped on the Today tab (`state.skippedDays`, ISO
+  dates). A skipped date has no plan day and shows only a comment box; every
+  later date's day number is computed around the skips, so Day N moves one
+  calendar day later rather than being lost. Day numbers are therefore always
+  derived live from `store.dayNumberFor()`/`isoDateForDay()`; the `day`
+  field stored in `dailyLogs` is only a fallback.
 
 ---
 
@@ -567,3 +574,36 @@ half + ½ c swirl". The PDF itself prints that (it is Day 24's yield); Day
 Extraction was faithful. Added `YIELD_FIXES` to merge_recipes.py keyed by
 (day, title) and patched plan.json / parsed_plan.json. A scan of all yields
 for foods absent from the recipe found no other cases. Cache v19.
+
+---
+
+## 2026-11-10 — skipped days, Week calendar, word search
+Per user: a skipped day must shift the plan, not lose the day; the Week tab
+needs a GitHub-style overview to identify weeks and skipped days; the
+Tracker needs search by word.
+- **Skipped days** (`store.skipDay/unskipDay/isSkipped/upcomingDayNumber`,
+  `addDaysISO`): Today navigates by calendar date now
+  (`viewState.todayDayOffset` is in days from today). "⏭ Skip this day" card
+  at the bottom of Today; a skipped date shows the nav, an amber "Skipped
+  day" card with "Undo skip" and where the displaced day moved to, and a
+  single "Comment" notes card (no recipes, pills, reactions). Badge says
+  "Skipped day". Week/Grocery date ranges, `currentWeekNumber()` and the
+  Notes timeline labels follow the shift. Exported JSON gains `skippedDays`.
+- **Week tab → "100 days at a glance"**: calendar grid from Day 1 to the
+  last plan day, 7 per row starting on Day 1's weekday, row label = plan
+  week of the row's first day (a repeated "W2" shows the drift). Cells show
+  the plan day number and darken with tries + notes logged that date;
+  future days dashed; skipped dates striped amber with ⏭; today outlined;
+  the week being viewed is ringed; tapping a cell switches to its week.
+  "Day by day" lists skipped dates in place with their comment.
+- **Tracker search by word**: moved to the top of the tab; every typed word
+  must occur in the name, a recipe alias (`FOOD_ALIASES`) or the food's notes
+  (substring), or be a whole word of its allergen group ("fish", "tree nut").
+  Accent/case-insensitive ("puree" → Purée). Categories are deliberately not
+  searched ("egg" would pull in all of Meat, Fish & Eggs; the chips cover
+  that). Match count line, matched letters highlighted, "Add a food" hidden
+  while searching, and a no-match state offers "+ Add “x” as a food".
+- New test `tests/ui/test_skip_days_and_search.py`; `tests/.venv` had to be
+  recreated (see tests/README.md). All 11 tests pass. Cache/APP_VERSION v20.
+- Not committed/pushed in this session (user did not ask); the working tree
+  holds the change.

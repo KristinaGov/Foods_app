@@ -1,7 +1,73 @@
-import { store } from "../store.js";
-import { PLAN, WEEKS, viewState, fmtDate, escapeHTML, LAST_WEEK, currentWeekNumber } from "./shared.js";
+import { store, addDaysISO } from "../store.js";
+import { PLAN, WEEKS, viewState, todayISO, fmtDate, escapeHTML, LAST_WEEK, currentWeekNumber, weekNumberFor } from "./shared.js";
 
 /* ---------------- Weekly overview ---------------- */
+
+const WEEKDAY_INITIALS = ["S", "M", "T", "W", "T", "F", "S"];
+
+// Number of food tries logged per ISO date.
+function triesByDate() {
+  const counts = {};
+  Object.values(store.getState().foodTracker).forEach((entry) => {
+    (entry.tries || []).forEach((t) => { counts[t.date] = (counts[t.date] || 0) + 1; });
+  });
+  return counts;
+}
+
+// GitHub-style calendar: one square per calendar date from Day 1 to the
+// last plan day, seven per row starting on Day 1's weekday. Squares show
+// the plan day number and darken with the amount logged that day; skipped
+// dates are striped amber and carry no day number, so the shift of the plan
+// is visible. The week currently shown is ringed; tapping a square shows
+// its week.
+function calendarHTML(week) {
+  const state = store.getState();
+  if (!state.startDate) return "";
+  const today = todayISO();
+  const lastISO = store.isoDateForDay(100);
+  const tries = triesByDate();
+  const cells = [];
+  for (let iso = state.startDate; iso <= lastISO; iso = addDaysISO(iso, 1)) {
+    const skipped = store.isSkipped(iso);
+    const day = store.dayNumberFor(iso);
+    const w = weekNumberFor(skipped ? store.upcomingDayNumber(iso) : day);
+    const log = state.dailyLogs[iso] || {};
+    const activity = (tries[iso] || 0) + (log.notes || (log.reaction && log.reaction !== "none") ? 1 : 0);
+    let level = "t0";
+    if (skipped) level = "skipped";
+    else if (iso > today) level = "future";
+    else if (activity >= 4) level = "t3";
+    else if (activity >= 2) level = "t2";
+    else if (activity >= 1) level = "t1";
+    const classes = ["cal-cell", level, w === week ? "in-week" : "", iso === today ? "today" : ""].filter(Boolean).join(" ");
+    const title = skipped ? `${fmtDate(iso)} · skipped` : `${fmtDate(iso)} · Day ${day}${activity ? ` · ${activity} logged` : ""}`;
+    cells.push({ iso, day, w, skipped, html: `<button class="${classes}" data-cal-week="${w}" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}">${skipped ? "⏭" : day}</button>` });
+  }
+  const rows = [];
+  for (let i = 0; i < cells.length; i += 7) {
+    const chunk = cells.slice(i, i + 7);
+    const first = chunk.find((c) => !c.skipped) || chunk[0];
+    const label = `<span class="cal-label ${first.w === week ? "in-week" : ""}" title="${fmtDate(chunk[0].iso)}">W${first.w}</span>`;
+    rows.push(label + chunk.map((c) => c.html).join("") + "<span></span>".repeat(7 - chunk.length));
+  }
+  const startDow = new Date(state.startDate + "T00:00:00").getDay();
+  const header = `<span></span>${Array.from({ length: 7 }, (_, i) => `<span class="cal-dow">${WEEKDAY_INITIALS[(startDow + i) % 7]}</span>`).join("")}`;
+  const skippedCount = state.skippedDays.filter((s) => s >= state.startDate && s <= lastISO).length;
+  return `
+    <div class="card cal-card">
+      <div class="activity-head">
+        <h2>100 days at a glance</h2>
+        <span class="food-meta">${skippedCount ? `${skippedCount} skipped · ` : ""}ends ${new Date(lastISO + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
+      </div>
+      <div class="cal-grid" id="cal-grid">${header}${rows.join("")}</div>
+      <div class="cal-legend">
+        <span><i class="cal-cell t0"></i> nothing logged</span>
+        <span><i class="cal-cell t1"></i><i class="cal-cell t2"></i><i class="cal-cell t3"></i> logged</span>
+        <span><i class="cal-cell skipped"></i> skipped</span>
+        <span><i class="cal-cell future today"></i> today</span>
+      </div>
+    </div>`;
+}
 
 export function renderWeeks() {
   const view = document.getElementById("view");
@@ -14,7 +80,8 @@ export function renderWeeks() {
 
   document.getElementById("day-badge").textContent = `Week ${week} of ${LAST_WEEK}`;
 
-  const hasDates = Boolean(store.getState().startDate);
+  const state = store.getState();
+  const hasDates = Boolean(state.startDate);
   const rangeLabel = days.length
     ? hasDates
       ? `${fmtDate(store.isoDateForDay(firstDay))} – ${fmtDate(store.isoDateForDay(lastDay))}`
@@ -39,15 +106,29 @@ export function renderWeeks() {
     </div>`
     : '<div class="card empty-state"><p>No overview for this week.</p></div>';
 
-  const dayRows = days.map((d) => {
-    const dateLabel = hasDates ? ` · ${fmtDate(store.isoDateForDay(d.day))}` : "";
-    return `
+  // Skipped dates belong to the week of the plan day that follows them, so
+  // they are listed in place between the days they pushed apart.
+  const skippedInWeek = hasDates
+    ? state.skippedDays.filter((s) => s >= state.startDate && weekNumberFor(store.upcomingDayNumber(s)) === week && store.upcomingDayNumber(s) <= 100)
+    : [];
+  const rows = [];
+  days.forEach((d) => {
+    const iso = hasDates ? store.isoDateForDay(d.day) : null;
+    skippedInWeek.filter((s) => s < iso).forEach((s) => {
+      if (!rows.some((r) => r.iso === s)) rows.push({ iso: s, html: `
+      <div class="week-day-row skipped-row">
+        <div class="food-name">⏭ Skipped · ${fmtDate(s)}</div>
+        <div class="food-meta">${escapeHTML(state.dailyLogs[s]?.notes || "No solids this day; the plan shifted by one day.")}</div>
+      </div>` });
+    });
+    rows.push({ iso, html: `
       <div class="week-day-row">
-        <div class="food-name">Day ${d.day}${dateLabel}</div>
+        <div class="food-name">Day ${d.day}${iso ? ` · ${fmtDate(iso)}` : ""}</div>
         <div class="food-meta">${escapeHTML(d.meals.join(", "))}${d.familyMeal ? ` · <em>Family: ${escapeHTML(d.familyMeal)}</em>` : ""}</div>
         ${d.newFoods.length ? `<div class="food-meta">New: ${escapeHTML(d.newFoods.join(", "))}</div>` : ""}
-      </div>`;
-  }).join("");
+      </div>` });
+  });
+  const dayRows = rows.map((r) => r.html).join("");
 
   view.innerHTML = `
     <div class="day-nav">
@@ -55,6 +136,8 @@ export function renderWeeks() {
       <span class="current-date">Week ${week}${rangeLabel ? " · " + rangeLabel : ""}</span>
       <button id="next-week-ov" ${week >= LAST_WEEK ? "disabled" : ""}>›</button>
     </div>
+
+    ${calendarHTML(week)}
 
     ${summaryHTML}
 
@@ -70,4 +153,11 @@ export function renderWeeks() {
 
   document.getElementById("prev-week-ov").addEventListener("click", () => { viewState.overviewWeek = Math.max(1, week - 1); renderWeeks(); });
   document.getElementById("next-week-ov").addEventListener("click", () => { viewState.overviewWeek = Math.min(LAST_WEEK, week + 1); renderWeeks(); });
+  view.querySelectorAll("[data-cal-week]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      viewState.overviewWeek = Number(btn.dataset.calWeek);
+      renderWeeks();
+      document.getElementById("cal-grid")?.scrollIntoView({ block: "nearest" });
+    });
+  });
 }

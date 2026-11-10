@@ -1,4 +1,4 @@
-import { store } from "../store.js";
+import { store, addDaysISO } from "../store.js";
 import { allergenFor, ALLERGEN_ORDER, foodsInIngredients } from "../categories.js";
 import { viewState, dayData, todayISO, fmtDate, escapeHTML, recipeCardHTML, backupNoticeHTML, attachBackupNotice, REACTIONS, allKnownFoods } from "./shared.js";
 
@@ -61,22 +61,65 @@ export function renderToday() {
     return;
   }
 
-  const baseDay = store.dayNumberFor(todayISO());
-  const dayNumber = baseDay + viewState.todayDayOffset;
-  const iso = store.isoDateForDay(dayNumber);
-  const data = dayNumber >= 1 && dayNumber <= 100 ? dayData(dayNumber) : null;
+  // Navigation is by calendar date: a skipped date has no plan day, and the
+  // day numbers of every later date shift by one.
+  const iso = addDaysISO(todayISO(), viewState.todayDayOffset);
+  const skipped = store.isSkipped(iso);
+  const dayNumber = store.dayNumberFor(iso);
+  const inPlan = !skipped && dayNumber >= 1 && dayNumber <= 100;
+  const data = inPlan ? dayData(dayNumber) : null;
   const log = store.getDailyLog(iso) || {};
 
   document.getElementById("day-badge").textContent =
-    dayNumber >= 1 && dayNumber <= 100 ? `Day ${dayNumber} of 100` : "Baby Food Plan";
+    skipped ? "Skipped day" : inPlan ? `Day ${dayNumber} of 100` : "Baby Food Plan";
+
+  const navHTML = `
+    <div class="day-nav">
+      <button id="prev-day">‹</button>
+      <span class="current-date">${fmtDate(iso)}${viewState.todayDayOffset ? '<br><button class="today-btn" id="back-today">↩ Back to today</button>' : ""}</span>
+      <button id="next-day">›</button>
+    </div>`;
+
+  // A saved note is shown as text with an Edit button; the textarea only
+  // appears while there is nothing saved yet or the user tapped Edit.
+  const hasNote = Boolean((log.notes || "").trim());
+  const editing = viewState.editingNotesFor === iso || !hasNote;
+  const notesHTML = editing
+    ? `
+      <textarea id="day-notes" placeholder="${skipped ? "Why was today skipped? Anything to remember..." : "Any notes about today's meals or reactions..."}">${escapeHTML(log.notes || "")}</textarea>
+      <div class="note-actions">
+        <button class="btn btn-primary" id="save-day-notes">Save</button>
+        ${hasNote ? '<button class="btn" id="cancel-day-notes">Cancel</button>' : ""}
+      </div>`
+    : `
+      <div class="saved-note">${escapeHTML(log.notes)}</div>
+      <div class="note-actions">
+        <span class="saved-badge">✓ Saved</span>
+        <button class="btn" id="edit-day-notes">Edit</button>
+      </div>`;
+
+  if (skipped) {
+    const nextDay = store.upcomingDayNumber(iso);
+    view.innerHTML = `
+      ${navHTML}
+      <div class="card skipped-card">
+        <h2>⏭ Skipped day</h2>
+        <p class="hint">No solids this day. The plan is shifted: ${nextDay && nextDay <= 100 ? `Day ${nextDay} moves to ${fmtDate(store.isoDateForDay(nextDay))}` : "nothing was lost"}.</p>
+        <button class="btn" id="unskip-day">Undo skip</button>
+      </div>
+      <div class="card">
+        <h2>📝 Comment</h2>
+        ${notesHTML}
+      </div>`;
+    attachDayNav();
+    attachNotes();
+    document.getElementById("unskip-day").addEventListener("click", () => { store.unskipDay(iso); renderToday(); });
+    return;
+  }
 
   if (!data) {
     view.innerHTML = `
-      <div class="day-nav">
-        <button id="prev-day">‹</button>
-        <span class="current-date">${fmtDate(iso)}${viewState.todayDayOffset ? '<br><button class="today-btn" id="back-today">↩ Back to today</button>' : ""}</span>
-        <button id="next-day">›</button>
-      </div>
+      ${navHTML}
       <div class="card empty-state"><p>${dayNumber < 1 ? "Before Day 1 of the plan." : "Past Day 100 — the plan ends here. 🎉"}</p></div>`;
     attachDayNav();
     return;
@@ -99,24 +142,6 @@ export function renderToday() {
   const allergensHTML = data.allergens.map((a) => `<span class="pill allergen">⚠ ${escapeHTML(a)}</span>`).join("");
   const recipesHTML = (data.recipes || []).map(recipeCardHTML).join("");
 
-  // A saved note is shown as text with an Edit button; the textarea only
-  // appears while there is nothing saved yet or the user tapped Edit.
-  const hasNote = Boolean((log.notes || "").trim());
-  const editing = viewState.editingNotesFor === iso || !hasNote;
-  const notesHTML = editing
-    ? `
-      <textarea id="day-notes" placeholder="Any notes about today's meals or reactions...">${escapeHTML(log.notes || "")}</textarea>
-      <div class="note-actions">
-        <button class="btn btn-primary" id="save-day-notes">Save</button>
-        ${hasNote ? '<button class="btn" id="cancel-day-notes">Cancel</button>' : ""}
-      </div>`
-    : `
-      <div class="saved-note">${escapeHTML(log.notes)}</div>
-      <div class="note-actions">
-        <span class="saved-badge">✓ Saved</span>
-        <button class="btn" id="edit-day-notes">Edit</button>
-      </div>`;
-
   // Remember which recipes are expanded so re-rendering (after a pill or
   // reaction tap) does not fold them shut.
   if (viewState.openRecipes.day === dayNumber) {
@@ -127,11 +152,7 @@ export function renderToday() {
 
   view.innerHTML = `
     ${backupNoticeHTML()}
-    <div class="day-nav">
-      <button id="prev-day">‹</button>
-      <span class="current-date">${fmtDate(iso)}${viewState.todayDayOffset ? '<br><button class="today-btn" id="back-today">↩ Back to today</button>' : ""}</span>
-      <button id="next-day">›</button>
-    </div>
+    ${navHTML}
 
     <div class="card">
       <h2>🍽 What to cook</h2>
@@ -168,10 +189,21 @@ export function renderToday() {
       </div>
       ${notesHTML}
     </div>
+
+    <div class="card skip-card">
+      <p class="hint">No solids today (sick, travelling, fussy)? Skip this day and the rest of the plan shifts by one day, so nothing is lost.</p>
+      <button class="btn" id="skip-day">⏭ Skip this day</button>
+    </div>
   `;
 
   attachDayNav();
+  attachNotes();
   attachBackupNotice();
+  document.getElementById("skip-day").addEventListener("click", () => {
+    store.skipDay(iso);
+    viewState.editingNotesFor = null;
+    renderToday();
+  });
   const detailsEls = view.querySelectorAll("details");
   viewState.openRecipes.idx.forEach((i) => { if (detailsEls[i]) detailsEls[i].open = true; });
 
@@ -192,24 +224,26 @@ export function renderToday() {
     });
   });
 
-  const saveBtn = document.getElementById("save-day-notes");
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      const notes = document.getElementById("day-notes").value.trim();
-      store.setDailyLog(iso, { day: dayNumber, notes });
-      viewState.editingNotesFor = null;
-      renderToday();
-    });
-  }
-  const cancelBtn = document.getElementById("cancel-day-notes");
-  if (cancelBtn) cancelBtn.addEventListener("click", () => { viewState.editingNotesFor = null; renderToday(); });
-  const editBtn = document.getElementById("edit-day-notes");
-  if (editBtn) {
-    editBtn.addEventListener("click", () => {
-      viewState.editingNotesFor = iso;
-      renderToday();
-      document.getElementById("day-notes").focus();
-    });
+  function attachNotes() {
+    const saveBtn = document.getElementById("save-day-notes");
+    if (saveBtn) {
+      saveBtn.addEventListener("click", () => {
+        const notes = document.getElementById("day-notes").value.trim();
+        store.setDailyLog(iso, { day: dayNumber, notes });
+        viewState.editingNotesFor = null;
+        renderToday();
+      });
+    }
+    const cancelBtn = document.getElementById("cancel-day-notes");
+    if (cancelBtn) cancelBtn.addEventListener("click", () => { viewState.editingNotesFor = null; renderToday(); });
+    const editBtn = document.getElementById("edit-day-notes");
+    if (editBtn) {
+      editBtn.addEventListener("click", () => {
+        viewState.editingNotesFor = iso;
+        renderToday();
+        document.getElementById("day-notes").focus();
+      });
+    }
   }
 
   function attachDayNav() {

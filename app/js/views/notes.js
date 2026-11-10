@@ -46,10 +46,12 @@ export function renderNotes() {
     </div>`;
 
   view.innerHTML = chips + (entries.map((e) => {
-    const dayNo = e.day ?? store.dayNumberFor(e.iso);
+    // Day numbers are computed live so a skipped day shifts the labels too.
+    const dayNo = store.dayNumberFor(e.iso) ?? e.day;
+    const label = store.isSkipped(e.iso) ? "Skipped day · " : dayNo > 0 ? `Day ${dayNo} · ` : "";
     return `
     <div class="card">
-      <h2>${dayNo ? `Day ${dayNo} · ` : ""}${fmtDate(e.iso)}</h2>
+      <h2>${label}${fmtDate(e.iso)}</h2>
       ${e.keepDay && (e.reaction || e.notes) ? `
       <div class="timeline-day">
         ${e.reaction ? `<span class="pill outline">${reactionLabel(e.reaction)}</span>` : ""}

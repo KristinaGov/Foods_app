@@ -14,8 +14,23 @@ const DEFAULT_STATE = {
   // persists which grocery items have been checked off, keyed "week-N"
   groceryChecks: {},
   // foods the user added that are not in the plan (kept even while untried)
-  customFoods: []
+  customFoods: [],
+  // ISO dates on which no solids were offered. A skipped date gets no plan
+  // day; the plan shifts so the next date takes the day that was due.
+  skippedDays: []
 };
+
+// Local-time "YYYY-MM-DD" (toISOString would shift to UTC).
+function isoOf(d) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+export function addDaysISO(iso, n) {
+  const d = new Date(iso + "T00:00:00");
+  d.setDate(d.getDate() + n);
+  return isoOf(d);
+}
 
 // Keeps the derived summary fields of a food entry in step with its tries.
 function recompute(entry) {
@@ -35,6 +50,7 @@ function migrate(state) {
   // Grocery ticks were once keyed by week-start date; those keys are dead.
   Object.keys(state.groceryChecks).forEach((k) => { if (!k.startsWith("week-")) { delete state.groceryChecks[k]; state._dirty = true; } });
   state.customFoods = Array.isArray(state.customFoods) ? state.customFoods : [];
+  state.skippedDays = Array.isArray(state.skippedDays) ? state.skippedDays.slice().sort() : [];
   Object.values(state.foodTracker).forEach((e) => {
     if (e.status === "tried" && !(e.tries && e.tries.length)) {
       e.tries = [{ date: e.firstDate || new Date().toISOString().slice(0, 10), reaction: e.reaction || "none" }];
@@ -83,7 +99,7 @@ export const store = {
   },
 
   hasUserData() {
-    return Object.keys(state.foodTracker).length > 0 || Object.keys(state.dailyLogs).length > 0 || Boolean(state.startDate);
+    return Object.keys(state.foodTracker).length > 0 || Object.keys(state.dailyLogs).length > 0 || state.skippedDays.length > 0 || Boolean(state.startDate);
   },
 
   setStartDate(isoDate) {
@@ -91,23 +107,54 @@ export const store = {
     save();
   },
 
-  // Day number (1-based) for a given ISO date, or null if start date not set.
+  // Day number (1-based) for a given ISO date, or null if the start date is
+  // not set or the date is skipped. Dates before Day 1 give 0 or less.
+  // Skipped dates before `isoDate` are not counted, so the plan shifts.
   dayNumberFor(isoDate) {
     if (!state.startDate) return null;
+    if (state.skippedDays.includes(isoDate)) return null;
     const start = new Date(state.startDate + "T00:00:00");
     const target = new Date(isoDate + "T00:00:00");
     const diffDays = Math.round((target - start) / 86400000);
-    return diffDays + 1;
+    if (diffDays < 0) return diffDays + 1;
+    const skippedBefore = state.skippedDays.filter((s) => s >= state.startDate && s < isoDate).length;
+    return diffDays + 1 - skippedBefore;
+  },
+
+  // The day number that the first non-skipped date on or after `isoDate`
+  // gets. Equals dayNumberFor() when the date itself is not skipped.
+  upcomingDayNumber(isoDate) {
+    if (!state.startDate) return null;
+    let iso = isoDate;
+    while (state.skippedDays.includes(iso)) iso = addDaysISO(iso, 1);
+    return this.dayNumberFor(iso);
   },
 
   isoDateForDay(dayNumber) {
     if (!state.startDate) return null;
-    const d = new Date(state.startDate + "T00:00:00");
-    d.setDate(d.getDate() + (dayNumber - 1));
-    // Format in local time. toISOString() would convert to UTC and, in any
-    // timezone ahead of UTC, shift local midnight back to the previous day.
-    const pad = (n) => String(n).padStart(2, "0");
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    if (dayNumber < 1) return addDaysISO(state.startDate, dayNumber - 1);
+    let iso = state.startDate, count = 0;
+    for (;;) {
+      if (!state.skippedDays.includes(iso)) count += 1;
+      if (count === dayNumber) return iso;
+      iso = addDaysISO(iso, 1);
+    }
+  },
+
+  isSkipped(isoDate) {
+    return state.skippedDays.includes(isoDate);
+  },
+
+  skipDay(isoDate) {
+    if (!state.skippedDays.includes(isoDate)) {
+      state.skippedDays = state.skippedDays.concat(isoDate).sort();
+      save();
+    }
+  },
+
+  unskipDay(isoDate) {
+    state.skippedDays = state.skippedDays.filter((s) => s !== isoDate);
+    save();
   },
 
   // Marks a food as tried (adding a first try on `date` if it has none) and/or

@@ -1,19 +1,64 @@
 import { store } from "../store.js";
-import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON, allergenFor } from "../categories.js";
+import { iconFor, categoryFor, CATEGORY_ORDER, CATEGORY_ICON, allergenFor, FOOD_ALIASES } from "../categories.js";
 import { PLAN, viewState, todayISO, fmtDate, escapeHTML, REACTIONS, reactionLabel, allKnownFoods } from "./shared.js";
 
 /* ---------------- Tracker ---------------- */
 
+// Search by word: every word typed must occur in the food's name, its recipe
+// spellings (FOOD_ALIASES) or the user's notes on it (as a substring), or be
+// a whole word of its allergen group ("fish" lists the fish, "tree nut" the
+// tree nuts). Categories are not searched: they have their own chips, and
+// "egg" would otherwise drag in the whole "Meat, Fish & Eggs" card. Accents
+// and case are ignored, so "puree" finds "Purée".
+function normalizeText(str) {
+  return String(str).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function queryWords(query) {
+  return normalizeText(query).split(/\s+/).filter(Boolean);
+}
+
+function searchFields(food, state) {
+  return {
+    text: normalizeText([food, ...(FOOD_ALIASES[food] || []), state.foodTracker[food]?.notes || ""].join(" ")),
+    words: normalizeText(allergenFor(food) || "").split(/[^a-z0-9]+/).filter(Boolean)
+  };
+}
+
+function matchesQuery(food, words, state) {
+  if (!words.length) return true;
+  const f = searchFields(food, state);
+  return words.every((w) => f.text.includes(w) || f.words.includes(w));
+}
+
+// Wraps the typed words where they occur in a food name, for display.
+function highlightName(food, words) {
+  const safe = escapeHTML(food);
+  if (!words.length) return safe;
+  const plain = normalizeText(food);
+  if (plain.length !== food.length) return safe; // accents change offsets; skip highlighting
+  const marks = new Array(food.length).fill(false);
+  words.forEach((w) => { let i = plain.indexOf(w); while (i >= 0) { for (let k = i; k < i + w.length; k++) marks[k] = true; i = plain.indexOf(w, i + 1); } });
+  let out = "", open = false;
+  for (let i = 0; i < food.length; i++) {
+    if (marks[i] && !open) { out += '<mark class="hit">'; open = true; }
+    if (!marks[i] && open) { out += "</mark>"; open = false; }
+    out += escapeHTML(food[i]);
+  }
+  return out + (open ? "</mark>" : "");
+}
+
 // search box can refresh just this part and keep the keyboard open.
 function trackerResultsHTML(foods, state) {
   const isTried = (f) => state.foodTracker[f]?.status === "tried";
+  const words = queryWords(viewState.trackerQuery);
   const filtered = foods.filter((f) => {
     const tried = isTried(f);
     if (viewState.trackerFilter === "tried" && !tried) return false;
     if (viewState.trackerFilter === "nottried" && tried) return false;
     if (viewState.trackerCategory !== "all" && categoryFor(f) !== viewState.trackerCategory) return false;
     if (viewState.trackerAllergens && !allergenFor(f)) return false;
-    if (viewState.trackerQuery && !f.toLowerCase().includes(viewState.trackerQuery.toLowerCase())) return false;
+    if (!matchesQuery(f, words, state)) return false;
     return true;
   });
   const catTotals = {}, catTried = {};
@@ -32,16 +77,22 @@ function trackerResultsHTML(foods, state) {
                allergens: items.filter(allergenFor), others: items.filter((f) => !allergenFor(f)) };
     })
     .filter((g) => g.allergens.length || g.others.length);
-  return grouped.map((g) => `
+  const cards = grouped.map((g) => `
     <div class="card">
       <h2 class="category-title">${g.icon} ${escapeHTML(g.name)} <span class="chip-count">${g.tried}/${g.total} tried</span></h2>
       ${g.allergens.length ? `
       <h3 class="sub-title allergen">⚠ Allergens</h3>
-      <ul class="food-list">${g.allergens.map((f) => foodRowHTML(f, state)).join("")}</ul>` : ""}
+      <ul class="food-list">${g.allergens.map((f) => foodRowHTML(f, state, words)).join("")}</ul>` : ""}
       ${g.others.length ? `
       ${g.allergens.length ? '<h3 class="sub-title">Other foods</h3>' : ""}
-      <ul class="food-list">${g.others.map((f) => foodRowHTML(f, state)).join("")}</ul>` : ""}
-    </div>`).join("") || '<div class="card"><p class="empty-state">No foods match.</p></div>';
+      <ul class="food-list">${g.others.map((f) => foodRowHTML(f, state, words)).join("")}</ul>` : ""}
+    </div>`).join("");
+  const q = viewState.trackerQuery.trim();
+  const count = words.length
+    ? `<p class="hint search-count" id="search-count">${filtered.length ? `${filtered.length} ${filtered.length === 1 ? "food matches" : "foods match"}` : "No foods match"} “${escapeHTML(q)}”${viewState.trackerFilter !== "all" || viewState.trackerCategory !== "all" || viewState.trackerAllergens ? " with the current filters" : ""}.</p>`
+    : "";
+  const empty = `<div class="card"><p class="empty-state">No foods match.</p>${q && !allKnownFoods().some((f) => f.toLowerCase() === q.toLowerCase()) ? `<p style="text-align:center;"><button class="btn btn-primary" id="add-searched-food">+ Add “${escapeHTML(q)}” as a food</button></p>` : ""}</div>`;
+  return count + (cards || empty);
 }
 
 function refreshTrackerResults() {
@@ -49,8 +100,14 @@ function refreshTrackerResults() {
   if (!results) return;
   results.innerHTML = trackerResultsHTML(allKnownFoods(), store.getState());
   attachFoodRowHandlers();
+  const addSearched = document.getElementById("add-searched-food");
+  if (addSearched) addSearched.addEventListener("click", () => addFoodByName(viewState.trackerQuery.trim()));
   const clear = document.getElementById("tracker-clear");
   if (clear) clear.classList.toggle("hidden", !viewState.trackerQuery);
+  // While searching, the results sit right under the grid; "Add a food"
+  // comes back when the search is cleared (no-match results offer it too).
+  const addCard = document.getElementById("add-food-card");
+  if (addCard) addCard.classList.toggle("hidden", Boolean(viewState.trackerQuery));
   document.querySelectorAll("#activity-grid .tile").forEach((t) => t.classList.toggle("selected", t.dataset.tileFood === viewState.trackerQuery));
 }
 
@@ -79,17 +136,9 @@ export function renderTracker() {
       </div>`;
 
   view.innerHTML = `
-    <div class="card activity-card">
-      <div class="activity-head">
-        <h2>${triedCount} of ${foods.length} foods tried</h2>
-        <span class="activity-legend"><span class="tile t0"></span><span class="tile t1"></span><span class="tile t2"></span><span class="tile t3"></span></span>
-      </div>
-      <div class="activity-grid" id="activity-grid" role="img" aria-label="${triedCount} of ${foods.length} foods tried"></div>
-    </div>
-
     <div class="card search-bar">
       <div class="search-row">
-        <input type="search" id="tracker-search" placeholder="Search foods..." value="${escapeHTML(viewState.trackerQuery)}" autocomplete="off">
+        <input type="search" id="tracker-search" placeholder="Search by word: egg, nut butter, rash…" value="${escapeHTML(viewState.trackerQuery)}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
         <button class="btn ${viewState.trackerQuery ? "" : "hidden"}" id="tracker-clear">✕ Show all</button>
       </div>
       <div class="reaction-row" style="margin-top:10px;">
@@ -100,7 +149,15 @@ export function renderTracker() {
       ${categoryChips}
     </div>
 
-    <div class="card">
+    <div class="card activity-card">
+      <div class="activity-head">
+        <h2>${triedCount} of ${foods.length} foods tried</h2>
+        <span class="activity-legend"><span class="tile t0"></span><span class="tile t1"></span><span class="tile t2"></span><span class="tile t3"></span></span>
+      </div>
+      <div class="activity-grid" id="activity-grid" role="img" aria-label="${triedCount} of ${foods.length} foods tried"></div>
+    </div>
+
+    <div class="card ${viewState.trackerQuery ? "hidden" : ""}" id="add-food-card">
       <h2>Add a food</h2>
       <p class="hint">Adds it to the list as not tried; mark it tried when it has been offered.</p>
       <div style="display:flex; gap:8px;">
@@ -135,22 +192,32 @@ export function renderTracker() {
     });
   });
   document.getElementById("add-custom-food").addEventListener("click", () => {
-    const input = document.getElementById("custom-food-input");
-    const name = input.value.trim();
-    if (!name) return;
-    const existing = allKnownFoods().find((f) => f.toLowerCase() === name.toLowerCase());
-    if (existing) {
-      viewState.trackerQuery = existing;
-    } else {
-      store.addCustomFood(name);
-      viewState.trackerQuery = name;
-    }
-    viewState.trackerCategory = "all";
-    viewState.trackerAllergens = false;
-    renderTracker();
+    addFoodByName(document.getElementById("custom-food-input").value.trim());
+  });
+  document.getElementById("tracker-search").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") e.target.blur(); // closes the phone keyboard
   });
 
   attachFoodRowHandlers();
+  const addSearched = document.getElementById("add-searched-food");
+  if (addSearched) addSearched.addEventListener("click", () => addFoodByName(viewState.trackerQuery.trim()));
+}
+
+// Adds a custom food (or just searches for it when it already exists) and
+// shows it alone in the list.
+function addFoodByName(name) {
+  if (!name) return;
+  const existing = allKnownFoods().find((f) => f.toLowerCase() === name.toLowerCase());
+  if (existing) {
+    viewState.trackerQuery = existing;
+  } else {
+    store.addCustomFood(name);
+    viewState.trackerQuery = name;
+  }
+  viewState.trackerFilter = "all";
+  viewState.trackerCategory = "all";
+  viewState.trackerAllergens = false;
+  renderTracker();
 }
 
 // GitHub-style activity grid: one tile per food, in the order the plan
@@ -223,7 +290,7 @@ window.addEventListener("resize", () => {
   resizeTimer = setTimeout(() => { if (document.getElementById("activity-grid")) renderTracker(); }, 150);
 });
 
-function foodRowHTML(food, state) {
+function foodRowHTML(food, state, words = []) {
   const entry = state.foodTracker[food];
   const tried = entry && entry.status === "tried";
   return `
@@ -231,7 +298,7 @@ function foodRowHTML(food, state) {
       <div class="food-row">
         <span class="food-icon" aria-hidden="true">${iconFor(food)}</span>
         <div class="food-row-text">
-          <div class="food-name">${escapeHTML(food)}${allergenFor(food) ? ` <span class="allergen-badge">⚠ ${escapeHTML(allergenFor(food))}</span>` : ""}</div>
+          <div class="food-name">${highlightName(food, words)}${allergenFor(food) ? ` <span class="allergen-badge">⚠ ${escapeHTML(allergenFor(food))}</span>` : ""}</div>
           <div class="food-meta">${tried ? triedMeta(entry) : "Not tried yet"}</div>
         </div>
         <button class="status-chip ${tried ? "tried" : "not-tried"}" data-toggle="${escapeHTML(food)}">${tried ? "Tried ✓" : "Mark tried"}</button>

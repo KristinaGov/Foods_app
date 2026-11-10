@@ -721,3 +721,90 @@ textarea { min-height: 70px; resize: vertical; }
   border-bottom: 1px solid var(--border);
 }
 .timeline-try:last-child { border-bottom: none; }
+
+/* Skipped days (Today tab) */
+.skipped-card {
+  background: var(--notice-bg);
+  border-color: var(--warn);
+}
+
+.skip-card { text-align: center; }
+.skip-card .hint { margin-bottom: 8px; }
+
+.week-day-row.skipped-row {
+  background: var(--notice-bg);
+  border-left: 3px solid var(--warn);
+  border-radius: 6px;
+  padding-left: 8px;
+}
+
+/* Week tab: GitHub-style calendar of the 100 days */
+.cal-card { padding-bottom: 10px; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: 28px repeat(7, minmax(0, 34px));
+  justify-content: space-between;
+  gap: 4px;
+  align-items: center;
+}
+
+.cal-dow, .cal-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.cal-label { font-weight: 600; }
+.cal-label.in-week { color: var(--accent-strong); }
+
+.cal-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  padding: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-sizing: border-box;
+}
+
+.cal-cell.t0 { background: var(--border); color: var(--muted); }
+.cal-cell.t1 { background: var(--accent); opacity: 0.55; }
+.cal-cell.t2 { background: var(--accent); opacity: 0.8; }
+.cal-cell.t3 { background: var(--accent); }
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+  .cal-cell.t1 { background: color-mix(in srgb, var(--accent) 45%, var(--card)); opacity: 1; }
+  .cal-cell.t2 { background: color-mix(in srgb, var(--accent) 72%, var(--card)); opacity: 1; }
+}
+.cal-cell.future { background: var(--card); border: 1px dashed var(--border); color: var(--muted); }
+.cal-cell.skipped {
+  background: repeating-linear-gradient(135deg, var(--warn) 0 3px, var(--notice-bg) 3px 6px);
+  color: var(--text);
+  font-size: 0.6rem;
+}
+.cal-cell.in-week { box-shadow: 0 0 0 2px var(--accent-strong); }
+.cal-cell.today { outline: 2px solid var(--text); outline-offset: 1px; }
+
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.cal-legend span { display: inline-flex; align-items: center; gap: 3px; }
+.cal-legend i.cal-cell { width: 11px; height: 11px; aspect-ratio: auto; border-radius: 2px; font-size: 0; }
+.cal-legend i.cal-cell.today { outline-width: 1.5px; outline-offset: 0; }
+
+/* Tracker search: match count and highlighted words */
+.search-count { margin-top: 6px; }
+mark.hit { background: none; color: var(--accent-strong); font-weight: 700; }

@@ -29,6 +29,8 @@ export function attachBackupNotice() {
 export let PLAN = [];
 export let WEEKS = [];
 export let GROCERIES = {};
+// todayDayOffset: calendar days from today shown on the Today tab (skipped
+// dates are navigated through like any other date).
 // editingNotesFor: ISO date whose notes textarea is open (null = none).
 // editingFoodNote: food name whose Tracker note textarea is open.
 // overviewWeek / groceryWeek: plan week shown on the Weeks / Grocery tab (null = current week).
@@ -125,8 +127,9 @@ export function weekNumberFor(dayNumber) {
   return Math.min(LAST_WEEK, Math.max(1, Math.ceil(dayNumber / 7)));
 }
 
+// Plan week of today; on a skipped day, the week of the next plan day.
 export function currentWeekNumber() {
-  const baseDay = store.dayNumberFor(todayISO());
+  const baseDay = store.upcomingDayNumber(todayISO());
   return baseDay === null ? 1 : weekNumberFor(baseDay);
 }
 
